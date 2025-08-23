@@ -1,0 +1,25 @@
+2025-08-23 15:35:16 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton/captures" /filename capture_%Y%m%d_%H%M%S_%i.jpg
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+No connected device was found ! Exiting
+-- BEFORE COUNT=2
+2025-08-23 15:35:24 TIMEOUT files_after=DSC_0003.jpg:1755955241,capture_20250822_122050_1ef2fd.jpg:1755858050
+2025-08-23 15:35:53 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton/captures" /filename capture_%Y%m%d_%H%M%S_%i.jpg
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+No connected device was found ! Exiting
+-- BEFORE COUNT=2
+2025-08-23 15:36:01 TIMEOUT files_after=DSC_0003.jpg:1755955241,capture_20250822_122050_1ef2fd.jpg:1755858050
+2025-08-23 15:50:07 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton/captures" /filename "capture_%Y%m%d_%H%M%S_%i.jpg"
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :ILCE-7S
+Error occurred while capturing photo System.NotImplementedException: La m‚thode ou l'op‚ration n'est pas impl‚ment‚e.
+   … WIA.IDevice.ExecuteCommand(String CommandID)
+   … CameraControl.Devices.Others.WiaCameraDevice.CapturePhoto() dans C:\Work\VS\CameraControl\CameraControl.Devices\Others\WiaCameraDevice.cs:ligne 671
+   … CameraControlCmd.Program.Capture() dans C:\Work\VS\CameraControl\CameraControlCmd\Program.cs:ligne 470
+-- BEFORE COUNT=2
+2025-08-23 15:50:14 TIMEOUT files_after=DSC_0003.jpg:1755955241,capture_20250822_122050_1ef2fd.jpg:1755858050

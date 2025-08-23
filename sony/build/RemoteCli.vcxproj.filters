@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\xampp\htdocs\Photomaton\sony\app\CameraDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\xampp\htdocs\Photomaton\sony\app\ConnectionInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\xampp\htdocs\Photomaton\sony\app\PropertyValueTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\xampp\htdocs\Photomaton\sony\app\RemoteCli.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\xampp\htdocs\Photomaton\sony\app\Text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\xampp\htdocs\Photomaton\sony\app\MessageDefine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\xampp\htdocs\Photomaton\sony\app\OpenCVWrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\xampp\htdocs\Photomaton\sony\app\CrDebugString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\xampp\htdocs\Photomaton\sony\app\CameraDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\xampp\htdocs\Photomaton\sony\app\ConnectionInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\xampp\htdocs\Photomaton\sony\app\PropertyValueTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\xampp\htdocs\Photomaton\sony\app\Text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\xampp\htdocs\Photomaton\sony\app\MessageDefine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\xampp\htdocs\Photomaton\sony\app\OpenCVWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\xampp\htdocs\Photomaton\sony\app\CRSDK\CameraRemote_SDK.h">
+      <Filter>CRSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\xampp\htdocs\Photomaton\sony\app\CRSDK\CrCommandData.h">
+      <Filter>CRSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\xampp\htdocs\Photomaton\sony\app\CRSDK\CrDefines.h">
+      <Filter>CRSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\xampp\htdocs\Photomaton\sony\app\CRSDK\CrDeviceProperty.h">
+      <Filter>CRSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\xampp\htdocs\Photomaton\sony\app\CRSDK\CrError.h">
+      <Filter>CRSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\xampp\htdocs\Photomaton\sony\app\CRSDK\CrImageDataBlock.h">
+      <Filter>CRSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\xampp\htdocs\Photomaton\sony\app\CRSDK\CrTypes.h">
+      <Filter>CRSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\xampp\htdocs\Photomaton\sony\app\CRSDK\ICrCameraObjectInfo.h">
+      <Filter>CRSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\xampp\htdocs\Photomaton\sony\app\CRSDK\IDeviceCallback.h">
+      <Filter>CRSDK</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\xampp\htdocs\Photomaton\sony\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CRSDK">
+      <UniqueIdentifier>{0B7066BB-AEB5-3840-93A0-C6F2345A9860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{07D3EE55-EAD7-33C5-9A19-B55F7371C401}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{3938034F-6B45-3694-82E5-E627D2952DFF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

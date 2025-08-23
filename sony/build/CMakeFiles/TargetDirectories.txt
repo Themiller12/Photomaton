@@ -1,0 +1,4 @@
+C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/RemoteCli.dir
+C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/INSTALL.dir
+C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/ALL_BUILD.dir
+C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/ZERO_CHECK.dir
