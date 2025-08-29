@@ -18,11 +18,12 @@ usort($files, function($a, $b) {
 <meta charset="UTF-8" />
 <title>Galerie - Photomaton</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <link rel="stylesheet" href="src/css/style.css" />
 </head>
 <body>
   <div class="screen" id="gallery">
-    <h1 id="gallery-title">📷 Galerie 📷</h1>
+    <h1 id="gallery-title"><i class="fas fa-camera"></i> Galerie <i class="fas fa-camera"></i></h1>
     <p id="gallery-subtitle" style="font-size: 1.3rem; color: var(--charcoal); margin-bottom: 2rem; font-weight: 300;">
       Tous vos souvenirs capturés (<span id="photo-count"><?= count($files) ?></span> photos)
     </p>
@@ -41,7 +42,7 @@ usort($files, function($a, $b) {
       <?php if(empty($files)): ?>
         <div style="grid-column: 1/-1; text-align: center; padding: 4rem;">
           <p id="no-photos-msg" style="font-size: 1.5rem; color: var(--charcoal);">
-            ✨ Aucune photo pour le moment ✨<br>
+            <i class="fas fa-sparkles"></i> Aucune photo pour le moment <i class="fas fa-sparkles"></i><br>
             <span id="no-photos-sub" style="font-size: 1.1rem; opacity: 0.7;">Commencez à créer de beaux souvenirs !</span>
           </p>
         </div>
@@ -51,13 +52,13 @@ usort($files, function($a, $b) {
     <?php if(count($files) > $initialLoad): ?>
     <div style="margin: 2rem 0;">
       <button id="loadMore" class="btn secondary" onclick="loadMorePhotos()">
-        📸 Voir plus de photos (<span id="remaining-count"><?= count($files) - $initialLoad ?></span> restantes)
+        <i class="fas fa-camera"></i> Voir plus de photos (<span id="remaining-count"><?= count($files) - $initialLoad ?></span> restantes)
       </button>
     </div>
     <?php endif; ?>
     
     <div class="controls">
-      <button class="btn" onclick="window.location='index.php'">🏠 Accueil</button>
+      <button class="btn" onclick="window.location='index.php'"><i class="fas fa-home"></i> Accueil</button>
     </div>
   </div>
   

@@ -85,16 +85,16 @@ window.PHOTOMATON_CONFIG = {
   
   // === MESSAGES PERSONNALISABLES ===
   messages: {
-    welcomeTitle: '💕 Photomaton 💕',
+    welcomeTitle: 'Photomaton',
     welcomeSubtitle: 'Capturez vos plus beaux souvenirs',
-    prepareTitle: '✨ Préparez-vous ! ✨',
+    prepareTitle: 'Préparez-vous !',
     prepareSubtitle: 'Souriez et prenez votre plus belle pose !',
-    galleryTitle: '📷 Galerie 📷',
+    galleryTitle: 'Galerie',
     gallerySubtitle: 'Tous vos souvenirs capturés',
-    singlePhotoTitle: '📸 Votre magnifique photo ! 📸',
-    multiPhotoTitle: '🌟 Choisissez votre photo préférée 🌟',
+    singlePhotoTitle: 'Votre magnifique photo !',
+    multiPhotoTitle: 'Choisissez votre photo préférée',
     countdownMessage: 'On ne bouge plus ! 😁',
-    noPhotosMessage: '✨ Aucune photo pour le moment ✨',
+    noPhotosMessage: 'Aucune photo pour le moment',
     noPhotosSubMessage: 'Commencez à créer de beaux souvenirs !'
   }
 };
