@@ -22,7 +22,7 @@ usort($files, function($a, $b) {
 <link rel="stylesheet" href="src/css/style.css" />
 </head>
 <body>
-  <div class="screen" id="gallery">
+  <div class="screen scrollable" id="gallery">
     <h1 id="gallery-title"><i class="fas fa-camera"></i> Galerie <i class="fas fa-camera"></i></h1>
     <p id="gallery-subtitle" style="font-size: 1.3rem; color: var(--charcoal); margin-bottom: 2rem; font-weight: 300;">
       Tous vos souvenirs capturés (<span id="photo-count"><?= count($files) ?></span> photos)

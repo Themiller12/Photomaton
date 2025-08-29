@@ -23,6 +23,13 @@ body {
   overflow-x: hidden;
 }
 
+/* Touch scroll tuning (Raspberry Pi) */
+html, body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+}
+
 .screen { 
   padding: 2rem; 
   text-align: center; 
@@ -30,7 +37,15 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow-y: auto; /* allow scroll when content taller */
+  -webkit-overflow-scrolling: touch;
   position: relative;
+}
+
+/* Variante scrollable: contenu en haut, meilleur défilement tactile pour galeries longues */
+.screen.scrollable {
+  justify-content: flex-start;
+  align-items: stretch;
 }
 
 #gallery {
