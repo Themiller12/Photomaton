@@ -85,9 +85,14 @@ int main(int argc, char** argv)
     SDK::ICrEnumCameraObjectInfo* camera_list = nullptr;
     auto enum_status = SDK::EnumCameraObjects(&camera_list);
     if (CR_FAILED(enum_status) || camera_list == nullptr) {
-        cli::tout << "No cameras detected. Connect a camera and retry.\n";
+        cli::tout << "No cameras detected. Enum status=0x" << std::hex << enum_status << std::dec << " (CR_FAILED)." << "\n";
+        cli::tout << "Hints: Ensure USB Connection=PC Remote, disable smartphone control, try different USB port/cable, close Imaging Edge Remote if open." << "\n";
         SDK::Release();
         std::exit(EXIT_FAILURE);
+    }
+    if(camera_list->GetCount()==0){
+        cli::tout << "Enumeration returned zero devices (status=0x" << std::hex << enum_status << std::dec << ")." << "\n";
+        cli::tout << "Possible causes: unsupported model for current SDK, driver exposing MTP instead of PC Remote, or another app holding exclusive lock." << "\n";
     }
     auto ncams = camera_list->GetCount();
     cli::tout << "Camera enumeration successful. " << ncams << " detected.\n\n";

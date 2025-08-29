@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impression - Photomaton</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        
+        .print-container {
+            text-align: center;
+            max-width: 100%;
+        }
+        
+        .photo {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border: none;
+        }
+        
+        .print-info {
+            margin: 20px 0;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        .countdown {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            margin: 10px 0;
+        }
+        
+        /* Styles pour l'impression */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background: white;
+            }
+            
+            .print-info,
+            .countdown,
+            .no-print {
+                display: none !important;
+            }
+            
+            .print-container {
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .photo {
+                max-width: 100%;
+                max-height: 100%;
+                width: auto;
+                height: auto;
+                object-fit: contain;
+            }
+        }
+        
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="print-container">
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <div class="print-info">Préparation de l'impression...</div>
+        </div>
+        
+        <div id="print-content" style="display: none;">
+            <div class="print-info no-print">
+                <div id="photo-info"></div>
+                <div class="countdown" id="countdown"></div>
+                <button onclick="printNow()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
+                    🖨️ Imprimer maintenant
+                </button>
+                <button onclick="window.close()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; margin-left: 10px;">
+                    ❌ Annuler
+                </button>
+            </div>
+            <img id="photo" class="photo" alt="Photo à imprimer" />
+        </div>
+    </div>
+
+    <script>
+        // Récupérer les paramètres de l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const imageUrl = urlParams.get('image');
+        const copies = parseInt(urlParams.get('copies')) || 1;
+        const auto = urlParams.get('auto') === 'true';
+        
+        let currentCopy = 0;
+        let printInterval;
+        
+        function updateCountdown(seconds) {
+            const countdownEl = document.getElementById('countdown');
+            if (seconds > 0) {
+                countdownEl.textContent = `Impression automatique dans ${seconds} secondes...`;
+            } else {
+                countdownEl.textContent = '';
+            }
+        }
+        
+        function printNow() {
+            console.log(`Impression ${currentCopy + 1}/${copies}`);
+            
+            // Configurer l'impression pour la Canon SELPHY CP1500
+            const printCSS = `
+                @page {
+                    size: 10cm 15cm; /* Format postcard standard */
+                    margin: 0;
+                }
+                @media print {
+                    body { margin: 0; padding: 0; }
+                    .photo { 
+                        width: 10cm; 
+                        height: 15cm; 
+                        object-fit: cover;
+                    }
+                }
+            `;
+            
+            // Ajouter les styles d'impression
+            const style = document.createElement('style');
+            style.textContent = printCSS;
+            document.head.appendChild(style);
+            
+            // Lancer l'impression
+            window.print();
+            
+            currentCopy++;
+            
+            // Si on a encore des copies à imprimer
+            if (currentCopy < copies) {
+                document.getElementById('photo-info').textContent = 
+                    `Copie ${currentCopy}/${copies} imprimée. Préparation de la suivante...`;
+                
+                // Attendre 3 secondes avant la prochaine impression
+                setTimeout(() => {
+                    if (auto) {
+                        printNow();
+                    } else {
+                        document.getElementById('photo-info').textContent = 
+                            `Prêt pour la copie ${currentCopy + 1}/${copies}`;
+                    }
+                }, 3000);
+            } else {
+                // Toutes les impressions terminées
+                document.getElementById('photo-info').textContent = 
+                    `✅ Toutes les impressions terminées (${copies} copie(s))`;
+                document.getElementById('countdown').textContent = 'Fermeture automatique...';
+                
+                setTimeout(() => {
+                    // Retourner au photomaton
+                    window.location.href = 'index.php';
+                }, 2000);
+            }
+        }
+        
+        function startPrintProcess() {
+            const loadingEl = document.getElementById('loading');
+            const contentEl = document.getElementById('print-content');
+            const photoEl = document.getElementById('photo');
+            const infoEl = document.getElementById('photo-info');
+            
+            if (!imageUrl) {
+                alert('Aucune image spécifiée pour l\'impression');
+                window.close();
+                return;
+            }
+            
+            // Charger l'image
+            photoEl.onload = function() {
+                loadingEl.style.display = 'none';
+                contentEl.style.display = 'block';
+                
+                infoEl.textContent = `Photo chargée - ${copies} copie(s) à imprimer`;
+                
+                if (auto) {
+                    // Démarrer le compte à rebours automatique
+                    let countdown = 3;
+                    updateCountdown(countdown);
+                    
+                    const countdownInterval = setInterval(() => {
+                        countdown--;
+                        updateCountdown(countdown);
+                        
+                        if (countdown <= 0) {
+                            clearInterval(countdownInterval);
+                            printNow();
+                        }
+                    }, 1000);
+                } else {
+                    document.getElementById('countdown').textContent = 'Cliquez sur "Imprimer maintenant" quand vous êtes prêt';
+                }
+            };
+            
+            photoEl.onerror = function() {
+                alert('Erreur lors du chargement de l\'image: ' + imageUrl);
+                window.close();
+            };
+            
+            // Charger l'image avec cache busting
+            photoEl.src = imageUrl + '?t=' + Date.now();
+        }
+        
+        // Démarrer le processus quand la page est chargée
+        window.addEventListener('load', startPrintProcess);
+        
+        // Gérer la fermeture de fenêtre
+        window.addEventListener('beforeunload', function(e) {
+            if (currentCopy > 0 && currentCopy < copies) {
+                e.preventDefault();
+                e.returnValue = 'Impression en cours. Êtes-vous sûr de vouloir fermer ?';
+            }
+        });
+    </script>
+</body>
+</html>

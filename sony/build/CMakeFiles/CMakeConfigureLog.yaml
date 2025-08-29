@@ -11,6 +11,274 @@ events:
   -
     kind: "find-v1"
     backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeNinjaFindMake.cmake:5 (find_program)"
+      - "CMakeLists.txt:5 (project)"
+    mode: "program"
+    variable: "CMAKE_MAKE_PROGRAM"
+    description: "Program used to build from build.ninja files."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ninja-build"
+      - "ninja"
+      - "samu"
+    candidate_directories:
+      - "C:/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files (x86)/Brackets/command/"
+      - "C:/Program Files/PuTTY/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/Docker/Docker/resources/bin/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Program Files/nodejs/"
+      - "C:/Users/simon.balitrand/.config/herd/bin/nvm/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/simon.balitrand/AppData/Local/GitHubDesktop/bin/"
+      - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/Users/simon.balitrand/AppData/Roaming/npm/"
+      - "C:/OSGeo4W/bin/"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/"
+      - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+    searched_directories:
+      - "C:/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler/ninja-build.com"
+      - "C:/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler/ninja-build.exe"
+      - "C:/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler/ninja-build"
+      - "C:/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler/ninja.com"
+      - "C:/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler/ninja.exe"
+      - "C:/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler/ninja"
+      - "C:/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler/samu.com"
+      - "C:/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler/samu.exe"
+      - "C:/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler/samu"
+      - "C:/Windows/System32/ninja-build.com"
+      - "C:/Windows/System32/ninja-build.exe"
+      - "C:/Windows/System32/ninja-build"
+      - "C:/Windows/System32/ninja.com"
+      - "C:/Windows/System32/ninja.exe"
+      - "C:/Windows/System32/ninja"
+      - "C:/Windows/System32/samu.com"
+      - "C:/Windows/System32/samu.exe"
+      - "C:/Windows/System32/samu"
+      - "C:/Windows/ninja-build.com"
+      - "C:/Windows/ninja-build.exe"
+      - "C:/Windows/ninja-build"
+      - "C:/Windows/ninja.com"
+      - "C:/Windows/ninja.exe"
+      - "C:/Windows/ninja"
+      - "C:/Windows/samu.com"
+      - "C:/Windows/samu.exe"
+      - "C:/Windows/samu"
+      - "C:/Windows/System32/wbem/ninja-build.com"
+      - "C:/Windows/System32/wbem/ninja-build.exe"
+      - "C:/Windows/System32/wbem/ninja-build"
+      - "C:/Windows/System32/wbem/ninja.com"
+      - "C:/Windows/System32/wbem/ninja.exe"
+      - "C:/Windows/System32/wbem/ninja"
+      - "C:/Windows/System32/wbem/samu.com"
+      - "C:/Windows/System32/wbem/samu.exe"
+      - "C:/Windows/System32/wbem/samu"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/ninja-build.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/ninja-build.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/ninja-build"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/ninja.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/ninja.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/ninja"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/samu.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/samu.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/samu"
+      - "C:/Windows/System32/OpenSSH/ninja-build.com"
+      - "C:/Windows/System32/OpenSSH/ninja-build.exe"
+      - "C:/Windows/System32/OpenSSH/ninja-build"
+      - "C:/Windows/System32/OpenSSH/ninja.com"
+      - "C:/Windows/System32/OpenSSH/ninja.exe"
+      - "C:/Windows/System32/OpenSSH/ninja"
+      - "C:/Windows/System32/OpenSSH/samu.com"
+      - "C:/Windows/System32/OpenSSH/samu.exe"
+      - "C:/Windows/System32/OpenSSH/samu"
+      - "C:/Program Files (x86)/Brackets/command/ninja-build.com"
+      - "C:/Program Files (x86)/Brackets/command/ninja-build.exe"
+      - "C:/Program Files (x86)/Brackets/command/ninja-build"
+      - "C:/Program Files (x86)/Brackets/command/ninja.com"
+      - "C:/Program Files (x86)/Brackets/command/ninja.exe"
+      - "C:/Program Files (x86)/Brackets/command/ninja"
+      - "C:/Program Files (x86)/Brackets/command/samu.com"
+      - "C:/Program Files (x86)/Brackets/command/samu.exe"
+      - "C:/Program Files (x86)/Brackets/command/samu"
+      - "C:/Program Files/PuTTY/ninja-build.com"
+      - "C:/Program Files/PuTTY/ninja-build.exe"
+      - "C:/Program Files/PuTTY/ninja-build"
+      - "C:/Program Files/PuTTY/ninja.com"
+      - "C:/Program Files/PuTTY/ninja.exe"
+      - "C:/Program Files/PuTTY/ninja"
+      - "C:/Program Files/PuTTY/samu.com"
+      - "C:/Program Files/PuTTY/samu.exe"
+      - "C:/Program Files/PuTTY/samu"
+      - "C:/Program Files/dotnet/ninja-build.com"
+      - "C:/Program Files/dotnet/ninja-build.exe"
+      - "C:/Program Files/dotnet/ninja-build"
+      - "C:/Program Files/dotnet/ninja.com"
+      - "C:/Program Files/dotnet/ninja.exe"
+      - "C:/Program Files/dotnet/ninja"
+      - "C:/Program Files/dotnet/samu.com"
+      - "C:/Program Files/dotnet/samu.exe"
+      - "C:/Program Files/dotnet/samu"
+      - "C:/Program Files/Docker/Docker/resources/bin/ninja-build.com"
+      - "C:/Program Files/Docker/Docker/resources/bin/ninja-build.exe"
+      - "C:/Program Files/Docker/Docker/resources/bin/ninja-build"
+      - "C:/Program Files/Docker/Docker/resources/bin/ninja.com"
+      - "C:/Program Files/Docker/Docker/resources/bin/ninja.exe"
+      - "C:/Program Files/Docker/Docker/resources/bin/ninja"
+      - "C:/Program Files/Docker/Docker/resources/bin/samu.com"
+      - "C:/Program Files/Docker/Docker/resources/bin/samu.exe"
+      - "C:/Program Files/Docker/Docker/resources/bin/samu"
+      - "C:/Program Files/Git/cmd/ninja-build.com"
+      - "C:/Program Files/Git/cmd/ninja-build.exe"
+      - "C:/Program Files/Git/cmd/ninja-build"
+      - "C:/Program Files/Git/cmd/ninja.com"
+      - "C:/Program Files/Git/cmd/ninja.exe"
+      - "C:/Program Files/Git/cmd/ninja"
+      - "C:/Program Files/Git/cmd/samu.com"
+      - "C:/Program Files/Git/cmd/samu.exe"
+      - "C:/Program Files/Git/cmd/samu"
+      - "C:/Program Files/nodejs/ninja-build.com"
+      - "C:/Program Files/nodejs/ninja-build.exe"
+      - "C:/Program Files/nodejs/ninja-build"
+      - "C:/Program Files/nodejs/ninja.com"
+      - "C:/Program Files/nodejs/ninja.exe"
+      - "C:/Program Files/nodejs/ninja"
+      - "C:/Program Files/nodejs/samu.com"
+      - "C:/Program Files/nodejs/samu.exe"
+      - "C:/Program Files/nodejs/samu"
+      - "C:/Users/simon.balitrand/.config/herd/bin/nvm/ninja-build.com"
+      - "C:/Users/simon.balitrand/.config/herd/bin/nvm/ninja-build.exe"
+      - "C:/Users/simon.balitrand/.config/herd/bin/nvm/ninja-build"
+      - "C:/Users/simon.balitrand/.config/herd/bin/nvm/ninja.com"
+      - "C:/Users/simon.balitrand/.config/herd/bin/nvm/ninja.exe"
+      - "C:/Users/simon.balitrand/.config/herd/bin/nvm/ninja"
+      - "C:/Users/simon.balitrand/.config/herd/bin/nvm/samu.com"
+      - "C:/Users/simon.balitrand/.config/herd/bin/nvm/samu.exe"
+      - "C:/Users/simon.balitrand/.config/herd/bin/nvm/samu"
+      - "C:/Program Files/CMake/bin/ninja-build.com"
+      - "C:/Program Files/CMake/bin/ninja-build.exe"
+      - "C:/Program Files/CMake/bin/ninja-build"
+      - "C:/Program Files/CMake/bin/ninja.com"
+      - "C:/Program Files/CMake/bin/ninja.exe"
+      - "C:/Program Files/CMake/bin/ninja"
+      - "C:/Program Files/CMake/bin/samu.com"
+      - "C:/Program Files/CMake/bin/samu.exe"
+      - "C:/Program Files/CMake/bin/samu"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WindowsApps/ninja-build.com"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WindowsApps/ninja-build.exe"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WindowsApps/ninja-build"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WindowsApps/ninja.com"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WindowsApps/ninja.exe"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WindowsApps/ninja"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WindowsApps/samu.com"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WindowsApps/samu.exe"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WindowsApps/samu"
+      - "C:/Users/simon.balitrand/AppData/Local/GitHubDesktop/bin/ninja-build.com"
+      - "C:/Users/simon.balitrand/AppData/Local/GitHubDesktop/bin/ninja-build.exe"
+      - "C:/Users/simon.balitrand/AppData/Local/GitHubDesktop/bin/ninja-build"
+      - "C:/Users/simon.balitrand/AppData/Local/GitHubDesktop/bin/ninja.com"
+      - "C:/Users/simon.balitrand/AppData/Local/GitHubDesktop/bin/ninja.exe"
+      - "C:/Users/simon.balitrand/AppData/Local/GitHubDesktop/bin/ninja"
+      - "C:/Users/simon.balitrand/AppData/Local/GitHubDesktop/bin/samu.com"
+      - "C:/Users/simon.balitrand/AppData/Local/GitHubDesktop/bin/samu.exe"
+      - "C:/Users/simon.balitrand/AppData/Local/GitHubDesktop/bin/samu"
+      - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/ninja-build.com"
+      - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/ninja-build.exe"
+      - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/ninja-build"
+      - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/ninja.com"
+      - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/ninja.exe"
+      - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/ninja"
+      - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/samu.com"
+      - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/samu.exe"
+      - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/samu"
+      - "C:/Users/simon.balitrand/AppData/Roaming/npm/ninja-build.com"
+      - "C:/Users/simon.balitrand/AppData/Roaming/npm/ninja-build.exe"
+      - "C:/Users/simon.balitrand/AppData/Roaming/npm/ninja-build"
+      - "C:/Users/simon.balitrand/AppData/Roaming/npm/ninja.com"
+      - "C:/Users/simon.balitrand/AppData/Roaming/npm/ninja.exe"
+      - "C:/Users/simon.balitrand/AppData/Roaming/npm/ninja"
+      - "C:/Users/simon.balitrand/AppData/Roaming/npm/samu.com"
+      - "C:/Users/simon.balitrand/AppData/Roaming/npm/samu.exe"
+      - "C:/Users/simon.balitrand/AppData/Roaming/npm/samu"
+      - "C:/OSGeo4W/bin/ninja-build.com"
+      - "C:/OSGeo4W/bin/ninja-build.exe"
+      - "C:/OSGeo4W/bin/ninja-build"
+      - "C:/OSGeo4W/bin/ninja.com"
+      - "C:/OSGeo4W/bin/ninja.exe"
+      - "C:/OSGeo4W/bin/ninja"
+      - "C:/OSGeo4W/bin/samu.com"
+      - "C:/OSGeo4W/bin/samu.exe"
+      - "C:/OSGeo4W/bin/samu"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/ninja-build.com"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/ninja-build.exe"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/ninja-build"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/ninja.com"
+    found: "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/ninja.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files (x86)\\Common Files\\Intel\\Shared Libraries\\redist\\intel64\\compiler"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files (x86)\\Brackets\\command"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Users\\simon.balitrand\\.config\\herd\\bin\\nvm"
+        - "C:\\Program Files\\nodejs"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files (x86)\\Common Files\\Intel\\Shared Libraries\\redist\\intel64\\compiler"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files (x86)\\Brackets\\command"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Users\\simon.balitrand\\.config\\herd\\bin\\nvm"
+        - "C:\\Program Files\\nodejs"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Users\\simon.balitrand\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\simon.balitrand\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\Users\\simon.balitrand\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\simon.balitrand\\AppData\\Roaming\\npm"
+        - "C:\\OSGeo4W\\bin"
+        - "C:\\OSGeo4W\\bin"
+        - "C:\\Users\\simon.balitrand\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe"
+        - "c:\\Users\\simon.balitrand\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+  -
+    kind: "find-v1"
+    backtrace:
       - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
       - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
       - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
@@ -80,6 +348,108 @@ events:
         - "C:\\Users\\simon.balitrand\\AppData\\Roaming\\npm"
         - "C:\\OSGeo4W\\bin"
         - "C:\\OSGeo4W\\bin"
+        - "C:\\Users\\simon.balitrand\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe"
+        - "c:\\Users\\simon.balitrand\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:5 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+      Compiler: C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      2
+      Compilateur d'optimisation Microsoft (R) C/C++ version 19.44.35215 pour x64
+      Copyright (C) Microsoft Corporation. Tous droits réservés.
+      
+      CMakeCXXCompilerId.cpp
+      Microsoft (R) Incremental Linker Version 14.44.35215.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      /out:CMakeCXXCompilerId.exe 
+      CMakeCXXCompilerId.obj 
+      LINK : fatal error LNK1104: impossible d'ouvrir le fichier 'LIBCMT.lib'
+      
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:5 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/"
+    found: "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files (x86)\\Common Files\\Intel\\Shared Libraries\\redist\\intel64\\compiler"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files (x86)\\Brackets\\command"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Users\\simon.balitrand\\.config\\herd\\bin\\nvm"
+        - "C:\\Program Files\\nodejs"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files (x86)\\Common Files\\Intel\\Shared Libraries\\redist\\intel64\\compiler"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files (x86)\\Brackets\\command"
+        - "C:\\Program Files\\PuTTY\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Users\\simon.balitrand\\.config\\herd\\bin\\nvm"
+        - "C:\\Program Files\\nodejs"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Users\\simon.balitrand\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\simon.balitrand\\AppData\\Local\\GitHubDesktop\\bin"
+        - "C:\\Users\\simon.balitrand\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\simon.balitrand\\AppData\\Roaming\\npm"
+        - "C:\\OSGeo4W\\bin"
+        - "C:\\OSGeo4W\\bin"
+        - "C:\\Users\\simon.balitrand\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe"
         - "c:\\Users\\simon.balitrand\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
   -
     kind: "message-v1"
@@ -90,52 +460,36 @@ events:
       - "CMakeLists.txt:5 (project)"
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
-      Compiler:  
+      Compiler: C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe 
       Build flags: 
-      Id flags:  
+      Id flags: -c 
       
       The output was:
       0
-      Version MSBuild 17.14.19+164abd434 pour .NET Framework
-      La g├®n├®ration a d├®marr├® 23/08/2025 17:08:26.
+      Compilateur d'optimisation Microsoft (R) C/C++ version 19.44.35215 pour x64
+      Copyright (C) Microsoft Corporation. Tous droits réservés.
       
-      Projet "C:\\xampp\\htdocs\\Photomaton\\sony\\build\\CMakeFiles\\4.1.0\\CompilerIdCXX\\CompilerIdCXX.vcxproj" sur le n┼ôud 1 (cibles par d├®faut).
-      PrepareForBuild:
-        Cr├®ation du r├®pertoire "Debug\\".
-        La sortie structur├®e est activ├®e. La mise en forme du compilateur diagnostics refl├¿te la hi├®rarchie des erreurs. Pour plus dÔÇÖinformations, consultez https://aka.ms/cpp/structured-output.
-        Cr├®ation du r├®pertoire "Debug\\CompilerIdCXX.tlog\\".
-      InitializeBuildStatus:
-        Cr├®ation de "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild", car "AlwaysCreate" a ├®t├® sp├®cifi├®.
-        Mise ├á jour de l'horodatage "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
-      ClCompile:
-        C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
-        CMakeCXXCompilerId.cpp
-      Link:
-        C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
-        CompilerIdCXX.vcxproj -> C:\\xampp\\htdocs\\Photomaton\\sony\\build\\CMakeFiles\\4.1.0\\CompilerIdCXX\\CompilerIdCXX.exe
-      PostBuildEvent:
-        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
-        :VCEnd
-        CMAKE_CXX_COMPILER=C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\cl.exe
-      FinalizeBuildStatus:
-        Suppression du fichier "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
-        Mise ├á jour de l'horodatage "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
-      G├®n├®ration du projet "C:\\xampp\\htdocs\\Photomaton\\sony\\build\\CMakeFiles\\4.1.0\\CompilerIdCXX\\CompilerIdCXX.vcxproj" termin├®e (cibles par d├®faut).
-      
-      La g├®n├®ration a r├®ussi.
-          0 Avertissement(s)
-          0 Erreur(s)
-      
-      Temps ├®coul├® 00:00:00.72
+      CMakeCXXCompilerId.cpp
       
       
-      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
-      
-      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.obj"
       
       The CXX compiler identification is MSVC, found in:
-        C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/4.1.0/CompilerIdCXX/CompilerIdCXX.exe
+        C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/4.1.0/CompilerIdCXX/CMakeCXXCompilerId.obj
       
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:1341 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:250 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:5 (project)"
+    message: |
+      Detecting CXX compiler /showIncludes prefix:
+        main.c
+        Remarque : inclusion du fichier :  C:\\xampp\\htdocs\\Photomaton\\sony\\build\\CMakeFiles\\ShowIncludes\\foo.h
+        
+      Found prefix "Remarque : inclusion du fichier :  "
   -
     kind: "find-v1"
     backtrace:
@@ -178,6 +532,7 @@ events:
       - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/simon.balitrand/AppData/Roaming/npm/"
       - "C:/OSGeo4W/bin/"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/"
       - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
     searched_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/link.com"
@@ -229,6 +584,7 @@ events:
         - "C:\\Users\\simon.balitrand\\AppData\\Roaming\\npm"
         - "C:\\OSGeo4W\\bin"
         - "C:\\OSGeo4W\\bin"
+        - "C:\\Users\\simon.balitrand\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe"
         - "c:\\Users\\simon.balitrand\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
   -
     kind: "find-v1"
@@ -272,6 +628,7 @@ events:
       - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/simon.balitrand/AppData/Roaming/npm/"
       - "C:/OSGeo4W/bin/"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/"
       - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
     searched_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/lld-link.com"
@@ -334,6 +691,9 @@ events:
       - "C:/OSGeo4W/bin/lld-link.com"
       - "C:/OSGeo4W/bin/lld-link.exe"
       - "C:/OSGeo4W/bin/lld-link"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/lld-link.com"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/lld-link.exe"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/lld-link"
       - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/lld-link.com"
       - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/lld-link.exe"
       - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/lld-link"
@@ -385,6 +745,7 @@ events:
         - "C:\\Users\\simon.balitrand\\AppData\\Roaming\\npm"
         - "C:\\OSGeo4W\\bin"
         - "C:\\OSGeo4W\\bin"
+        - "C:\\Users\\simon.balitrand\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe"
         - "c:\\Users\\simon.balitrand\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
   -
     kind: "find-v1"
@@ -426,6 +787,7 @@ events:
       - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/simon.balitrand/AppData/Roaming/npm/"
       - "C:/OSGeo4W/bin/"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/"
       - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
     searched_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/link.com"
@@ -477,6 +839,7 @@ events:
         - "C:\\Users\\simon.balitrand\\AppData\\Roaming\\npm"
         - "C:\\OSGeo4W\\bin"
         - "C:\\OSGeo4W\\bin"
+        - "C:\\Users\\simon.balitrand\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe"
         - "c:\\Users\\simon.balitrand\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
   -
     kind: "find-v1"
@@ -518,6 +881,7 @@ events:
       - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/simon.balitrand/AppData/Roaming/npm/"
       - "C:/OSGeo4W/bin/"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/"
       - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
     searched_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/mt.com"
@@ -580,6 +944,9 @@ events:
       - "C:/OSGeo4W/bin/mt.com"
       - "C:/OSGeo4W/bin/mt.exe"
       - "C:/OSGeo4W/bin/mt"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/mt.com"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/mt.exe"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/mt"
       - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/mt.com"
       - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/mt.exe"
       - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/mt"
@@ -631,6 +998,7 @@ events:
         - "C:\\Users\\simon.balitrand\\AppData\\Roaming\\npm"
         - "C:\\OSGeo4W\\bin"
         - "C:\\OSGeo4W\\bin"
+        - "C:\\Users\\simon.balitrand\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe"
         - "c:\\Users\\simon.balitrand\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
   -
     kind: "find-v1"
@@ -672,6 +1040,7 @@ events:
       - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/simon.balitrand/AppData/Roaming/npm/"
       - "C:/OSGeo4W/bin/"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/"
       - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
     searched_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/lib.com"
@@ -723,6 +1092,7 @@ events:
         - "C:\\Users\\simon.balitrand\\AppData\\Roaming\\npm"
         - "C:\\OSGeo4W\\bin"
         - "C:\\OSGeo4W\\bin"
+        - "C:\\Users\\simon.balitrand\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe"
         - "c:\\Users\\simon.balitrand\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
   -
     kind: "find-v1"
@@ -766,6 +1136,7 @@ events:
       - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/simon.balitrand/AppData/Roaming/npm/"
       - "C:/OSGeo4W/bin/"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/"
       - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
       - "C:/Program Files/bin/"
       - "C:/Program Files/sbin/"
@@ -776,9 +1147,9 @@ events:
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/CMake/sbin/"
       - "C:/Program Files/CMake/"
-      - "C:/Program Files/RemoteCli/bin/"
-      - "C:/Program Files/RemoteCli/sbin/"
-      - "C:/Program Files/RemoteCli/"
+      - "C:/Program Files (x86)/RemoteCli/bin/"
+      - "C:/Program Files (x86)/RemoteCli/sbin/"
+      - "C:/Program Files (x86)/RemoteCli/"
     searched_directories:
       - "C:/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler/rc.com"
       - "C:/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler/rc.exe"
@@ -837,6 +1208,9 @@ events:
       - "C:/OSGeo4W/bin/rc.com"
       - "C:/OSGeo4W/bin/rc.exe"
       - "C:/OSGeo4W/bin/rc"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/rc.com"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/rc.exe"
+      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/rc"
       - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/rc.com"
       - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/rc.exe"
       - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/rc"
@@ -867,15 +1241,15 @@ events:
       - "C:/Program Files/CMake/rc.com"
       - "C:/Program Files/CMake/rc.exe"
       - "C:/Program Files/CMake/rc"
-      - "C:/Program Files/RemoteCli/bin/rc.com"
-      - "C:/Program Files/RemoteCli/bin/rc.exe"
-      - "C:/Program Files/RemoteCli/bin/rc"
-      - "C:/Program Files/RemoteCli/sbin/rc.com"
-      - "C:/Program Files/RemoteCli/sbin/rc.exe"
-      - "C:/Program Files/RemoteCli/sbin/rc"
-      - "C:/Program Files/RemoteCli/rc.com"
-      - "C:/Program Files/RemoteCli/rc.exe"
-      - "C:/Program Files/RemoteCli/rc"
+      - "C:/Program Files (x86)/RemoteCli/bin/rc.com"
+      - "C:/Program Files (x86)/RemoteCli/bin/rc.exe"
+      - "C:/Program Files (x86)/RemoteCli/bin/rc"
+      - "C:/Program Files (x86)/RemoteCli/sbin/rc.com"
+      - "C:/Program Files (x86)/RemoteCli/sbin/rc.exe"
+      - "C:/Program Files (x86)/RemoteCli/sbin/rc"
+      - "C:/Program Files (x86)/RemoteCli/rc.com"
+      - "C:/Program Files (x86)/RemoteCli/rc.exe"
+      - "C:/Program Files (x86)/RemoteCli/rc"
     found: false
     search_context:
       ENV{PATH}:
@@ -924,13 +1298,14 @@ events:
         - "C:\\Users\\simon.balitrand\\AppData\\Roaming\\npm"
         - "C:\\OSGeo4W\\bin"
         - "C:\\OSGeo4W\\bin"
+        - "C:\\Users\\simon.balitrand\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe"
         - "c:\\Users\\simon.balitrand\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-      CMAKE_INSTALL_PREFIX: "C:/Program Files/RemoteCli"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/RemoteCli"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
         - "C:/Program Files (x86)"
         - "C:/Program Files/CMake"
-        - "C:/Program Files/RemoteCli"
+        - "C:/Program Files (x86)/RemoteCli"
   -
     kind: "try_compile-v1"
     backtrace:
@@ -940,8 +1315,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/CMakeScratch/TryCompile-6q5prw"
-      binary: "C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/CMakeScratch/TryCompile-6q5prw"
+      source: "C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/CMakeScratch/TryCompile-4zqafg"
+      binary: "C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/CMakeScratch/TryCompile-4zqafg"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -951,176 +1326,47 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/CMakeScratch/TryCompile-6q5prw'
+        Change Dir: 'C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/CMakeScratch/TryCompile-4zqafg'
         
-        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_2643d.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
-        Version MSBuild 17.14.19+164abd434 pour .NET Framework
-        La g├®n├®ration a d├®marr├® 23/08/2025 17:08:27.
+        Run Build Command(s): C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/ninja.exe -v cmTC_696a0
+        [1/2] C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_696a0.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_696a0.dir\\ /FS -c "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1944 --intdir=CMakeFiles\\cmTC_696a0.dir --rc=rc --mt=CMAKE_MT-NOTFOUND --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_696a0.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_696a0.exe /implib:cmTC_696a0.lib /pdb:cmTC_696a0.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        FAILED: [code=4294967295] cmTC_696a0.exe 
+        C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1944 --intdir=CMakeFiles\\cmTC_696a0.dir --rc=rc --mt=CMAKE_MT-NOTFOUND --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_696a0.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_696a0.exe /implib:cmTC_696a0.lib /pdb:cmTC_696a0.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        RC Pass 1: command "rc /fo CMakeFiles\\cmTC_696a0.dir/manifest.res CMakeFiles\\cmTC_696a0.dir/manifest.rc" failed (exit code 0) with the following output:
+        no such file or directory
+        ninja: build stopped: subcommand failed.
         
-        Projet "C:\\xampp\\htdocs\\Photomaton\\sony\\build\\CMakeFiles\\CMakeScratch\\TryCompile-6q5prw\\cmTC_2643d.vcxproj" sur le n┼ôud 1 (cibles par d├®faut).
-        PrepareForBuild:
-          Cr├®ation du r├®pertoire "cmTC_2643d.dir\\Debug\\".
-          La sortie structur├®e est activ├®e. La mise en forme du compilateur diagnostics refl├¿te la hi├®rarchie des erreurs. Pour plus dÔÇÖinformations, consultez https://aka.ms/cpp/structured-output.
-          Cr├®ation du r├®pertoire "C:\\xampp\\htdocs\\Photomaton\\sony\\build\\CMakeFiles\\CMakeScratch\\TryCompile-6q5prw\\Debug\\".
-          Cr├®ation du r├®pertoire "cmTC_2643d.dir\\Debug\\cmTC_2643d.tlog\\".
-        InitializeBuildStatus:
-          Cr├®ation de "cmTC_2643d.dir\\Debug\\cmTC_2643d.tlog\\unsuccessfulbuild", car "AlwaysCreate" a ├®t├® sp├®cifi├®.
-          Mise ├á jour de l'horodatage "cmTC_2643d.dir\\Debug\\cmTC_2643d.tlog\\unsuccessfulbuild".
-        ClCompile:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /GR /Fo"cmTC_2643d.dir\\Debug\\\\" /Fd"cmTC_2643d.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
-          Compilateur d'optimisation Microsoft (R) C/C++ version┬á19.44.35215 pour x64
-          Copyright (C) Microsoft Corporation. Tous droits r├®serv├®s.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /GR /Fo"cmTC_2643d.dir\\Debug\\\\" /Fd"cmTC_2643d.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
-          CMakeCXXCompilerABI.cpp
-        Link:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\xampp\\htdocs\\Photomaton\\sony\\build\\CMakeFiles\\CMakeScratch\\TryCompile-6q5prw\\Debug\\cmTC_2643d.exe" /INCREMENTAL /ILK:"cmTC_2643d.dir\\Debug\\cmTC_2643d.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/CMakeScratch/TryCompile-6q5prw/Debug/cmTC_2643d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/CMakeScratch/TryCompile-6q5prw/Debug/cmTC_2643d.lib" /MACHINE:X64  /machine:x64 cmTC_2643d.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_2643d.vcxproj -> C:\\xampp\\htdocs\\Photomaton\\sony\\build\\CMakeFiles\\CMakeScratch\\TryCompile-6q5prw\\Debug\\cmTC_2643d.exe
-        FinalizeBuildStatus:
-          Suppression du fichier "cmTC_2643d.dir\\Debug\\cmTC_2643d.tlog\\unsuccessfulbuild".
-          Mise ├á jour de l'horodatage "cmTC_2643d.dir\\Debug\\cmTC_2643d.tlog\\cmTC_2643d.lastbuildstate".
-        G├®n├®ration du projet "C:\\xampp\\htdocs\\Photomaton\\sony\\build\\CMakeFiles\\CMakeScratch\\TryCompile-6q5prw\\cmTC_2643d.vcxproj" termin├®e (cibles par d├®faut).
-        
-        La g├®n├®ration a r├®ussi.
-            0 Avertissement(s)
-            0 Erreur(s)
-        
-        Temps ├®coul├® 00:00:00.53
-        
-      exitCode: 0
+      exitCode: -1
   -
-    kind: "message-v1"
+    kind: "try_compile-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:56 (try_compile)"
       - "CMakeLists.txt:5 (project)"
-    message: |
-      Parsed CXX implicit link information:
-        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
-        linker tool for 'CXX': C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/HostX64/x64/link.exe
-        implicit libs: []
-        implicit objs: []
-        implicit dirs: []
-        implicit fwks: []
-      
-      
-  -
-    kind: "message-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:5 (project)"
-    message: |
-      Running the CXX compiler's linker: "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/HostX64/x64/link.exe" "-v"
-      Microsoft (R) Incremental Linker Version 14.44.35215.0
-      Copyright (C) Microsoft Corporation.  All rights reserved.
-  -
-    kind: "find-v1"
-    backtrace:
-      - "CMakeLists.txt:69 (find_library)"
-    mode: "library"
-    variable: "camera_remote"
-    description: "Path to a library."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: true
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "Cr_Core"
-    candidate_directories:
-      - "C:/xampp/htdocs/Photomaton/sony/external/crsdk/"
-      - "C:/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files (x86)/Brackets/command/"
-      - "C:/Program Files/PuTTY/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files/Docker/Docker/resources/bin/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Program Files/nodejs/"
-      - "C:/Users/simon.balitrand/.config/herd/bin/nvm/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Users/simon.balitrand/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Users/simon.balitrand/AppData/Local/GitHubDesktop/bin/"
-      - "C:/Users/simon.balitrand/AppData/Local/Programs/Microsoft VS Code/bin/"
-      - "C:/Users/simon.balitrand/AppData/Roaming/npm/"
-      - "C:/OSGeo4W/bin/"
-      - "C:/Users/simon.balitrand/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
-      - "C:/Program Files/lib/"
-      - "C:/Program Files/"
-      - "C:/Program Files (x86)/lib/"
-      - "C:/Program Files (x86)/"
-      - "C:/Program Files/CMake/lib/"
-      - "C:/Program Files/CMake/"
-      - "C:/Program Files/RemoteCli/lib/"
-      - "C:/Program Files/RemoteCli/"
-      - "C:/Program Files/RemoteCli/bin/"
-      - "/bin/"
-    found: "C:/xampp/htdocs/Photomaton/sony/external/crsdk/Cr_Core.lib"
-    search_context:
-      ENV{PATH}:
-        - "C:\\Program Files (x86)\\Common Files\\Intel\\Shared Libraries\\redist\\intel64\\compiler"
-        - "C:\\WINDOWS\\system32"
-        - "C:\\WINDOWS"
-        - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\Brackets\\command"
-        - "C:\\Program Files\\PuTTY\\"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\nodejs\\"
-        - "C:\\Users\\simon.balitrand\\.config\\herd\\bin\\nvm"
-        - "C:\\Program Files\\nodejs"
-        - "C:\\WINDOWS\\system32"
-        - "C:\\WINDOWS"
-        - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Program Files (x86)\\Common Files\\Intel\\Shared Libraries\\redist\\intel64\\compiler"
-        - "C:\\WINDOWS\\system32"
-        - "C:\\WINDOWS"
-        - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Program Files (x86)\\Brackets\\command"
-        - "C:\\Program Files\\PuTTY\\"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\nodejs\\"
-        - "C:\\Users\\simon.balitrand\\.config\\herd\\bin\\nvm"
-        - "C:\\Program Files\\nodejs"
-        - "C:\\WINDOWS\\system32"
-        - "C:\\WINDOWS"
-        - "C:\\WINDOWS\\System32\\Wbem"
-        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\WINDOWS\\System32\\OpenSSH\\"
-        - "C:\\Users\\simon.balitrand\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\simon.balitrand\\AppData\\Local\\GitHubDesktop\\bin"
-        - "C:\\Users\\simon.balitrand\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\Users\\simon.balitrand\\AppData\\Roaming\\npm"
-        - "C:\\OSGeo4W\\bin"
-        - "C:\\OSGeo4W\\bin"
-        - "c:\\Users\\simon.balitrand\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
-      CMAKE_INSTALL_PREFIX: "C:/Program Files/RemoteCli"
-      CMAKE_SYSTEM_PREFIX_PATH:
-        - "C:/Program Files"
-        - "C:/Program Files (x86)"
-        - "C:/Program Files/CMake"
-        - "C:/Program Files/RemoteCli"
-      CMAKE_SYSTEM_LIBRARY_PATH:
-        - "C:/Program Files/RemoteCli/bin"
-        - "C:/Program Files/CMake/bin"
-        - "/bin"
+    checks:
+      - "Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe"
+    directories:
+      source: "C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/CMakeScratch/TryCompile-iasnsn"
+      binary: "C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/CMakeScratch/TryCompile-iasnsn"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_CXX_COMPILER_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/xampp/htdocs/Photomaton/sony/build/CMakeFiles/CMakeScratch/TryCompile-iasnsn'
+        
+        Run Build Command(s): C:/Users/simon.balitrand/AppData/Local/Microsoft/WinGet/Packages/Ninja-build.Ninja_Microsoft.Winget.Source_8wekyb3d8bbwe/ninja.exe -v cmTC_1e02d
+        [1/2] C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_1e02d.dir\\testCXXCompiler.cxx.obj /FdCMakeFiles\\cmTC_1e02d.dir\\ /FS -c C:\\xampp\\htdocs\\Photomaton\\sony\\build\\CMakeFiles\\CMakeScratch\\TryCompile-iasnsn\\testCXXCompiler.cxx
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1944 --intdir=CMakeFiles\\cmTC_1e02d.dir --rc=rc --mt=CMAKE_MT-NOTFOUND --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_1e02d.dir\\testCXXCompiler.cxx.obj  /out:cmTC_1e02d.exe /implib:cmTC_1e02d.lib /pdb:cmTC_1e02d.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        FAILED: [code=4294967295] cmTC_1e02d.exe 
+        C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1944 --intdir=CMakeFiles\\cmTC_1e02d.dir --rc=rc --mt=CMAKE_MT-NOTFOUND --manifests  -- C:\\PROGRA~2\\MICROS~2\\2022\\BUILDT~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_1e02d.dir\\testCXXCompiler.cxx.obj  /out:cmTC_1e02d.exe /implib:cmTC_1e02d.lib /pdb:cmTC_1e02d.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        RC Pass 1: command "rc /fo CMakeFiles\\cmTC_1e02d.dir/manifest.res CMakeFiles\\cmTC_1e02d.dir/manifest.rc" failed (exit code 0) with the following output:
+        no such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: -1
 ...

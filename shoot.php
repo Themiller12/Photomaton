@@ -11,14 +11,15 @@
 </head>
 <body>
   <div class="screen" id="capture-screen">
-    <h2>✨ Préparez-vous ! ✨</h2>
-    <p style="font-size: 1.2rem; color: var(--charcoal); margin-bottom: 2rem;">
-      Souriez, 3 magnifiques photos vous attendent
+    <h2 id="prepare-title">✨ Préparez-vous ! ✨</h2>
+    <p id="prepare-subtitle" style="font-size: 1.2rem; color: var(--charcoal); margin-bottom: 2rem;">
+      Souriez, prenez votre plus belle pose et appuyez quand vous êtes prêts !
     </p>
     <video id="live-view" autoplay playsinline></video>
     <div id="countdown"></div>
     <div class="controls">
-      <button id="start-sequence" class="btn">📸 Prendre Photo</button>
+      <button id="start-sequence" class="btn">📸 Prendre <span id="photo-count">3</span> photos</button>
+      <button id="single-photo" class="btn">📷 Prendre 1 photo</button>
       <button class="btn secondary" onclick="window.location='index.php'">❌ Annuler</button>
     </div>
   </div>
@@ -34,10 +35,22 @@
       <button class="btn secondary" onclick="window.location='index.php'">🏠 Terminer</button>
     </div>
   </div>
+<script src="src/js/config.js"></script>
 <script>
-// Expose mode côté front (config surveillée par capture.js)
-// Valeurs possibles: 'dslr_win', 'webcam', 'sony_wifi'
-window.PHOTOMATON_MODE = 'sony_sdk'; // changer en 'sony_wifi' si utilisation WiFi API
+// Pour compatibilité avec l'ancien système
+window.PHOTOMATON_MODE = getCameraMode();
+
+// Mettre à jour les textes avec la configuration
+document.addEventListener('DOMContentLoaded', function() {
+  // Mettre à jour les titres et sous-titres
+  const prepareTitle = document.getElementById('prepare-title');
+  const prepareSubtitle = document.getElementById('prepare-subtitle');
+  const photoCount = document.getElementById('photo-count');
+  
+  if (prepareTitle) prepareTitle.textContent = getMessage('prepareTitle');
+  if (prepareSubtitle) prepareSubtitle.textContent = getMessage('prepareSubtitle');
+  if (photoCount) photoCount.textContent = window.PHOTOMATON_CONFIG.photoCount;
+});
 </script>
 <script src="src/js/effects.js"></script>
 <script src="src/js/capture.js"></script>

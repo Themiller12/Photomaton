@@ -27,7 +27,7 @@ $responses['list'] = [ 'command'=>$listCmd, 'exit'=>$listCode, 'raw'=>$listOut, 
 if(!empty($_GET['test'])){
   $pattern = isset($CAPTURE_FILENAME_PATTERN) ? $CAPTURE_FILENAME_PATTERN : 'capture_%Y%m%d_%H%M%S_%i.jpg';
   $testPattern = 'preflight_%Y%m%d_%H%M%S_%i.jpg';
-  $capCmd = win_quote($CAMERA_CMD).' /capture /folder '.win_quote($CAPTURE_DIR).' /filename '.win_quote($testPattern);
+  $capCmd = win_quote($CAMERA_CMD).' /folder '.win_quote($CAPTURE_DIR).' /filename '.win_quote($testPattern).' /capture';
   $exts = isset($CAPTURE_EXTS)?$CAPTURE_EXTS:['jpg','jpeg','JPG','JPEG'];
   $pattern = '{'.implode(',', array_map(fn($e)=>'*.'.preg_replace('/[^a-zA-Z0-9]/','',$e), $exts)).'}';
   $before = glob($CAPTURE_DIR.'/'.$pattern, GLOB_BRACE) ?: [];

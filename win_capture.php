@@ -25,22 +25,16 @@ if(!file_exists($CAMERA_CMD)) {
     exit;
 }
 
-$lockHandle = null;
-if(!$ALLOW_CONCURRENT) {
-    $lockFile = $CAPTURE_DIR.'/.capture.lock';
-    $lockHandle = fopen($lockFile,'c');
-    if(!$lockHandle || !flock($lockHandle, LOCK_EX | LOCK_NB)) {
-        http_response_code(423); // Locked
-        echo json_encode(['error'=>'Capture en cours, patientez']);
-        exit;
-    }
-}
 
 // Lister les fichiers existants avant capture (toutes extensions surveillées)
+// Inclure tous les fichiers JPEG sans restriction de nom car digiCamControl peut ignorer /filename
 $extPattern = '{'.implode(',', array_map(function($e){return '*.'.preg_replace('/[^a-zA-Z0-9]/','',$e);}, $CAPTURE_EXTS)).'}';
 $before = glob($CAPTURE_DIR.'/'.$extPattern, GLOB_BRACE) ?: [];
 $beforeMap = [];
 foreach($before as $b) { $beforeMap[realpath($b)] = filemtime($b); }
+
+// Initialiser lockHandle (pour compatibilité avec code existant)
+$lockHandle = null;
 
 // Fonction de quoting adaptée Windows : utiliser des doubles quotes si sous Windows car les simples quotes ne sont pas traitées par cmd.exe
 function win_quote($s){
@@ -51,14 +45,24 @@ function win_quote($s){
     return escapeshellarg($s);
 }
 
-$pattern = isset($CAPTURE_FILENAME_PATTERN) ? $CAPTURE_FILENAME_PATTERN : 'capture_%Y%m%d_%H%M%S_%i.jpg';
-$cmd = win_quote($CAMERA_CMD).' /capture /folder '.win_quote($CAPTURE_DIR).' /filename '.win_quote($pattern);
+// Convertir le chemin Unix vers Windows et s'assurer qu'il est absolu
+$winCaptureDir = str_replace('/', '\\', $CAPTURE_DIR);
+if(!is_absolute_path($winCaptureDir)) {
+    $winCaptureDir = realpath($winCaptureDir);
+}
+
+function is_absolute_path($path) {
+    return preg_match('/^[A-Z]:\\\\/', $path) || preg_match('/^\//', $path);
+}
+
+// Simplifier la commande - digiCamControl ignore souvent /filename de toute façon
+$cmd = win_quote($CAMERA_CMD).' /capture /folder '.win_quote($winCaptureDir);
 
 $start = microtime(true);
 // Exécuter (rediriger erreurs)
 exec($cmd.' 2>&1', $outLines, $code);
 if(isset($DEBUG_CAPTURE) && $DEBUG_CAPTURE){
-    file_put_contents($CAPTURE_LOG_FILE, date('Y-m-d H:i:s')." CMD=$cmd\nEXIT=$code\nOUTPUT=".implode("\n", $outLines)."\n-- BEFORE COUNT=".count($beforeMap)."\n", FILE_APPEND);
+    file_put_contents($CAPTURE_LOG_FILE, date('Y-m-d H:i:s')." CMD=$cmd\nWIN_DIR=$winCaptureDir\nEXIT=$code\nOUTPUT=".implode("\n", $outLines)."\n-- BEFORE COUNT=".count($beforeMap)."\n", FILE_APPEND);
 }
 // Détection appareil non trouvé (peut arriver avec EXIT=0)
 $joined = strtolower(implode("\n", $outLines));
@@ -84,14 +88,16 @@ if($code !== 0) {
 }
 
 // Attendre apparition d'un nouveau fichier image (extensions configurées)
+// Note: digiCamControl peut ignorer /filename et utiliser ses propres noms (DSC_XXXX)
 $newFile = null;
 do {
     usleep(300000); // 0.3s
     $nowList = glob($CAPTURE_DIR.'/'.$extPattern, GLOB_BRACE) ?: [];
     foreach($nowList as $f) {
         $rp = realpath($f);
-        if(!isset($beforeMap[$rp])) {
-            // Nouveau fichier
+        $mtime = filemtime($f);
+        // Nouveau fichier OU fichier modifié après le début de la capture
+        if(!isset($beforeMap[$rp]) || $mtime > $start) {
             $newFile = $f;
             break 2;
         }

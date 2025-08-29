@@ -10,8 +10,9 @@
 </head>
 <body>
   <div class="screen" id="home">
-    <h1>💕 Photomaton 💕</h1>
-    <p style="font-size: 1.5rem; color: var(--charcoal); margin-bottom: 3rem; font-weight: 300;">
+    <h1 id="welcome-title">💕 Photomaton 💕</h1>
+    <h2 id="marriage-name" style="font-size: 1.8rem; color: var(--rose-gold); margin-bottom: 1rem; font-weight: 400;"></h2>
+    <p id="welcome-subtitle" style="font-size: 1.5rem; color: var(--charcoal); margin-bottom: 3rem; font-weight: 300;">
       Capturez vos plus beaux souvenirs
     </p>
     <div class="buttons">
@@ -23,5 +24,19 @@
       </button>
     </div>
   </div>
+
+<script src="src/js/config.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Mettre à jour les textes avec la configuration
+  const welcomeTitle = document.getElementById('welcome-title');
+  const marriageName = document.getElementById('marriage-name');
+  const welcomeSubtitle = document.getElementById('welcome-subtitle');
+  
+  if (welcomeTitle) welcomeTitle.textContent = getMessage('welcomeTitle');
+  if (marriageName) marriageName.textContent = window.PHOTOMATON_CONFIG.marriageName;
+  if (welcomeSubtitle) welcomeSubtitle.textContent = getMessage('welcomeSubtitle');
+});
+</script>
 </body>
 </html>

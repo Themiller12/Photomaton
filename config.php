@@ -2,7 +2,7 @@
 // Configuration générale Photomaton
 // Mode capture : 'webcam', 'dslr_win', 'sony_wifi', 'sony_sdk', 'folder_watch'
 // folder_watch : on surveille simplement l'arrivée d'un nouveau fichier dans captures/ (utiliser Imaging Edge Desktop configuré pour enregistrer là)
-$CAPTURE_MODE = 'sony_sdk'; // valeurs possibles: 'dslr_win', 'webcam', 'sony_wifi', 'sony_sdk', 'folder_watch'
+$CAPTURE_MODE = 'dslr_win'; // valeurs possibles: 'dslr_win', 'webcam', 'sony_wifi', 'sony_sdk', 'folder_watch'
 
 // Emplacement de CameraControlCmd.exe (digiCamControl) sous Windows
 // Adapter si installé ailleurs.

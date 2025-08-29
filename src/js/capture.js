@@ -1,20 +1,22 @@
 // Front-end capture sequence.
-// Deux modes :
-// 1) Webcam (fallback) -> utilise getUserMedia et sauvegarde base64 via save_print.php
-// 2) DSLR / Sony modes -> appels serveur pour obtenir un fichier disque
+// Configuration centralisée dans config.js
 
 const video = document.getElementById('live-view');
 const startBtn = document.getElementById('start-sequence');
+const singlePhotoBtn = document.getElementById('single-photo');
 const countdownEl = document.getElementById('countdown');
 const selectionScreen = document.getElementById('selection-screen');
+const selectionTitle = document.querySelector('#selection-screen h2');
 const captureScreen = document.getElementById('capture-screen');
 const thumbsDiv = document.getElementById('thumbnails');
 const printBtn = document.getElementById('print-selected');
 const copiesSelect = document.getElementById('copies');
 
-// Mode défini côté backend (shoot.php injecte window.PHOTOMATON_MODE)
-const MODE = window.PHOTOMATON_MODE || 'dslr_win'; // 'webcam' | 'dslr_win' | 'sony_wifi' | 'sony_sdk' | 'folder_watch'
-const PHOTO_COUNT = 3;
+// Variables de configuration (depuis config.js)
+const MODE = getCameraMode();
+console.log('[Photomaton] MODE détecté =', MODE, 'OS =', window.PHOTOMATON_CONFIG.operatingSystem);
+const PHOTO_COUNT = window.PHOTOMATON_CONFIG.photoCount;
+const DELAY_BETWEEN_PHOTOS = window.PHOTOMATON_CONFIG.delayBetweenPhotos;
 
 let captured = [];
 let selectedIndex = 0;
@@ -32,21 +34,56 @@ async function initWebcamIfNeeded(){
 async function runSequence(){
   startBtn.disabled = true;
   captured = [];
+  
   for(let i=0;i<PHOTO_COUNT;i++){
-    await runCountdown(3);
     if(MODE === 'webcam') {
+      await runCountdown(3);
       captured.push(takeSnapshot());
-  } else if(MODE === 'dslr_win' || MODE === 'sony_wifi' || MODE === 'sony_sdk' || MODE === 'folder_watch') {
+  } else if(MODE === 'dslr_win' || MODE === 'dslr_linux' || MODE === 'sony_wifi' || MODE === 'sony_sdk' || MODE === 'folder_watch') {
+      // Pour DSLR: lancer capture pendant le décompte (latence 3-4s)
       try {
-        const f = await triggerServerFileCapture();
+        const capturePromise = runCountdownWithCapture();
+        const f = await capturePromise;
         captured.push(f);
+        
+        // Afficher la photo capturée en arrière-plan
+        showCapturedPhoto(f, i + 1);
+        
       } catch(err){
         alert('Erreur capture: '+err.message);
         startBtn.disabled = false;
         return;
       }
     }
-    if(i < PHOTO_COUNT-1) await sleep(3000); // pause entre les prises
+    if(i < PHOTO_COUNT-1) await sleep(DELAY_BETWEEN_PHOTOS); // pause entre les prises
+  }
+  showSelection();
+}
+
+async function runSinglePhoto(){
+  singlePhotoBtn.disabled = true;
+  startBtn.disabled = true;
+  captured = [];
+  
+  if(MODE === 'webcam') {
+    await runCountdown(3);
+    captured.push(takeSnapshot());
+  } else if(MODE === 'dslr_win' || MODE === 'dslr_linux' || MODE === 'sony_wifi' || MODE === 'sony_sdk' || MODE === 'folder_watch') {
+    // Pour DSLR: lancer capture pendant le décompte (latence 3-4s)
+    try {
+      const capturePromise = runCountdownWithCapture();
+      const f = await capturePromise;
+      captured.push(f);
+      
+      // Afficher la photo capturée en arrière-plan
+      showCapturedPhoto(f, 1);
+      
+    } catch(err){
+      alert('Erreur capture: '+err.message);
+      singlePhotoBtn.disabled = false;
+      startBtn.disabled = false;
+      return;
+    }
   }
   showSelection();
 }
@@ -54,16 +91,48 @@ async function runSequence(){
 async function runCountdown(from){
   for(let c=from; c>0; c--){
     countdownEl.textContent = c;
-    countdownEl.style.animation = 'none';
-    setTimeout(() => countdownEl.style.animation = 'pulse 1s ease-in-out', 10);
+    countdownEl.classList.remove('countdown-pulse');
+    countdownEl.classList.add('countdown-pulse');
     await sleep(1000);
   }
   countdownEl.textContent = '';
+  countdownEl.classList.remove('countdown-pulse');
   if(window.PhotoEffects) {
     PhotoEffects.createFlashEffect();
     if(video) video.classList.add('photo-taking');
     setTimeout(() => video?.classList.remove('photo-taking'), 500);
   }
+}
+
+async function runCountdownWithCapture(){
+  // Lancer la capture AVANT même le décompte pour compenser la latence totale
+  console.log('Lancement capture...');
+  const capturePromise = triggerServerFileCapture();
+  
+  // Petit délai pour que la commande soit envoyée
+  await sleep(200);
+  
+  for(let c=3; c>0; c--){
+    countdownEl.textContent = c;
+    countdownEl.classList.remove('countdown-pulse');
+    countdownEl.classList.add('countdown-pulse');
+    await sleep(1000);
+  }
+  
+  countdownEl.textContent = getMessage('countdownMessage');
+  
+  // Effet flash
+  if(window.PhotoEffects) {
+    PhotoEffects.createFlashEffect();
+    if(video) video.classList.add('photo-taking');
+    setTimeout(() => video?.classList.remove('photo-taking'), 500);
+  }
+  
+  // Attendre que la capture soit terminée
+  console.log('Attente fin capture...');
+  const result = await capturePromise;
+  countdownEl.textContent = '';
+  return result;
 }
 
 function takeSnapshot(){
@@ -75,17 +144,121 @@ function takeSnapshot(){
   return canvas.toDataURL('image/jpeg',0.9);
 }
 
+function showCapturedPhoto(filePath, photoNumber) {
+  const captureScreen = document.getElementById('capture-screen');
+  if (!captureScreen) return;
+  
+  // Ajouter la photo en arrière-plan avec transparence
+  const imageUrl = `${filePath}?t=${Date.now()}`;
+  captureScreen.style.backgroundImage = `url(${imageUrl})`;
+  captureScreen.style.backgroundSize = 'cover';
+  captureScreen.style.backgroundPosition = 'center';
+  captureScreen.style.backgroundRepeat = 'no-repeat';
+  
+  // Ajouter un overlay semi-transparent pour garder la lisibilité du texte
+  if (!captureScreen.querySelector('.bg-overlay')) {
+    const overlay = document.createElement('div');
+    overlay.className = 'bg-overlay';
+    overlay.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      z-index: 1;
+      pointer-events: none;
+    `;
+    captureScreen.style.position = 'relative';
+    captureScreen.insertBefore(overlay, captureScreen.firstChild);
+    
+    // S'assurer que le contenu reste au-dessus
+    const content = captureScreen.children;
+    for (let i = 1; i < content.length; i++) {
+      content[i].style.position = 'relative';
+      content[i].style.zIndex = '2';
+    }
+  }
+  
+  // Si c'est la dernière photo, programmer le reset
+  if (photoNumber === PHOTO_COUNT) {
+    setTimeout(() => {
+      resetCaptureScreenBackground();
+    }, 3000); // Reset après 3 secondes
+  }
+}
+
+function resetCaptureScreenBackground() {
+  const captureScreen = document.getElementById('capture-screen');
+  if (!captureScreen) return;
+  
+  // Supprimer le background
+  captureScreen.style.backgroundImage = '';
+  captureScreen.style.backgroundSize = '';
+  captureScreen.style.backgroundPosition = '';
+  captureScreen.style.backgroundRepeat = '';
+  
+  // Supprimer l'overlay
+  const overlay = captureScreen.querySelector('.bg-overlay');
+  if (overlay) {
+    overlay.remove();
+  }
+}
+
 async function triggerServerFileCapture(){
-  const endpoint = MODE === 'sony_wifi' ? 'sony_wifi_capture.php' : (MODE === 'sony_sdk' ? 'sony_sdk_capture.php' : (MODE === 'folder_watch' ? 'folder_watch_capture.php' : 'win_capture.php'));
+  // Détecter l'endpoint selon l'OS et le mode caméra
+  let endpoint;
+  
+  if (window.PHOTOMATON_CONFIG.operatingSystem === 'linux') {
+    endpoint = 'src/linux_capture.php';
+  } else {
+    endpoint = MODE === 'sony_wifi' ? 'sony_wifi_capture.php' : 
+               (MODE === 'sony_sdk' ? 'sony_sdk_capture.php' : 
+               (MODE === 'folder_watch' ? 'folder_watch_capture.php' : 'win_capture.php'));
+  }
+  
+  console.log(`Appel ${endpoint} (OS: ${window.PHOTOMATON_CONFIG.operatingSystem})...`);
+  const startTime = Date.now();
+  
   const res = await fetch(endpoint);
   const data = await res.json().catch(()=>({}));
-  if(!res.ok || !data.file) throw new Error(data.error || 'Echec capture');
-  return data.file; // chemin relatif
+  
+  const elapsed = Date.now() - startTime;
+  console.log(`Capture terminée en ${elapsed}ms`);
+  
+  if(!res.ok || !data.file && !data.filename) throw new Error(data.error || 'Echec capture');
+  return data.file || data.filename; // chemin relatif
 }
 
 function showSelection(){
+  // Reset le background de capture-screen avant d'afficher la sélection
+  resetCaptureScreenBackground();
+  
   captureScreen.classList.add('hidden');
   selectionScreen.classList.remove('hidden');
+  
+  // Adapter le titre selon le nombre de photos
+  if (selectionTitle) {
+    if (captured.length === 1) {
+      selectionTitle.textContent = getMessage('singlePhotoTitle');
+    } else {
+      selectionTitle.textContent = getMessage('multiPhotoTitle');
+    }
+  }
+  
+  // Masquer ou afficher les contrôles d'impression selon la configuration
+  const printControls = document.querySelector('#selection-screen .controls');
+  if (printControls && !isPrintingEnabled()) {
+    // Masquer les contrôles d'impression
+    const copyLabel = printControls.querySelector('label[for="copies"]');
+    const copySelect = printControls.querySelector('#copies');
+    const printButton = printControls.querySelector('#print-selected');
+    
+    if (copyLabel) copyLabel.style.display = 'none';
+    if (copySelect) copySelect.style.display = 'none';
+    if (printButton) printButton.style.display = 'none';
+  }
+  
   thumbsDiv.innerHTML='';
   if(window.PhotoEffects && selectionScreen) {
     PhotoEffects.createSparkles(selectionScreen);
@@ -105,16 +278,68 @@ function showSelection(){
 
 printBtn?.addEventListener('click', async () => {
   const copies = parseInt(copiesSelect.value,10) || 1;
-  if(MODE === 'dslr_win' || MODE === 'sony_wifi' || MODE === 'sony_sdk' || MODE === 'folder_watch') {
+  if(MODE === 'dslr_win' || MODE === 'dslr_linux' || MODE === 'sony_wifi' || MODE === 'sony_sdk' || MODE === 'folder_watch') {
     const filePath = captured[selectedIndex];
     if(filePath.startsWith('captures/')){
       try {
-        const res = await fetch('print_file.php',{method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({file:filePath, copies})});
-        const data = await res.json().catch(()=>({}));
-        if(!res.ok) throw new Error(data.error||'Erreur impression');
-        alert('Impression lancée');
+        // Choisir l'endpoint d'impression selon l'OS et la configuration
+        let printEndpoint = 'print_file.php'; // Fallback par défaut
+        
+        // Support Linux prioritaire
+        if (window.PHOTOMATON_CONFIG.operatingSystem === 'linux' && window.PHOTOMATON_CONFIG.printerType === 'linux_cups') {
+          printEndpoint = 'src/linux_print.php';
+        } else {
+          // Endpoints Windows
+          switch(window.PHOTOMATON_CONFIG.printerType) {
+            case 'simple':
+              printEndpoint = 'print_simple.php';
+              break;
+            case 'selphy_optimized':
+              printEndpoint = 'print_selphy_optimized.php';
+              break;
+            case 'canon_cp1500':
+              printEndpoint = 'print_canon_ps.php';
+              break;
+            case 'ppd_optimized':
+              printEndpoint = 'print_ppd.php';
+              break;
+            case 'browser':
+              printEndpoint = 'src/print_browser.php';
+              break;
+            default:
+              printEndpoint = 'print_canon.php';
+          }
+        }
+        
+        const printData = {
+          file: filePath, 
+          imagePath: filePath, // Format Linux
+          copies: copies
+        };
+        
+        // Ajouter le format papier si configuré
+        if (window.PHOTOMATON_CONFIG.defaultPaperSize) {
+          printData.paperSize = window.PHOTOMATON_CONFIG.defaultPaperSize;
+          printData.media = window.PHOTOMATON_CONFIG.defaultPaperSize; // Format Linux
+        }
+          
+        const res = await fetch(printEndpoint, {
+          method: 'POST', 
+          headers: {'Content-Type': 'application/json'}, 
+          body: JSON.stringify(printData)
+        });
+        
+        const data = await res.json().catch(() => ({}));
+        if(!res.ok) throw new Error(data.error || 'Erreur impression');
+        
+        // Message de succès personnalisé
+        const printerName = window.PHOTOMATON_CONFIG.printerName || 'imprimante';
+        const method = data.method ? ` (${data.method})` : '';
+        alert(`✅ Impression lancée sur ${printerName}${method}\n📄 ${copies} copie(s) en cours...`);
         window.location='index.php';
-      } catch(e){ alert(e.message); }
+      } catch(e){ 
+        alert('❌ Erreur impression: ' + e.message); 
+      }
       return;
     }
   }
@@ -143,4 +368,5 @@ async function sendToSavePrint(imageData, copies){
 }
 
 startBtn?.addEventListener('click', runSequence);
+singlePhotoBtn?.addEventListener('click', runSinglePhoto);
 initWebcamIfNeeded();

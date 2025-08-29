@@ -23,3 +23,1082 @@ Error occurred while capturing photo System.NotImplementedException: La mÇthode 
    Ö CameraControlCmd.Program.Capture() dans C:\Work\VS\CameraControl\CameraControlCmd\Program.cs:ligne 470
 -- BEFORE COUNT=2
 2025-08-23 15:50:14 TIMEOUT files_after=DSC_0003.jpg:1755955241,capture_20250822_122050_1ef2fd.jpg:1755858050
+2025-08-26 09:46:47 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton/captures" /filename "capture_%Y%m%d_%H%M%S_%i.jpg"
+EXIT=-532462766
+OUTPUT=digiCamControl command line utility running
+
+Canon event 520
+New Camera is connected ! Driver :Canon EOS 700D
+
+Exception non gÇrÇeˇ: System.InvalidOperationException: La collection a ÇtÇ modifiÇeˇ; l'opÇration d'ÇnumÇration peut ne pas s'exÇcuter.
+   Ö System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   Ö System.Collections.Generic.List`1.Enumerator.MoveNextRare()
+   Ö System.Collections.Generic.List`1.Enumerator.MoveNext()
+   Ö System.Linq.Enumerable.Aggregate[TSource,TAccumulate](IEnumerable`1 source, TAccumulate seed, Func`3 func)
+   Ö CameraControlCmd.Program.CamerasAreBusy() dans C:\Work\VS\CameraControl\CameraControlCmd\Program.cs:ligne 673
+   Ö CameraControlCmd.Program.WaitForCameras() dans C:\Work\VS\CameraControl\CameraControlCmd\Program.cs:ligne 149
+   Ö System.Threading.ThreadHelper.ThreadStart_Context(Object state)
+   Ö System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   Ö System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   Ö System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   Ö System.Threading.ThreadHelper.ThreadStart()
+
+
+-- BEFORE COUNT=3
+2025-08-26 09:47:42 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton/captures" /filename "capture_%Y%m%d_%H%M%S_%i.jpg"
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+
+
+Canon event 520
+Photo transfer begin.
+Transfer error !
+Message :Le chemin d'accäs ne peut pas àtre une chaåne vide ou contenir uniquement des espaces blancs.
+-- BEFORE COUNT=3
+2025-08-26 09:47:42 TIMEOUT files_after=DSC_0003.jpg:1755955241,DSC_0004.jpg:1756194276,capture_20250822_122050_1ef2fd.jpg:1755858050
+2025-08-26 09:50:25 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton/captures" /filename "capture_%Y%m%d_%H%M%S_%i.jpg"
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer error !
+Message :Le chemin d'accäs ne peut pas àtre une chaåne vide ou contenir uniquement des espaces blancs.
+-- BEFORE COUNT=4
+2025-08-26 09:50:30 TIMEOUT files_after=DSC_0003.jpg:1755955241,DSC_0004.jpg:1756194276,DSC_0005.jpg:1756194604,capture_20250822_122050_1ef2fd.jpg:1755858050
+2025-08-26 09:51:22 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton/captures" /filename "capture_%Y%m%d_%H%M%S_%i.jpg"
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer error !
+Message :Le chemin d'accäs ne peut pas àtre une chaåne vide ou contenir uniquement des espaces blancs.
+-- BEFORE COUNT=4
+2025-08-26 09:51:29 TIMEOUT files_after=DSC_0003.jpg:1755955241,DSC_0004.jpg:1756194276,DSC_0005.jpg:1756194604,capture_20250822_122050_1ef2fd.jpg:1755858050
+2025-08-26 09:52:24 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton/captures" /filename "capture_%Y%m%d_%H%M%S_%i.jpg"
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+
+Transfer error !
+Message :Le chemin d'accäs ne peut pas àtre une chaåne vide ou contenir uniquement des espaces blancs.
+-- BEFORE COUNT=4
+2025-08-26 09:52:25 TIMEOUT files_after=DSC_0003.jpg:1755955241,DSC_0004.jpg:1756194276,DSC_0005.jpg:1756194604,capture_20250822_122050_1ef2fd.jpg:1755858050
+2025-08-26 09:55:16 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures" /filename "capture_%Y%m%d_%H%M%S_%i.jpg"
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer error !
+Message :Le chemin d'accäs ne peut pas àtre une chaåne vide ou contenir uniquement des espaces blancs.
+-- BEFORE COUNT=4
+2025-08-26 09:55:29 TIMEOUT(Enhanced) files_after=DSC_0003.jpg:1755955241,DSC_0004.jpg:1756194276,DSC_0005.jpg:1756194604,capture_20250822_122050_1ef2fd.jpg:1755858050
+2025-08-26 09:58:58 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures" /filename "capture_%Y%m%d_%H%M%S_%i.jpg"
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer error !
+Message :Le chemin d'accäs ne peut pas àtre une chaåne vide ou contenir uniquement des espaces blancs.
+-- BEFORE COUNT=4
+2025-08-26 09:59:11 TIMEOUT(Enhanced) files_after=DSC_0003.jpg:1755955241,DSC_0004.jpg:1756194276,DSC_0005.jpg:1756194604,capture_20250822_122050_1ef2fd.jpg:1755858050
+2025-08-26 11:23:50 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton/captures" /filename "capture_%Y%m%d_%H%M%S_%i.jpg"
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer error !
+Message :Le chemin d'accäs ne peut pas àtre une chaåne vide ou contenir uniquement des espaces blancs.
+-- BEFORE COUNT=4
+2025-08-26 11:23:55 TIMEOUT files_after=DSC_0003.jpg:1755955241,DSC_0004.jpg:1756194276,DSC_0005.jpg:1756194604,capture_20250822_122050_1ef2fd.jpg:1755858050
+2025-08-26 11:25:34 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0007.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0007.JPG
+Photo transfer done.
+-- BEFORE COUNT=5
+2025-08-26 11:25:34 NEWFILE=captures/DSC_0007.JPG
+2025-08-26 11:27:49 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0008.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0008.JPG
+Photo transfer done.
+-- BEFORE COUNT=6
+2025-08-26 11:27:49 NEWFILE=captures/DSC_0008.JPG
+2025-08-26 11:29:18 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0009.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0009.JPG
+Photo transfer done.
+-- BEFORE COUNT=7
+2025-08-26 11:29:18 NEWFILE=captures/DSC_0009.JPG
+2025-08-26 11:31:03 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0010.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0010.JPG
+Photo transfer done.
+-- BEFORE COUNT=8
+2025-08-26 11:31:03 NEWFILE=captures/DSC_0010.JPG
+2025-08-26 11:31:43 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0011.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0011.JPG
+Photo transfer done.
+-- BEFORE COUNT=9
+2025-08-26 11:31:44 NEWFILE=captures/DSC_0011.JPG
+2025-08-26 11:33:29 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0012.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0012.JPG
+Photo transfer done.
+-- BEFORE COUNT=10
+2025-08-26 11:33:29 NEWFILE=captures/DSC_0012.JPG
+2025-08-26 11:33:41 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0013.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0013.JPG
+Photo transfer done.
+-- BEFORE COUNT=11
+2025-08-26 11:33:42 NEWFILE=captures/DSC_0013.JPG
+2025-08-26 11:33:54 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0014.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0014.JPG
+Photo transfer done.
+-- BEFORE COUNT=12
+2025-08-26 11:33:55 NEWFILE=captures/DSC_0014.JPG
+2025-08-26 11:36:53 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0015.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0015.JPG
+Photo transfer done.
+-- BEFORE COUNT=13
+2025-08-26 11:36:53 NEWFILE=captures/DSC_0015.JPG
+2025-08-26 11:37:06 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0016.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0016.JPG
+Photo transfer done.
+-- BEFORE COUNT=14
+2025-08-26 11:37:06 NEWFILE=captures/DSC_0016.JPG
+2025-08-26 11:37:18 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0017.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0017.JPG
+Photo transfer done.
+-- BEFORE COUNT=15
+2025-08-26 11:37:19 NEWFILE=captures/DSC_0017.JPG
+2025-08-26 11:37:59 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0018.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0018.JPG
+Photo transfer done.
+-- BEFORE COUNT=16
+2025-08-26 11:37:59 NEWFILE=captures/DSC_0018.JPG
+2025-08-26 11:38:12 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0019.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0019.JPG
+Photo transfer done.
+-- BEFORE COUNT=17
+2025-08-26 11:38:12 NEWFILE=captures/DSC_0019.JPG
+2025-08-26 11:38:25 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0020.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0020.JPG
+Photo transfer done.
+-- BEFORE COUNT=18
+2025-08-26 11:38:25 NEWFILE=captures/DSC_0020.JPG
+2025-08-26 11:38:55 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0021.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0021.JPG
+Photo transfer done.
+-- BEFORE COUNT=19
+2025-08-26 11:38:56 NEWFILE=captures/DSC_0021.JPG
+2025-08-26 11:39:33 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0022.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0022.JPG
+Photo transfer done.
+-- BEFORE COUNT=20
+2025-08-26 11:39:33 NEWFILE=captures/DSC_0022.JPG
+2025-08-26 11:41:33 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0023.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0023.JPG
+Photo transfer done.
+-- BEFORE COUNT=21
+2025-08-26 11:41:34 NEWFILE=captures/DSC_0023.JPG
+2025-08-26 11:41:46 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0024.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0024.JPG
+Photo transfer done.
+-- BEFORE COUNT=22
+2025-08-26 11:41:46 NEWFILE=captures/DSC_0024.JPG
+2025-08-26 11:42:41 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0025.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0025.JPG
+Photo transfer done.
+-- BEFORE COUNT=23
+2025-08-26 11:42:42 NEWFILE=captures/DSC_0025.JPG
+2025-08-26 11:44:50 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0026.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0026.JPG
+Photo transfer done.
+-- BEFORE COUNT=24
+2025-08-26 11:44:50 NEWFILE=captures/DSC_0026.JPG
+2025-08-26 11:45:00 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0027.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0027.JPG
+Photo transfer done.
+-- BEFORE COUNT=25
+2025-08-26 11:45:00 NEWFILE=captures/DSC_0027.JPG
+2025-08-26 11:45:10 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0028.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0028.JPG
+Photo transfer done.
+-- BEFORE COUNT=26
+2025-08-26 11:45:11 NEWFILE=captures/DSC_0028.JPG
+2025-08-26 11:46:31 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0029.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0029.JPG
+Photo transfer done.
+-- BEFORE COUNT=27
+2025-08-26 11:46:31 NEWFILE=captures/DSC_0029.JPG
+2025-08-26 11:49:05 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0030.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0030.JPG
+Photo transfer done.
+-- BEFORE COUNT=28
+2025-08-26 11:49:05 NEWFILE=captures/DSC_0030.JPG
+2025-08-26 11:49:15 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0031.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0031.JPG
+Photo transfer done.
+-- BEFORE COUNT=29
+2025-08-26 11:49:15 NEWFILE=captures/DSC_0031.JPG
+2025-08-26 11:49:26 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0032.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0032.JPG
+Photo transfer done.
+-- BEFORE COUNT=30
+2025-08-26 11:49:26 NEWFILE=captures/DSC_0032.JPG
+2025-08-26 11:58:22 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0033.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0033.JPG
+Photo transfer done.
+-- BEFORE COUNT=31
+2025-08-26 11:58:22 NEWFILE=captures/DSC_0033.JPG
+2025-08-26 11:58:31 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0034.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0034.JPG
+Photo transfer done.
+-- BEFORE COUNT=32
+2025-08-26 11:58:32 NEWFILE=captures/DSC_0034.JPG
+2025-08-26 11:58:41 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0035.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0035.JPG
+Photo transfer done.
+-- BEFORE COUNT=33
+2025-08-26 11:58:41 NEWFILE=captures/DSC_0035.JPG
+2025-08-26 11:58:56 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0036.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0036.JPG
+Photo transfer done.
+-- BEFORE COUNT=34
+2025-08-26 11:58:57 NEWFILE=captures/DSC_0036.JPG
+2025-08-26 11:59:06 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0037.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0037.JPG
+Photo transfer done.
+-- BEFORE COUNT=35
+2025-08-26 11:59:07 NEWFILE=captures/DSC_0037.JPG
+2025-08-26 11:59:59 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0038.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0038.JPG
+Photo transfer done.
+-- BEFORE COUNT=36
+2025-08-26 11:59:59 NEWFILE=captures/DSC_0038.JPG
+2025-08-26 12:00:09 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0039.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0039.JPG
+Photo transfer done.
+-- BEFORE COUNT=37
+2025-08-26 12:00:09 NEWFILE=captures/DSC_0039.JPG
+2025-08-26 12:00:19 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0040.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0040.JPG
+Photo transfer done.
+-- BEFORE COUNT=38
+2025-08-26 12:00:19 NEWFILE=captures/DSC_0040.JPG
+2025-08-26 12:01:42 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0041.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0041.JPG
+Photo transfer done.
+-- BEFORE COUNT=39
+2025-08-26 12:01:43 NEWFILE=captures/DSC_0041.JPG
+2025-08-26 12:01:55 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0042.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0042.JPG
+Photo transfer done.
+-- BEFORE COUNT=40
+2025-08-26 12:01:55 NEWFILE=captures/DSC_0042.JPG
+2025-08-26 12:02:09 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0043.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0043.JPG
+Photo transfer done.
+-- BEFORE COUNT=41
+2025-08-26 12:02:09 NEWFILE=captures/DSC_0043.JPG
+2025-08-26 12:03:36 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0044.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0044.JPG
+Photo transfer done.
+-- BEFORE COUNT=42
+2025-08-26 12:03:36 NEWFILE=captures/DSC_0044.JPG
+2025-08-26 12:03:40 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0045.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0045.JPG
+Photo transfer done.
+-- BEFORE COUNT=42
+2025-08-26 12:03:40 NEWFILE=captures/DSC_0044.JPG
+2025-08-26 12:04:27 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0046.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0046.JPG
+Photo transfer done.
+-- BEFORE COUNT=44
+2025-08-26 12:04:27 NEWFILE=captures/DSC_0046.JPG
+2025-08-26 12:04:36 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0047.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0047.JPG
+Photo transfer done.
+-- BEFORE COUNT=45
+2025-08-26 12:04:37 NEWFILE=captures/DSC_0047.JPG
+2025-08-26 12:05:01 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0048.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0048.JPG
+Photo transfer done.
+-- BEFORE COUNT=46
+2025-08-26 12:05:01 NEWFILE=captures/DSC_0048.JPG
+2025-08-26 12:06:36 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0049.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0049.JPG
+Photo transfer done.
+-- BEFORE COUNT=47
+2025-08-26 12:06:36 NEWFILE=captures/DSC_0049.JPG
+2025-08-26 12:06:51 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0050.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0050.JPG
+Photo transfer done.
+-- BEFORE COUNT=48
+2025-08-26 12:06:51 NEWFILE=captures/DSC_0050.JPG
+2025-08-26 12:11:35 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0051.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0051.JPG
+Photo transfer done.
+-- BEFORE COUNT=49
+2025-08-26 12:11:35 NEWFILE=captures/DSC_0051.JPG
+2025-08-26 12:11:45 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0052.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0052.JPG
+Photo transfer done.
+-- BEFORE COUNT=50
+2025-08-26 12:11:45 NEWFILE=captures/DSC_0052.JPG
+2025-08-26 12:12:00 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0053.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0053.JPG
+Photo transfer done.
+-- BEFORE COUNT=51
+2025-08-26 12:12:01 NEWFILE=captures/DSC_0053.JPG
+2025-08-26 12:12:10 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0054.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0054.JPG
+Photo transfer done.
+-- BEFORE COUNT=52
+2025-08-26 12:12:10 NEWFILE=captures/DSC_0054.JPG
+2025-08-26 12:12:20 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0055.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0055.JPG
+Photo transfer done.
+-- BEFORE COUNT=53
+2025-08-26 12:12:20 NEWFILE=captures/DSC_0055.JPG
+2025-08-26 12:18:16 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0056.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0056.JPG
+Photo transfer done.
+-- BEFORE COUNT=54
+2025-08-26 12:18:17 NEWFILE=captures/DSC_0056.JPG
+2025-08-26 12:21:49 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0057.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0057.JPG
+Photo transfer done.
+-- BEFORE COUNT=55
+2025-08-26 12:21:49 NEWFILE=captures/DSC_0057.JPG
+2025-08-26 12:43:10 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0058.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0058.JPG
+Photo transfer done.
+-- BEFORE COUNT=56
+2025-08-26 12:43:10 NEWFILE=captures/DSC_0058.JPG
+2025-08-26 12:43:20 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0059.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0059.JPG
+Photo transfer done.
+-- BEFORE COUNT=57
+2025-08-26 12:43:21 NEWFILE=captures/DSC_0059.JPG
+2025-08-26 12:43:29 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0060.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0060.JPG
+Photo transfer done.
+-- BEFORE COUNT=58
+2025-08-26 12:43:30 NEWFILE=captures/DSC_0060.JPG
+2025-08-26 12:43:51 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0061.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0061.JPG
+Photo transfer done.
+-- BEFORE COUNT=59
+2025-08-26 12:43:51 NEWFILE=captures/DSC_0061.JPG
+2025-08-26 12:44:00 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0062.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0062.JPG
+Photo transfer done.
+-- BEFORE COUNT=60
+2025-08-26 12:44:00 NEWFILE=captures/DSC_0062.JPG
+2025-08-26 12:44:14 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0063.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0063.JPG
+Photo transfer done.
+-- BEFORE COUNT=61
+2025-08-26 12:44:14 NEWFILE=captures/DSC_0063.JPG
+2025-08-26 14:42:24 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0064.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0064.JPG
+Photo transfer done.
+-- BEFORE COUNT=62
+2025-08-26 14:42:24 NEWFILE=captures/DSC_0064.JPG
+2025-08-26 14:42:49 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0065.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0065.JPG
+Photo transfer done.
+-- BEFORE COUNT=63
+2025-08-26 14:42:49 NEWFILE=captures/DSC_0065.JPG
+2025-08-26 14:56:29 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0066.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0066.JPG
+Photo transfer done.
+-- BEFORE COUNT=64
+2025-08-26 14:56:29 NEWFILE=captures/DSC_0066.JPG
+2025-08-26 14:57:42 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0067.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0067.JPG
+Photo transfer done.
+-- BEFORE COUNT=65
+2025-08-26 14:57:43 NEWFILE=captures/DSC_0067.JPG
+2025-08-26 14:57:54 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0068.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0068.JPG
+Photo transfer done.
+-- BEFORE COUNT=66
+2025-08-26 14:57:54 NEWFILE=captures/DSC_0068.JPG
+2025-08-26 14:58:04 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0069.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0069.JPG
+Photo transfer done.
+-- BEFORE COUNT=67
+2025-08-26 14:58:05 NEWFILE=captures/DSC_0069.JPG
+2025-08-26 14:58:45 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0070.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0070.JPG
+Photo transfer done.
+-- BEFORE COUNT=68
+2025-08-26 14:58:46 NEWFILE=captures/DSC_0070.JPG
+2025-08-26 14:59:55 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0071.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0071.JPG
+Photo transfer done.
+-- BEFORE COUNT=69
+2025-08-26 14:59:56 NEWFILE=captures/DSC_0071.JPG
+2025-08-26 15:15:28 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0072.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0072.JPG
+Photo transfer done.
+-- BEFORE COUNT=70
+2025-08-26 15:15:28 NEWFILE=captures/DSC_0072.JPG
+2025-08-26 15:25:00 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0073.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0073.JPG
+Photo transfer done.
+-- BEFORE COUNT=71
+2025-08-26 15:25:01 NEWFILE=captures/DSC_0073.JPG
+2025-08-26 16:19:22 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0074.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0074.JPG
+Photo transfer done.
+-- BEFORE COUNT=72
+2025-08-26 16:19:22 NEWFILE=captures/DSC_0074.JPG
+2025-08-26 16:24:49 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0075.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0075.JPG
+Photo transfer done.
+-- BEFORE COUNT=73
+2025-08-26 16:24:49 NEWFILE=captures/DSC_0075.JPG
+2025-08-26 16:26:28 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0076.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0076.JPG
+Photo transfer done.
+-- BEFORE COUNT=74
+2025-08-26 16:26:29 NEWFILE=captures/DSC_0076.JPG
+2025-08-26 16:27:06 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0077.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0077.JPG
+Photo transfer done.
+-- BEFORE COUNT=75
+2025-08-26 16:27:06 NEWFILE=captures/DSC_0077.JPG
+2025-08-26 16:33:45 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0078.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0078.JPG
+Photo transfer done.
+-- BEFORE COUNT=76
+2025-08-26 16:33:45 NEWFILE=captures/DSC_0078.JPG
+2025-08-26 16:38:02 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0079.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0079.JPG
+Photo transfer done.
+-- BEFORE COUNT=77
+2025-08-26 16:38:02 NEWFILE=captures/DSC_0079.JPG
+2025-08-26 17:04:35 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0080.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0080.JPG
+Photo transfer done.
+-- BEFORE COUNT=78
+2025-08-26 17:04:35 NEWFILE=captures/DSC_0080.JPG
+2025-08-26 17:05:21 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+New Camera is connected ! Driver :Canon EOS 700D
+Canon event 520
+Photo transfer begin.
+Transfer started :C:\xampp\htdocs\Photomaton\captures\DSC_0081.JPG
+Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0081.JPG
+Photo transfer done.
+-- BEFORE COUNT=79
+2025-08-26 17:05:21 NEWFILE=captures/DSC_0081.JPG
