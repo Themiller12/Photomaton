@@ -123,6 +123,19 @@ try {
             logMessage("SUCCÈS capture: " . $result['filename']);
             echo json_encode($result);
             break;
+        case 'unlock':
+            $cmd = escapeshellcmd(CAPTURE_SCRIPT) . ' unlock 2>&1';
+            logMessage('Commande unlock: ' . $cmd);
+            $out = [];
+            $rc = 0;
+            exec($cmd, $out, $rc);
+            echo json_encode([
+                'success' => $rc === 0,
+                'action' => 'unlock',
+                'output' => implode("\n", $out),
+                'returnCode' => $rc
+            ]);
+            break;
             
         case 'test':
             $result = testSystem();

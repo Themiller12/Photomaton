@@ -72,10 +72,10 @@ release_lock() {
 free_camera_if_busy() {
     if ! gphoto2 --summary >/dev/null 2>&1; then
         log_message "Appareil semble occupé - tentative de libération (kill gvfs / reset)"
-        sudo killall -q gvfs-gphoto2-volume-monitor 2>/dev/null || true
-        sudo killall -q gvfsd-gphoto2 2>/dev/null || true
+    (killall -q gvfs-gphoto2-volume-monitor 2>/dev/null || sudo killall -q gvfs-gphoto2-volume-monitor 2>/dev/null) || true
+    (killall -q gvfsd-gphoto2 2>/dev/null || sudo killall -q gvfsd-gphoto2 2>/dev/null) || true
         # Tuer d'éventuels gphoto2 zombies
-        pkill -f gphoto2 2>/dev/null || true
+    (pkill -f gphoto2 2>/dev/null || true)
         sleep 2
         gphoto2 --reset >/dev/null 2>&1 || true
         sleep 1
@@ -85,6 +85,8 @@ free_camera_if_busy() {
 # Détecter l'appareil photo
 detect_camera() {
     log_message "Détection de l'appareil photo..."
+    log_message "Processus gphoto2 actifs: $(pgrep -fl gphoto2 | tr '\n' ';' )"
+    log_message "Processus gvfs: $(pgrep -fl gvfsd-gphoto2 | tr '\n' ';')"
     
     # Vérifier si un appareil est connecté
     if ! gphoto2 --auto-detect | grep -q "usb:"; then
@@ -166,6 +168,23 @@ main() {
     fi
 }
 
+unlock_camera() {
+    log_message "=== UNLOCK CAMERA MANUEL ==="
+    acquire_lock || true
+    free_camera_if_busy
+    log_message "Tentative de réouverture gphoto2 --summary"
+    if gphoto2 --summary >/dev/null 2>&1; then
+        log_message "Caméra accessible après unlock"
+        echo "UNLOCK_OK"
+        release_lock
+        exit 0
+    else
+        log_message "Échec unlock"
+        release_lock
+        exit 1
+    fi
+}
+
 # Configuration avancée (optionnel)
 configure_camera() {
     log_message "Configuration de l'appareil photo..."
@@ -192,6 +211,9 @@ trap cleanup EXIT INT TERM
 case "${1:-capture}" in
     "capture")
         main
+        ;;
+    "unlock")
+        unlock_camera
         ;;
     "detect")
         detect_camera

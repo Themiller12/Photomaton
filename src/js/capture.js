@@ -105,34 +105,42 @@ async function runCountdown(from){
 }
 
 async function runCountdownWithCapture(){
-  // Lancer la capture AVANT même le décompte pour compenser la latence totale
-  console.log('Lancement capture...');
-  const capturePromise = triggerServerFileCapture();
-  
-  // Petit délai pour que la commande soit envoyée
-  await sleep(200);
-  
-  for(let c=3; c>0; c--){
-    countdownEl.textContent = c;
+  if (MODE === 'dslr_linux') {
+    // Sur Linux (gphoto2) la capture est quasi instantanée: on fait le décompte AVANT puis on déclenche
+    console.log('Décompte avant capture (linux rapide)');
+    for(let c=3; c>0; c--){
+      countdownEl.textContent = c;
+      countdownEl.classList.remove('countdown-pulse');
+      countdownEl.classList.add('countdown-pulse');
+      await sleep(1000);
+    }
+    countdownEl.textContent = '';
     countdownEl.classList.remove('countdown-pulse');
-    countdownEl.classList.add('countdown-pulse');
-    await sleep(1000);
+    if(window.PhotoEffects) {
+      PhotoEffects.createFlashEffect();
+      if(video) video.classList.add('photo-taking');
+      setTimeout(() => video?.classList.remove('photo-taking'), 500);
+    }
+    const start = Date.now();
+    const file = await triggerServerFileCapture();
+    console.log('Capture Linux effectuée en', Date.now()-start, 'ms');
+    return file;
+  } else {
+    // Windows / autres DSLR: lancer la capture AVANT le décompte pour compenser la latence (digiCamControl etc.)
+    console.log('Lancement capture anticipée (latence élevée)');
+    const capturePromise = triggerServerFileCapture();
+    await sleep(200); // laisser partir la commande
+    for(let c=3; c>0; c--){
+      countdownEl.textContent = c;
+      countdownEl.classList.remove('countdown-pulse');
+      countdownEl.classList.add('countdown-pulse');
+      await sleep(1000);
+    }
+    countdownEl.textContent = '';
+    countdownEl.classList.remove('countdown-pulse');
+    const file = await capturePromise;
+    return file;
   }
-  
-  countdownEl.textContent = getMessage('countdownMessage');
-  
-  // Effet flash
-  if(window.PhotoEffects) {
-    PhotoEffects.createFlashEffect();
-    if(video) video.classList.add('photo-taking');
-    setTimeout(() => video?.classList.remove('photo-taking'), 500);
-  }
-  
-  // Attendre que la capture soit terminée
-  console.log('Attente fin capture...');
-  const result = await capturePromise;
-  countdownEl.textContent = '';
-  return result;
 }
 
 function takeSnapshot(){
