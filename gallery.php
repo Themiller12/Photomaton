@@ -20,53 +20,64 @@ usort($files, function($a, $b) {
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <link rel="stylesheet" href="src/css/style.css" />
+<style>
+  body, html { height:100%; overflow:hidden; }
+  #gallery-shell { height:100%; display:flex; flex-direction:column; }
+  #gallery-head { padding:1rem 1.2rem 0.5rem; flex:0 0 auto; }
+  #gallery-scroll { flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch; touch-action:pan-y; padding:0 1.2rem 2rem; }
+  #gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:0.9rem; align-content:start; }
+  #gallery-grid .item img { width:100%; height:150px; object-fit:cover; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,.25); cursor:pointer; transition:transform .18s; }
+  #gallery-grid .item img:active { transform:scale(.94); }
+  #loadMore { margin-top:1.2rem; }
+  /* Modal override for full bleed */
+  #photoModal.modal { align-items:center; justify-content:center; }
+  #photoModal img { max-width:92vw; max-height:92vh; }
+  /* Fallback no-native scroll */
+  .no-native-scroll #gallery-scroll { overflow-y:hidden; position:relative; }
+</style>
 </head>
 <body>
-  <div class="screen scrollable" id="gallery">
-    <h1 id="gallery-title"><i class="fas fa-camera"></i> Galerie <i class="fas fa-camera"></i></h1>
-    <p id="gallery-subtitle" style="font-size: 1.3rem; color: var(--charcoal); margin-bottom: 2rem; font-weight: 300;">
-      Tous vos souvenirs capturés (<span id="photo-count"><?= count($files) ?></span> photos)
-    </p>
-    <div class="grid" id="photoGrid">
-      <?php 
-      // Utiliser la configuration pour le nombre initial
-      $initialLoad = 20; // Valeur par défaut, sera remplacée par JavaScript
-      $displayFiles = array_slice($files, 0, $initialLoad);
-      foreach($displayFiles as $f): 
-        $base = basename($f); 
-      ?>
-        <div class="item">
-          <img loading="lazy" src="<?= $photosFolder ?>/<?= $base ?>" alt="photo" onclick="openModal(this.src)" style="cursor: pointer;" />
-        </div>
-      <?php endforeach; ?>
-      <?php if(empty($files)): ?>
-        <div style="grid-column: 1/-1; text-align: center; padding: 4rem;">
-          <p id="no-photos-msg" style="font-size: 1.5rem; color: var(--charcoal);">
-            <i class="fas fa-sparkles"></i> Aucune photo pour le moment <i class="fas fa-sparkles"></i><br>
-            <span id="no-photos-sub" style="font-size: 1.1rem; opacity: 0.7;">Commencez à créer de beaux souvenirs !</span>
-          </p>
+  <div id="gallery-shell">
+    <div id="gallery-head">
+      <h1 id="gallery-title"><i class="fas fa-images"></i> Galerie</h1>
+      <p id="gallery-subtitle" style="font-size:1.05rem; margin:0 0 1rem; font-weight:400;">
+        Tous vos souvenirs capturés (<span id="photo-count"><?= count($files) ?></span> photos)
+      </p>
+    </div>
+    <div id="gallery-scroll">
+      <div id="gallery-grid">
+        <?php 
+        $initialLoad = 20; // Valeur par défaut
+        $displayFiles = array_slice($files, 0, $initialLoad);
+        foreach($displayFiles as $f): $base=basename($f); ?>
+          <div class="item"><img loading="lazy" src="<?= $photosFolder ?>/<?= $base ?>" data-full="<?= $photosFolder ?>/<?= $base ?>" alt="photo" /></div>
+        <?php endforeach; ?>
+        <?php if(empty($files)): ?>
+          <div style="grid-column:1/-1; text-align:center; padding:3rem 0;">
+            <p id="no-photos-msg" style="font-size:1.2rem; opacity:.8;">
+              Aucune photo pour le moment<br><span id="no-photos-sub" style="font-size:0.95rem;">Commencez à créer de beaux souvenirs !</span>
+            </p>
+          </div>
+        <?php endif; ?>
+      </div>
+      <?php if(count($files) > $initialLoad): ?>
+        <div style="text-align:center;">
+          <button id="loadMore" class="btn secondary" style="padding:0.9rem 2rem; font-size:1rem;" onclick="loadMorePhotos()">
+            <i class="fas fa-plus"></i> Voir plus (<span id="remaining-count"><?= count($files) - $initialLoad ?></span>)
+          </button>
         </div>
       <?php endif; ?>
-    </div>
-    
-    <?php if(count($files) > $initialLoad): ?>
-    <div style="margin: 2rem 0;">
-      <button id="loadMore" class="btn secondary" onclick="loadMorePhotos()">
-        <i class="fas fa-camera"></i> Voir plus de photos (<span id="remaining-count"><?= count($files) - $initialLoad ?></span> restantes)
-      </button>
-    </div>
-    <?php endif; ?>
-    
-    <div class="controls">
-      <button class="btn" onclick="window.location='index.php'"><i class="fas fa-home"></i> Accueil</button>
+      <div style="text-align:center; margin-top:1.2rem;">
+        <button class="btn" style="padding:0.9rem 2rem; font-size:1rem;" onclick="window.location='index.php'"><i class="fas fa-home"></i> Accueil</button>
+      </div>
     </div>
   </div>
-  
-  <!-- Modal pour affichage en grand -->
-  <div id="photoModal" class="modal" onclick="closeModal()">
+
+  <!-- Modal -->
+  <div id="photoModal" class="modal" style="display:none;">
     <div class="modal-content">
       <button class="modal-close" onclick="closeModal()">&times;</button>
-      <img id="modalImage" src="" alt="Photo en grand">
+      <img id="modalImage" src="" alt="Photo en grand" />
     </div>
   </div>
 
@@ -97,48 +108,66 @@ function openModal(src) {
   const modal = document.getElementById('photoModal');
   const modalImg = document.getElementById('modalImage');
   modalImg.src = src;
-  modal.classList.add('show');
-  document.body.style.overflow = 'hidden'; // Empêcher le scroll
+  modal.style.display = 'flex';
+  requestAnimationFrame(()=> modal.classList.add('show'));
+  document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
   const modal = document.getElementById('photoModal');
   modal.classList.remove('show');
-  document.body.style.overflow = 'auto'; // Réactiver le scroll
+  setTimeout(()=>{ modal.style.display='none'; document.body.style.overflow='auto'; }, 200);
 }
 
 function loadMorePhotos() {
-  const grid = document.getElementById('photoGrid');
+  const grid = document.getElementById('gallery-grid');
   const loadMoreBtn = document.getElementById('loadMore');
-  const loadMoreCount = window.PHOTOMATON_CONFIG.galleryLoadMore;
-  
-  // Charger le nombre de photos configuré
-  const nextBatch = allFiles.slice(loadedCount, loadedCount + loadMoreCount);
-  
-  nextBatch.forEach(filename => {
-    const item = document.createElement('div');
-    item.className = 'item';
-    item.innerHTML = `<img loading="lazy" src="${photosFolder}/${filename}" alt="photo" onclick="openModal(this.src)" style="cursor: pointer;" />`;
-    grid.appendChild(item);
+  const batchSize = window.PHOTOMATON_CONFIG.galleryLoadMore;
+  const nextBatch = allFiles.slice(loadedCount, loadedCount + batchSize);
+  nextBatch.forEach(fn => {
+    const wrap = document.createElement('div');
+    wrap.className='item';
+    wrap.innerHTML = `<img loading="lazy" src="${photosFolder}/${fn}" data-full="${photosFolder}/${fn}" alt="photo" />`;
+    grid.appendChild(wrap);
   });
-  
   loadedCount += nextBatch.length;
-  
-  // Mettre à jour ou cacher le bouton
-  if (loadedCount >= totalCount) {
-    loadMoreBtn.style.display = 'none';
-  } else {
-    const remainingCount = document.getElementById('remaining-count');
-    if (remainingCount) remainingCount.textContent = totalCount - loadedCount;
+  if (loadedCount >= totalCount) loadMoreBtn?.style && (loadMoreBtn.style.display='none');
+  else {
+    const r = document.getElementById('remaining-count');
+    if (r) r.textContent = totalCount - loadedCount;
   }
 }
 
 // Fermer avec la touche Escape
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    closeModal();
-  }
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+// Délégation clic sur images (meilleur perf)
+document.getElementById('gallery-grid')?.addEventListener('click', e => {
+  if(e.target.tagName==='IMG') openModal(e.target.getAttribute('data-full'));
 });
+
+// Test support scroll natif (Raspberry Pi fallback)
+(function(){
+  const sc = document.getElementById('gallery-scroll');
+  if(!sc) return;
+  const probe = document.createElement('div');
+  probe.style.height='150%';
+  sc.appendChild(probe);
+  requestAnimationFrame(()=>{
+    sc.scrollTop = 50;
+    const native = sc.scrollTop === 50;
+    sc.removeChild(probe);
+    if(!native){
+      document.documentElement.classList.add('no-native-scroll');
+      let lastY=null;
+      sc.addEventListener('touchstart',e=>{ if(e.touches.length===1) lastY=e.touches[0].clientY; }, {passive:true});
+      sc.addEventListener('touchmove',e=>{
+        if(lastY!==null){ const y=e.touches[0].clientY; sc.scrollTop += (lastY - y); lastY = y; }
+      }, {passive:true});
+      sc.addEventListener('touchend',()=>{ lastY=null; }, {passive:true});
+    }
+  });
+})();
 </script>
 </body>
 </html>
