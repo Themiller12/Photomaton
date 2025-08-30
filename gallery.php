@@ -21,19 +21,31 @@ usort($files, function($a, $b) {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <link rel="stylesheet" href="src/css/style.css" />
 <style>
-  body, html { height:100%; overflow:hidden; }
-  #gallery-shell { height:100%; display:flex; flex-direction:column; }
-  #gallery-head { padding:1rem 1.2rem 0.5rem; flex:0 0 auto; }
-  #gallery-scroll { flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch; touch-action:pan-y; padding:0 1.2rem 2rem; }
-  #gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:0.9rem; align-content:start; }
-  #gallery-grid .item img { width:100%; height:150px; object-fit:cover; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,.25); cursor:pointer; transition:transform .18s; }
-  #gallery-grid .item img:active { transform:scale(.94); }
-  #loadMore { margin-top:1.2rem; }
-  /* Modal override for full bleed */
+  /* Gallery performance optimizations for Raspberry Pi */
+  html, body { height:auto; min-height:100%; overflow-y:auto; touch-action:pan-y; }
+  #gallery-shell { padding:0.8rem 1.2rem 2rem; }
+  #gallery-head { margin-bottom:0.8rem; }
+  #gallery-grid { 
+    display:grid; 
+    grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); 
+    gap:0.7rem; 
+    align-content:start; 
+  }
+  #gallery-grid .item img { 
+    width:100%; height:140px; object-fit:cover; border-radius:8px; 
+    border:2px solid rgba(255,255,255,0.6); 
+    background:#eee; 
+    cursor:pointer; 
+    transition:opacity .15s; 
+  }
+  #gallery-grid .item img:active { opacity:0.75; }
+  #loadMore { margin:1.1rem auto 0; }
   #photoModal.modal { align-items:center; justify-content:center; }
   #photoModal img { max-width:92vw; max-height:92vh; }
-  /* Fallback no-native scroll */
-  .no-native-scroll #gallery-scroll { overflow-y:hidden; position:relative; }
+  /* Hide scrollbars visually (optional) */
+  #gallery-grid::-webkit-scrollbar { width:0; height:0; }
+  /* Pin action buttons */
+  .gallery-actions { text-align:center; margin-top:1rem; }
 </style>
 </head>
 <body>
@@ -44,8 +56,7 @@ usort($files, function($a, $b) {
         Tous vos souvenirs capturés (<span id="photo-count"><?= count($files) ?></span> photos)
       </p>
     </div>
-    <div id="gallery-scroll">
-      <div id="gallery-grid">
+    <div id="gallery-grid">
         <?php 
         $initialLoad = 20; // Valeur par défaut
         $displayFiles = array_slice($files, 0, $initialLoad);
@@ -59,17 +70,17 @@ usort($files, function($a, $b) {
             </p>
           </div>
         <?php endif; ?>
+    </div>
+    <?php if(count($files) > $initialLoad): ?>
+      <div class="gallery-actions">
+        <button id="loadMore" class="btn secondary" style="padding:0.8rem 2rem; font-size:1rem;" onclick="loadMorePhotos()">
+          <i class="fas fa-plus"></i> Voir plus (<span id="remaining-count"><?= count($files) - $initialLoad ?></span>)
+        </button>
       </div>
-      <?php if(count($files) > $initialLoad): ?>
-        <div style="text-align:center;">
-          <button id="loadMore" class="btn secondary" style="padding:0.9rem 2rem; font-size:1rem;" onclick="loadMorePhotos()">
-            <i class="fas fa-plus"></i> Voir plus (<span id="remaining-count"><?= count($files) - $initialLoad ?></span>)
-          </button>
-        </div>
-      <?php endif; ?>
-      <div style="text-align:center; margin-top:1.2rem;">
-        <button class="btn" style="padding:0.9rem 2rem; font-size:1rem;" onclick="window.location='index.php'"><i class="fas fa-home"></i> Accueil</button>
-      </div>
+    <?php endif; ?>
+    <div class="gallery-actions">
+      <button class="btn" style="padding:0.8rem 2rem; font-size:1rem;" onclick="window.location='index.php'"><i class="fas fa-home"></i> Accueil</button>
+    </div>
     </div>
   </div>
 
@@ -142,32 +153,7 @@ function loadMorePhotos() {
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
 
 // Délégation clic sur images (meilleur perf)
-document.getElementById('gallery-grid')?.addEventListener('click', e => {
-  if(e.target.tagName==='IMG') openModal(e.target.getAttribute('data-full'));
-});
-
-// Test support scroll natif (Raspberry Pi fallback)
-(function(){
-  const sc = document.getElementById('gallery-scroll');
-  if(!sc) return;
-  const probe = document.createElement('div');
-  probe.style.height='150%';
-  sc.appendChild(probe);
-  requestAnimationFrame(()=>{
-    sc.scrollTop = 50;
-    const native = sc.scrollTop === 50;
-    sc.removeChild(probe);
-    if(!native){
-      document.documentElement.classList.add('no-native-scroll');
-      let lastY=null;
-      sc.addEventListener('touchstart',e=>{ if(e.touches.length===1) lastY=e.touches[0].clientY; }, {passive:true});
-      sc.addEventListener('touchmove',e=>{
-        if(lastY!==null){ const y=e.touches[0].clientY; sc.scrollTop += (lastY - y); lastY = y; }
-      }, {passive:true});
-      sc.addEventListener('touchend',()=>{ lastY=null; }, {passive:true});
-    }
-  });
-})();
+document.getElementById('gallery-grid')?.addEventListener('click', e => { if(e.target.tagName==='IMG') openModal(e.target.dataset.full); });
 </script>
 </body>
 </html>
