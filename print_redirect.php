@@ -9,7 +9,7 @@ $imagePath = $_POST['imagePath'] ?? $_GET['imagePath'] ?? '';
 $copies = intval($_POST['copies'] ?? $_GET['copies'] ?? 1);
 
 // Log de la redirection
-$logFile = 'print_log.txt';
+$logFile = 'logs/print_log.txt';
 $timestamp = date('Y-m-d H:i:s');
 file_put_contents($logFile, "[$timestamp] REDIRECT_TO_BROWSER: $imagePath (x$copies copies)\n", FILE_APPEND);
 

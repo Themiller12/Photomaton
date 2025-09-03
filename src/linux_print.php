@@ -63,8 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Configuration
-define('PRINT_SCRIPT', __DIR__ . '/../linux_print.sh');
-define('LOG_FILE', __DIR__ . '/../print_log.txt');
+define('PRINT_SCRIPT', __DIR__ . '/../scripts/linux_print.sh');
+define('LOG_FILE', __DIR__ . '/../logs/print_log.txt');
 
 function logMessage($message) {
     $timestamp = date('Y-m-d H:i:s');

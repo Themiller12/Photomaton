@@ -6,9 +6,10 @@
 # ============================================================================
 
 # Configuration
-LOG_FILE="/var/www/html/Photomaton/print_log.txt"
+CAPTURES_DIR="/var/www/html/Photomaton/captures"
+LOG_FILE="/var/www/html/Photomaton/logs/print_log.txt"
 PRINTER_NAME="Canon_SELPHY_CP1500"
-PPD_FILE="/var/www/html/Photomaton/Canon_SELPHY_CP1500.ppd"
+PPD_FILE="/var/www/html/Photomaton/ppd/Canon_SELPHY_CP1500.ppd"
 DEFAULT_COPIES=1
 DEFAULT_MEDIA="Postcard.Fullbleed"  # Format Canon SELPHY exact du PPD
 

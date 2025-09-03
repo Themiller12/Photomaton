@@ -67,5 +67,6 @@ $PRINT_CMD = 'powershell -NoProfile -Command Start-Process -FilePath %file% -Ver
 // Debug : si true, écrit un journal détaillé des captures (commande, code retour, nouveaux fichiers)
 $DEBUG_CAPTURE = true;
 // Fichier log
-$CAPTURE_LOG_FILE = __DIR__ . '/capture_log.txt';
+$CAPTURE_LOG_FILE = // Configuration des logs
+$CAPTURE_LOG_FILE = __DIR__ . '/logs/capture_log.txt';
 ?>

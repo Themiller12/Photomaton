@@ -26,7 +26,8 @@ if (!file_exists($filePath)) {
     exit;
 }
 
-$logFile = __DIR__ . '/print_log.txt';
+// Log pour debug
+$logFile = __DIR__ . '/logs/print_log.txt';
 $logEntry = date('Y-m-d H:i:s') . " - Impression simple Canon SELPHY: $file (x$copies copies)\n";
 file_put_contents($logFile, $logEntry, FILE_APPEND | LOCK_EX);
 

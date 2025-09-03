@@ -69,13 +69,15 @@ function parsePPDInfo($ppdFile) {
     return $info;
 }
 
-$logFile = __DIR__ . '/print_log.txt';
+// Configuration
+$logFile = __DIR__ . '/logs/print_log.txt';
 $logEntry = date('Y-m-d H:i:s') . " - Impression PPD-optimisée: $file (x$copies, format: $paperSize)\n";
 file_put_contents($logFile, $logEntry, FILE_APPEND | LOCK_EX);
 
 try {
     // Analyser le fichier PPD
-    $ppdFile = __DIR__ . '/Canon_SELPHY_CP1500.ppd';
+    // Chemin vers le fichier PPD
+    $ppdFile = __DIR__ . '/ppd/Canon_SELPHY_CP1500.ppd';
     $ppdInfo = parsePPDInfo($ppdFile);
     
     // Vérifier si le nombre de copies est dans la limite

@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/# Configuration
+CAPTURES_DIR="/var/www/html/Photomaton/captures"
+LOG_FILE="/var/www/html/Photomaton/logs/capture_log.txt"h
 
 # ============================================================================
 # PHOTOMATON LINUX - Script de capture photo

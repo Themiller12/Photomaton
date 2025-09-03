@@ -63,8 +63,9 @@ if [[ -d "$INSTALL_DIR" ]]; then
     find "$INSTALL_DIR" -type f -exec chmod 644 {} \;
     
     # Rendre les scripts exécutables
-    chmod +x "$INSTALL_DIR/linux_capture.sh" 2>/dev/null || true
-    chmod +x "$INSTALL_DIR/linux_print.sh" 2>/dev/null || true
+    echo "✅ Scripts rendus exécutables"
+    chmod +x "$INSTALL_DIR/scripts/linux_capture.sh" 2>/dev/null || true
+    chmod +x "$INSTALL_DIR/scripts/linux_print.sh" 2>/dev/null || true
     
     # Créer les dossiers nécessaires
     mkdir -p "$INSTALL_DIR/captures"
@@ -114,9 +115,9 @@ if [[ -n "$USB_PRINTERS" ]]; then
     
     # Configurer l'imprimante avec le fichier PPD si disponible
     echo "⚙️ Configuration de l'imprimante $PRINTER_NAME..."
-    if [[ -f "$INSTALL_DIR/Canon_SELPHY_CP1500.ppd" ]]; then
+    if [[ -f "$INSTALL_DIR/ppd/Canon_SELPHY_CP1500.ppd" ]]; then
         echo "📄 Utilisation du fichier PPD pour configuration optimale"
-        lpadmin -p "$PRINTER_NAME" -v "$USB_URI" -P "$INSTALL_DIR/Canon_SELPHY_CP1500.ppd" -E
+        lpadmin -p "$PRINTER_NAME" -v "$USB_URI" -P "$INSTALL_DIR/ppd/Canon_SELPHY_CP1500.ppd" -E
     else
         echo "⚠️ Fichier PPD non trouvé, utilisation du driver par défaut"
         lpadmin -p "$PRINTER_NAME" -v "$USB_URI" -E -m everywhere 2>/dev/null || \
@@ -167,8 +168,8 @@ echo "     - printerType: 'linux_cups'"
 echo "  4. Accédez à: http://localhost/Photomaton"
 echo ""
 echo "🔧 Commandes utiles:"
-echo "  - Test caméra: cd $INSTALL_DIR && sudo -u $USER_WEB ./linux_capture.sh test"
-echo "  - Test impression: cd $INSTALL_DIR && sudo -u $USER_WEB ./linux_print.sh test"
+echo "  - Test caméra: cd $INSTALL_DIR && sudo -u $USER_WEB ./scripts/linux_capture.sh test"
+echo "  - Test impression: cd $INSTALL_DIR && sudo -u $USER_WEB ./scripts/linux_print.sh test"
 echo "  - Interface CUPS: http://localhost:631"
 echo "  - Logs Apache: tail -f /var/log/apache2/error.log"
 echo ""
@@ -180,11 +181,11 @@ echo "🧪 Test du système Photomaton Linux"
 echo "===================================="
 
 echo "📷 Test appareil photo..."
-./linux_capture.sh test
+./scripts/linux_capture.sh test
 
 echo ""
 echo "🖨️ Test impression..."
-./linux_print.sh test
+./scripts/linux_print.sh test
 
 echo ""
 echo "🌐 Test serveur web..."

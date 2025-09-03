@@ -18,7 +18,7 @@ WEB_ROOT="/var/www/html"
 PROJECT_DIR="$WEB_ROOT/$PROJECT_NAME"
 APACHE_USER="www-data"
 CUPS_CONFIG="/etc/cups"
-PPD_FILE="Canon_SELPHY_CP1500.ppd"
+PPD_FILE="ppd/Canon_SELPHY_CP1500.ppd"
 
 log() {
     echo -e "${GREEN}[$(date '+%H:%M:%S')]${NC} $1"
@@ -159,6 +159,12 @@ git clone $GITHUB_URL $PROJECT_NAME
 
 # 8. Configuration des permissions
 log "Configuration des permissions..."
+
+# Créer les dossiers nécessaires s'ils n'existent pas
+mkdir -p "$PROJECT_DIR/captures"
+mkdir -p "$PROJECT_DIR/logs" 
+mkdir -p "$PROJECT_DIR/ppd"
+mkdir -p "$PROJECT_DIR/scripts"
 
 # Propriétaire : utilisateur réel, Groupe : www-data
 chown -R $REAL_USER:$APACHE_USER "$PROJECT_DIR"

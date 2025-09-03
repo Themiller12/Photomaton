@@ -17,7 +17,7 @@ Application web simple pour borne photomaton (tablette + appareil photo ou webca
 Dans l'invité de commande, téléchargez le script :
 
 ```
-wget https://raw.githubusercontent.com/Themiller12/Photomaton/main/install_photomaton.sh
+wget https://raw.githubusercontent.com/Themiller12/Photomaton/main/scripts/install_photomaton.sh
 chmod +x install_photomaton.sh
 ```
 

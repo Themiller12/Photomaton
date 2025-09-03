@@ -16,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Configuration
-define('CAPTURE_SCRIPT', __DIR__ . '/../linux_capture.sh');
-define('LOG_FILE', __DIR__ . '/../capture_log.txt');
+define('CAPTURE_SCRIPT', __DIR__ . '/../scripts/linux_capture.sh');
+define('LOG_FILE', __DIR__ . '/../logs/capture_log.txt');
 
 function logMessage($message) {
     $timestamp = date('Y-m-d H:i:s');

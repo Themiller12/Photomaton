@@ -12,7 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // Fonction de log pour debug
 function logPrint($message) {
-    $logFile = '../print_log.txt';
+        // Log
+    $logFile = '../logs/print_log.txt';
     $timestamp = date('Y-m-d H:i:s');
     file_put_contents($logFile, "[$timestamp] BROWSER_PRINT: $message\n", FILE_APPEND);
 }

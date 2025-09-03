@@ -26,8 +26,8 @@ if (!file_exists($filePath)) {
     exit;
 }
 
-// Log de la demande d'impression
-$logFile = __DIR__ . '/print_log.txt';
+// Log pour debug
+$logFile = __DIR__ . '/logs/print_log.txt';
 $logEntry = date('Y-m-d H:i:s') . " - Demande impression navigateur: $file (x$copies copies)\n";
 file_put_contents($logFile, $logEntry, FILE_APPEND | LOCK_EX);
 
