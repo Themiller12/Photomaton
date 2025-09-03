@@ -35,6 +35,15 @@ function initialCameraMode() {
   return DETECTED_OS === 'linux' ? 'dslr_linux' : 'dslr_win';
 }
 
+// Printer type dynamique: Linux utilise CUPS par défaut
+function initialPrinterType() {
+  const paramType = new URLSearchParams(location.search).get('printer');
+  if (paramType) return paramType;
+  const stored = localStorage.getItem('PHOTOMATON_PRINTER_TYPE');
+  if (stored) return stored;
+  return DETECTED_OS === 'linux' ? 'linux_cups' : 'browser';
+}
+
 window.PHOTOMATON_CONFIG = {
   
   // === CONFIGURATION SYSTÈME ===
@@ -54,7 +63,7 @@ window.PHOTOMATON_CONFIG = {
   enablePrinting: 1,
   
   // Type d'impression: 'browser', 'simple', 'linux_cups', 'selphy_optimized', 'canon_cp1500', 'default_printer', 'mspaint'
-  printerType: 'browser',
+  printerType: initialPrinterType(),
   
   // Nom de l'imprimante (optionnel, pour identification)
   printerName: 'Canon SELPHY CP1500',
@@ -134,4 +143,8 @@ window.overridePhotomatonOS = function(newOS){
 window.overridePhotomatonMode = function(newMode){
   localStorage.setItem('PHOTOMATON_CAMERA_MODE', newMode);
   console.log('[Photomaton] Camera mode override =', newMode, ' -> recharger la page.');
+};
+window.overridePhotomatonPrinter = function(newType){
+  localStorage.setItem('PHOTOMATON_PRINTER_TYPE', newType);
+  console.log('[Photomaton] Printer type override =', newType, ' -> recharger la page.');
 };

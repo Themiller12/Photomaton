@@ -158,9 +158,10 @@ try {
     
     switch ($action) {
         case 'print':
-            $imagePath = $input['imagePath'] ?? $_POST['imagePath'] ?? $_GET['imagePath'] ?? '';
+            // Compatibilité avec les deux formats
+            $imagePath = $input['imagePath'] ?? $input['file'] ?? $_POST['imagePath'] ?? $_POST['file'] ?? $_GET['imagePath'] ?? $_GET['file'] ?? '';
             $copies = intval($input['copies'] ?? $_POST['copies'] ?? $_GET['copies'] ?? 1);
-            $media = $input['media'] ?? $_POST['media'] ?? $_GET['media'] ?? '4x6';
+            $media = $input['media'] ?? $input['paperSize'] ?? $_POST['media'] ?? $_POST['paperSize'] ?? $_GET['media'] ?? $_GET['paperSize'] ?? '4x6';
             
             $result = printImage($imagePath, $copies, $media);
             logMessage("SUCCÈS impression: Job " . ($result['jobId'] ?? 'N/A'));

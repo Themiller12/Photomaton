@@ -293,6 +293,8 @@ printBtn?.addEventListener('click', async () => {
         // Choisir l'endpoint d'impression selon l'OS et la configuration
         let printEndpoint = 'print_file.php'; // Fallback par défaut
         
+        console.log('[Print Debug] OS:', window.PHOTOMATON_CONFIG.operatingSystem, 'PrinterType:', window.PHOTOMATON_CONFIG.printerType);
+        
         // Support Linux prioritaire
         if (window.PHOTOMATON_CONFIG.operatingSystem === 'linux' && window.PHOTOMATON_CONFIG.printerType === 'linux_cups') {
           printEndpoint = 'src/linux_print.php';
@@ -330,6 +332,8 @@ printBtn?.addEventListener('click', async () => {
           printData.paperSize = window.PHOTOMATON_CONFIG.defaultPaperSize;
           printData.media = window.PHOTOMATON_CONFIG.defaultPaperSize; // Format Linux
         }
+        
+        console.log('[Print Debug] Endpoint:', printEndpoint, 'Data:', printData);
           
         const res = await fetch(printEndpoint, {
           method: 'POST', 
