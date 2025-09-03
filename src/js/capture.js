@@ -10,6 +10,7 @@ const selectionTitle = document.querySelector('#selection-screen h2');
 const captureScreen = document.getElementById('capture-screen');
 const thumbsDiv = document.getElementById('thumbnails');
 const printBtn = document.getElementById('print-selected');
+const printDoubleBtn = document.getElementById('print-double');
 const copiesSelect = document.getElementById('copies');
 
 // Variables de configuration (depuis config.js)
@@ -261,10 +262,12 @@ function showSelection(){
     const copyLabel = printControls.querySelector('label[for="copies"]');
     const copySelect = printControls.querySelector('#copies');
     const printButton = printControls.querySelector('#print-selected');
+    const printDoubleButton = printControls.querySelector('#print-double');
     
     if (copyLabel) copyLabel.style.display = 'none';
     if (copySelect) copySelect.style.display = 'none';
     if (printButton) printButton.style.display = 'none';
+    if (printDoubleButton) printDoubleButton.style.display = 'none';
   }
   
   thumbsDiv.innerHTML='';
@@ -356,6 +359,68 @@ printBtn?.addEventListener('click', async () => {
     }
   }
   await sendToSavePrint(captured[selectedIndex], copies);
+});
+
+// Gestionnaire impression double (2 photos par page)
+printDoubleBtn?.addEventListener('click', async () => {
+  const copies = parseInt(copiesSelect.value,10) || 1;
+  if(MODE === 'dslr_win' || MODE === 'dslr_linux' || MODE === 'sony_wifi' || MODE === 'sony_sdk' || MODE === 'folder_watch') {
+    const filePath = captured[selectedIndex];
+    if(filePath.startsWith('captures/')){
+      try {
+        // Utiliser même logique d'endpoint mais avec layout spécial
+        let printEndpoint = 'print_file.php';
+        
+        console.log('[Print Double Debug] OS:', window.PHOTOMATON_CONFIG.operatingSystem, 'PrinterType:', window.PHOTOMATON_CONFIG.printerType);
+        
+        if (window.PHOTOMATON_CONFIG.operatingSystem === 'linux' && window.PHOTOMATON_CONFIG.printerType === 'linux_cups') {
+          printEndpoint = 'src/linux_print.php';
+        } else {
+          // Windows endpoints
+          switch(window.PHOTOMATON_CONFIG.printerType) {
+            case 'simple': printEndpoint = 'print_simple.php'; break;
+            case 'selphy_optimized': printEndpoint = 'print_selphy_optimized.php'; break;
+            case 'canon_cp1500': printEndpoint = 'print_canon_ps.php'; break;
+            case 'ppd_optimized': printEndpoint = 'print_ppd.php'; break;
+            case 'browser': printEndpoint = 'src/print_browser.php'; break;
+            default: printEndpoint = 'print_canon.php';
+          }
+        }
+        
+        const printData = {
+          file: filePath, 
+          imagePath: filePath,
+          copies: copies,
+          layout: '2up', // Indicateur spécial pour 2 photos par page
+          doublePhoto: true
+        };
+        
+        if (window.PHOTOMATON_CONFIG.defaultPaperSize) {
+          printData.paperSize = window.PHOTOMATON_CONFIG.defaultPaperSize;
+          printData.media = window.PHOTOMATON_CONFIG.defaultPaperSize;
+        }
+        
+        console.log('[Print Double Debug] Endpoint:', printEndpoint, 'Data:', printData);
+          
+        const res = await fetch(printEndpoint, {
+          method: 'POST', 
+          headers: {'Content-Type': 'application/json'}, 
+          body: JSON.stringify(printData)
+        });
+        
+        const data = await res.json().catch(() => ({}));
+        if(!res.ok) throw new Error(data.error || 'Erreur impression double');
+        
+        const printerName = window.PHOTOMATON_CONFIG.printerName || 'imprimante';
+        const method = data.method ? ` (${data.method})` : '';
+        alert(`✅ Impression double lancée sur ${printerName}${method}\n📄 ${copies} page(s) avec 2 photos chacune...`);
+        window.location='index.php';
+      } catch(e){ 
+        alert('❌ Erreur impression double: ' + e.message); 
+      }
+      return;
+    }
+  }
 });
 
 async function toBase64FromUrl(url){

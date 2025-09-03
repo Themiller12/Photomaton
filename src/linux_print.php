@@ -1,7 +1,54 @@
 <?php
 /**
  * PHOTOMATON LINUX - Endpoint d'impression CUPS
- * Utilise le système CUPS pour impression sur Canon SELPHY CP1500
+ * Utilise le système CUPS pour impression function setupPrinter() {
+    logMessage("Configuration imprimante Linux");
+    
+    $command = escapeshellcmd(PRINT_SCRIPT) . ' setup 2>&1';
+    exec($command, $output, $returnCode);
+    
+    return [
+        'success' => $returnCode === 0,
+        'output' => implode("\n", $output)
+    ];
+}
+
+function create2upImage($originalPath) {
+    // Créer une image avec 2 copies côte à côte
+    $source = imagecreatefromjpeg($originalPath);
+    if (!$source) {
+        throw new Exception("Impossible de charger l'image source");
+    }
+    
+    $srcWidth = imagesx($source);
+    $srcHeight = imagesy($source);
+    
+    // Calculer dimensions pour 2 images côte à côte sur format 10x15
+    // Format final : 15x10 cm (landscape) avec 2 photos de ~7x10 chacune
+    $finalWidth = $srcWidth * 2;
+    $finalHeight = $srcHeight;
+    
+    // Créer l'image de destination
+    $dest = imagecreatetruecolor($finalWidth, $finalHeight);
+    $white = imagecolorallocate($dest, 255, 255, 255);
+    imagefill($dest, 0, 0, $white);
+    
+    // Copier l'image 2 fois
+    imagecopy($dest, $source, 0, 0, 0, 0, $srcWidth, $srcHeight); // Gauche
+    imagecopy($dest, $source, $srcWidth, 0, 0, 0, $srcWidth, $srcHeight); // Droite
+    
+    // Sauvegarder
+    $outputPath = __DIR__ . '/../temp_2up_' . basename($originalPath);
+    if (!imagejpeg($dest, $outputPath, 95)) {
+        throw new Exception("Impossible de sauvegarder l'image 2up");
+    }
+    
+    // Nettoyer
+    imagedestroy($source);
+    imagedestroy($dest);
+    
+    return $outputPath;
+}ELPHY CP1500
  */
 
 header('Content-Type: application/json');
@@ -24,7 +71,7 @@ function logMessage($message) {
     file_put_contents(LOG_FILE, "[$timestamp] PHP_LINUX_PRINT: $message\n", FILE_APPEND);
 }
 
-function printImage($imagePath, $copies = 1, $media = '4x6') {
+function printImage($imagePath, $copies = 1, $media = '4x6', $options = []) {
     logMessage("Impression Linux: $imagePath (x$copies, $media)");
     
     // Validation des paramètres
@@ -40,6 +87,12 @@ function printImage($imagePath, $copies = 1, $media = '4x6') {
         } else {
             throw new Exception("Fichier image introuvable: $imagePath");
         }
+    }
+    
+    // Traitement spécial pour impression double (2up)
+    if (isset($options['layout']) && $options['layout'] === '2up') {
+        $imagePath = create2upImage($imagePath);
+        logMessage("Image 2up créée: $imagePath");
     }
     
     // Vérifier le script d'impression
@@ -163,7 +216,12 @@ try {
             $copies = intval($input['copies'] ?? $_POST['copies'] ?? $_GET['copies'] ?? 1);
             $media = $input['media'] ?? $input['paperSize'] ?? $_POST['media'] ?? $_POST['paperSize'] ?? $_GET['media'] ?? $_GET['paperSize'] ?? '4x6';
             
-            $result = printImage($imagePath, $copies, $media);
+            // Options spéciales (layout 2up, etc.)
+            $options = [];
+            if (isset($input['layout'])) $options['layout'] = $input['layout'];
+            if (isset($input['doublePhoto'])) $options['doublePhoto'] = $input['doublePhoto'];
+            
+            $result = printImage($imagePath, $copies, $media, $options);
             logMessage("SUCCÈS impression: Job " . ($result['jobId'] ?? 'N/A'));
             echo json_encode($result);
             break;

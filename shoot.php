@@ -33,6 +33,9 @@
         <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
       </select>
       <button id="print-selected" class="btn"><i class="fas fa-print"></i> Imprimer</button>
+      <button id="print-double" class="btn" style="background: linear-gradient(135deg, #9CAF88 0%, #E8B4B8 100%);">
+        <i class="fas fa-clone"></i> 2 photos / page
+      </button>
       <button class="btn secondary" onclick="window.location='index.php'"><i class="fas fa-home"></i> Terminer</button>
     </div>
   </div>
