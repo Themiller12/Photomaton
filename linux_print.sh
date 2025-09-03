@@ -171,38 +171,53 @@ print_image() {
     case "$media" in
         "Postcard.Fullbleed"|"postcard"|"10x15")
             # Format 10x15cm sans bordure (format par défaut du PPD)
-            print_options="-o PageSize=Postcard.Fullbleed -o ColorModel=RGB -o cupsPrintQuality=Normal"
+            print_options="-o media=Postcard.fullbleed -o landscape -o fit-to-page"
             ;;
         "Postcard")
             # Format 10x15cm avec bordure
-            print_options="-o PageSize=Postcard -o ColorModel=RGB -o cupsPrintQuality=Normal"
+            print_options="-o media=Postcard -o landscape -o fit-to-page"
             ;;
         "54x86mm.Fullbleed")
             # Format carte de crédit sans bordure
-            print_options="-o PageSize=54x86mm.Fullbleed -o ColorModel=RGB -o cupsPrintQuality=Normal"
+            print_options="-o media=54x86mm.fullbleed -o landscape -o fit-to-page"
             ;;
         "54x86mm")
             # Format carte de crédit avec bordure
-            print_options="-o PageSize=54x86mm -o ColorModel=RGB -o cupsPrintQuality=Normal"
+            print_options="-o media=54x86mm -o landscape -o fit-to-page"
             ;;
         "89x119mm.Fullbleed")
             # Format L sans bordure
-            print_options="-o PageSize=89x119mm.Fullbleed -o ColorModel=RGB -o cupsPrintQuality=Normal"
+            print_options="-o media=89x119mm.fullbleed -o landscape -o fit-to-page"
             ;;
         "89x119mm")
             # Format L avec bordure
-            print_options="-o PageSize=89x119mm -o ColorModel=RGB -o cupsPrintQuality=Normal"
+            print_options="-o media=89x119mm -o landscape -o fit-to-page"
             ;;
         *)
             # Fallback avec le format par défaut du PPD
-            print_options="-o PageSize=Postcard.Fullbleed -o ColorModel=RGB -o cupsPrintQuality=Normal"
+            print_options="-o media=Postcard.fullbleed -o landscape -o fit-to-page"
             log_message "Format '$media' non reconnu, utilisation de Postcard.Fullbleed"
             ;;
     esac
     
     # Commande d'impression
+    log_message "USER: $(whoami), UID: $(id -u), GROUPS: $(groups)"
+    log_message "PATH: $PATH"
+    log_message "Imprimante active: $PRINTER_NAME"
+    
+    # Vérifier l'état de l'imprimante avant impression
+    local printer_status=$(lpstat -p "$PRINTER_NAME" 2>/dev/null)
+    log_message "État imprimante: $printer_status"
+    
+    # Vérifier si l'imprimante accepte les travaux
+    if echo "$printer_status" | grep -q "disabled\|reject"; then
+        log_message "ATTENTION: Imprimante disabled ou reject - tentative d'activation"
+        cupsenable "$PRINTER_NAME" 2>/dev/null || true
+        cupsaccept "$PRINTER_NAME" 2>/dev/null || true
+    fi
+    
     local cmd="lp -d '$PRINTER_NAME' -n $copies $print_options '$image_path'"
-    log_message "Commande: $cmd"
+    log_message "Commande finale: $cmd"
     
     # Exécution
     local output
@@ -217,9 +232,13 @@ print_image() {
         
         # Vérifier le statut du travail
         if [[ -n "$job_id" ]]; then
-            sleep 1
-            local job_status=$(lpstat -W completed "$job_id" 2>/dev/null)
+            sleep 2
+            local job_status=$(lpstat "$job_id" 2>/dev/null || echo "Job status unavailable")
             log_message "Statut job: $job_status"
+            
+            # Vérifier la queue d'impression générale
+            local queue_status=$(lpstat -o 2>/dev/null || echo "No jobs in queue")
+            log_message "Queue d'impression: $queue_status"
         fi
         
         echo "SUCCESS: $job_id"
