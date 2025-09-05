@@ -399,14 +399,62 @@ chmod +x "$PROJECT_DIR/test_installation.sh"
 # 13. Créer un script de mise à jour
 cat > "$PROJECT_DIR/update.sh" << 'EOF'
 #!/bin/bash
-echo "Mise à jour du projet Photomaton..."
+echo "🔄 Mise à jour du projet Photomaton..."
 cd /var/www/html/Photomaton
-git pull
+
+# Sauvegarder les modifications locales si elles existent
+if ! git diff --quiet || ! git diff --cached --quiet; then
+    echo "⚠️  Modifications locales détectées, sauvegarde en cours..."
+    
+    # Créer une sauvegarde avec timestamp
+    backup_branch="local-backup-$(date +%Y%m%d_%H%M%S)"
+    git add -A
+    git commit -m "Sauvegarde automatique avant mise à jour - $backup_branch" || true
+    git branch "$backup_branch" || true
+    echo "✅ Sauvegarde créée dans la branche: $backup_branch"
+fi
+
+# Vérifier le statut du dépôt
+if git status --porcelain | grep -q '^??'; then
+    echo "📁 Fichiers non trackés détectés, ajout automatique..."
+    git add -A
+    git commit -m "Auto-commit des nouveaux fichiers avant mise à jour" || true
+fi
+
+# Tenter la mise à jour
+echo "📥 Téléchargement des dernières modifications..."
+if git pull origin main; then
+    echo "✅ Mise à jour Git réussie"
+else
+    echo "❌ Échec du git pull, tentative de résolution..."
+    
+    # Reset dur en sauvegardant d'abord
+    echo "🔄 Reset vers la version distante..."
+    git fetch origin
+    git reset --hard origin/main
+    echo "✅ Réinitialisation forcée effectuée"
+fi
+
+# Restaurer les permissions
+echo "🔧 Restauration des permissions..."
 sudo chown -R $USER:www-data .
 sudo chmod -R 775 .
-sudo chmod 777 captures
+sudo chmod 777 captures logs
 sudo find . -name "*.sh" -exec chmod +x {} \;
-echo "✅ Mise à jour terminée"
+
+# Vérifier les scripts critiques
+for script in scripts/linux_capture.sh scripts/linux_print.sh; do
+    if [ -f "$script" ]; then
+        chmod +x "$script"
+        echo "✅ $script rendu exécutable"
+    fi
+done
+
+echo ""
+echo "🎉 Mise à jour terminée !"
+echo "📋 Si vous aviez des modifications locales, elles sont sauvegardées dans une branche."
+echo "   Pour les voir : git branch | grep local-backup"
+echo "   Pour restaurer : git checkout nom-de-la-branche-backup"
 EOF
 
 chmod +x "$PROJECT_DIR/update.sh"
