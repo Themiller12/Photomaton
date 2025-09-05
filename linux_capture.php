@@ -16,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Configuration
-$script_path = __DIR__ . '/../scripts/linux_capture.sh';
+$script_path = __DIR__ . '/scripts/linux_capture.sh';
 // Fallback pour environnement de production Linux
 if (!file_exists($script_path) && file_exists('/var/www/html/Photomaton/scripts/linux_capture.sh')) {
     $script_path = '/var/www/html/Photomaton/scripts/linux_capture.sh';
 }
 define('CAPTURE_SCRIPT', $script_path);
-define('LOG_FILE', __DIR__ . '/../logs/capture_log.txt');
+define('LOG_FILE', __DIR__ . '/logs/capture_log.txt');
 
 function logMessage($message) {
     $timestamp = date('Y-m-d H:i:s');

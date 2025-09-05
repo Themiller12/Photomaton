@@ -238,7 +238,7 @@ async function triggerServerFileCapture(){
   let endpoint;
   
   if (window.PHOTOMATON_CONFIG.operatingSystem === 'linux') {
-    endpoint = 'src/linux_capture.php';
+    endpoint = 'linux_capture.php';
   } else {
     endpoint = MODE === 'sony_wifi' ? 'sony_wifi_capture.php' : 
                (MODE === 'sony_sdk' ? 'sony_sdk_capture.php' : 
@@ -333,7 +333,7 @@ printBtn?.addEventListener('click', async () => {
         
         // Support Linux prioritaire
         if (window.PHOTOMATON_CONFIG.operatingSystem === 'linux' && window.PHOTOMATON_CONFIG.printerType === 'linux_cups') {
-          printEndpoint = 'src/linux_print.php';
+          printEndpoint = 'linux_print.php';
         } else {
           // Endpoints Windows
           switch(window.PHOTOMATON_CONFIG.printerType) {
@@ -350,7 +350,7 @@ printBtn?.addEventListener('click', async () => {
               printEndpoint = 'print_ppd.php';
               break;
             case 'browser':
-              printEndpoint = 'src/print_browser.php';
+              printEndpoint = 'print_browser.php';
               break;
             default:
               printEndpoint = 'print_canon.php';
@@ -410,7 +410,7 @@ printDoubleBtn?.addEventListener('click', async () => {
         console.log('[Print Double Debug] OS:', window.PHOTOMATON_CONFIG.operatingSystem, 'PrinterType:', window.PHOTOMATON_CONFIG.printerType);
         
         if (window.PHOTOMATON_CONFIG.operatingSystem === 'linux' && window.PHOTOMATON_CONFIG.printerType === 'linux_cups') {
-          printEndpoint = 'src/linux_print.php';
+          printEndpoint = 'linux_print.php';
         } else {
           // Windows endpoints
           switch(window.PHOTOMATON_CONFIG.printerType) {
@@ -418,7 +418,7 @@ printDoubleBtn?.addEventListener('click', async () => {
             case 'selphy_optimized': printEndpoint = 'print_selphy_optimized.php'; break;
             case 'canon_cp1500': printEndpoint = 'print_canon_ps.php'; break;
             case 'ppd_optimized': printEndpoint = 'print_ppd.php'; break;
-            case 'browser': printEndpoint = 'src/print_browser.php'; break;
+            case 'browser': printEndpoint = 'print_browser.php'; break;
             default: printEndpoint = 'print_canon.php';
           }
         }

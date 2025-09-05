@@ -1,44 +1,93 @@
 <?php
-// Impression via navigateur - Interface pour JavaScript
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['error' => 'Méthode non autorisée']);
-    exit;
+// Gérer les requêtes OPTIONS pour CORS
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
 }
 
-$input = json_decode(file_get_contents('php://input'), true);
-$file = $input['file'] ?? '';
-$copies = max(1, intval($input['copies'] ?? 1));
-
-if (empty($file)) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Fichier non spécifié']);
-    exit;
+// Fonction de log pour debug
+function logPrint($message) {
+        // Log
+    $logFile = 'logs/print_log.txt';
+    $timestamp = date('Y-m-d H:i:s');
+    file_put_contents($logFile, "[$timestamp] BROWSER_PRINT: $message\n", FILE_APPEND);
 }
 
-$filePath = __DIR__ . '/' . ltrim($file, '/');
-
-if (!file_exists($filePath)) {
-    http_response_code(404);
-    echo json_encode(['error' => 'Fichier non trouvé: ' . $file]);
-    exit;
+try {
+    // Récupérer les données JSON de la requête
+    $input = file_get_contents('php://input');
+    $data = json_decode($input, true);
+    
+    logPrint("Données reçues: " . print_r($data, true));
+    
+    // Vérifier si les données sont valides
+    if (!$data) {
+        throw new Exception("Aucune donnée JSON reçue");
+    }
+    
+    // Récupérer les paramètres
+    $imagePath = $data['imagePath'] ?? '';
+    $copies = intval($data['copies'] ?? 1);
+    $format = $data['format'] ?? 'Postcard.Fullbleed';
+    $autoPrint = $data['autoPrint'] ?? true;
+    
+    logPrint("ImagePath: $imagePath, Copies: $copies, Format: $format, AutoPrint: " . ($autoPrint ? 'true' : 'false'));
+    
+    // Vérifier si le fichier image est spécifié
+    if (empty($imagePath)) {
+        throw new Exception("Fichier non spécifié");
+    }
+    
+    // Si c'est une URL complète, extraire juste le chemin relatif
+    if (strpos($imagePath, 'http') === 0) {
+        $parsed = parse_url($imagePath);
+        $imagePath = ltrim($parsed['path'], '/');
+        
+        // Enlever "Photomaton/" du début si présent
+        if (strpos($imagePath, 'Photomaton/') === 0) {
+            $imagePath = substr($imagePath, 11);
+        }
+    }
+    
+    logPrint("Chemin image traité: $imagePath");
+    
+    // Vérifier si le fichier existe
+    $fullPath = '../' . $imagePath;
+    if (!file_exists($fullPath)) {
+        throw new Exception("Fichier image non trouvé: $fullPath");
+    }
+    
+    // Construire l'URL de la page d'impression
+    $printUrl = 'print_page.html?' . http_build_query([
+        'image' => $imagePath,
+        'copies' => $copies,
+        'format' => $format,
+        'auto' => $autoPrint ? '1' : '0'
+    ]);
+    
+    logPrint("URL d'impression générée: $printUrl");
+    
+    // Retourner la réponse de succès
+    echo json_encode([
+        'success' => true,
+        'printUrl' => $printUrl,
+        'message' => "Page d'impression préparée pour $copies copie(s)",
+        'imagePath' => $imagePath,
+        'copies' => $copies,
+        'format' => $format
+    ]);
+    
+} catch (Exception $e) {
+    logPrint("Erreur: " . $e->getMessage());
+    
+    echo json_encode([
+        'success' => false,
+        'error' => $e->getMessage()
+    ]);
 }
-
-// Log pour debug
-$logFile = __DIR__ . '/logs/print_log.txt';
-$logEntry = date('Y-m-d H:i:s') . " - Demande impression navigateur: $file (x$copies copies)\n";
-file_put_contents($logFile, $logEntry, FILE_APPEND | LOCK_EX);
-
-// Retourner les informations pour l'impression JavaScript
-echo json_encode([
-    'success' => true,
-    'action' => 'print_browser',
-    'file' => $file,
-    'copies' => $copies,
-    'fullPath' => $filePath,
-    'url' => $file . '?t=' . time(), // Cache busting
-    'message' => "Prêt pour impression navigateur ($copies copie(s))"
-]);
 ?>
