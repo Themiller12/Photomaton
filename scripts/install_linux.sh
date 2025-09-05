@@ -51,7 +51,11 @@ apt install -y \
     pkg-config \
     gettext \
     autopoint \
-    intltool
+    intltool \
+    libpopt-dev \
+    libusb-1.0-0-dev \
+    libexif-dev \
+    libltdl-dev
 
 # Paquets CUPS optionnels
 echo "📦 Installation des drivers d'impression..."

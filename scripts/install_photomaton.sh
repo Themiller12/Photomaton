@@ -74,6 +74,9 @@ apt install -y \
     autopoint \
     intltool \
     libusb-1.0-0-dev \
+    libpopt-dev \
+    libexif-dev \
+    libltdl-dev \
     usbutils
 
 # 3. Installation de CUPS
@@ -116,6 +119,32 @@ install_gphoto2_from_repos() {
 
 # Supprimer l'ancienne version si présente
 apt remove -y gphoto2 libgphoto2-dev || true
+
+# Vérifier les dépendances critiques
+log "Vérification des dépendances pour gPhoto2..."
+missing_deps=()
+
+for dep in libpopt-dev libusb-1.0-0-dev libexif-dev; do
+    if ! dpkg -l | grep -q "^ii.*$dep"; then
+        missing_deps+=("$dep")
+    fi
+done
+
+if [ ${#missing_deps[@]} -gt 0 ]; then
+    warn "Dépendances manquantes détectées, installation..."
+    apt install -y "${missing_deps[@]}" || warn "Certaines dépendances n'ont pas pu être installées"
+fi
+
+# Vérifier que pkg-config peut trouver les bibliothèques critiques
+log "Vérification de pkg-config..."
+if ! pkg-config --exists libusb-1.0; then
+    warn "libusb-1.0 non détectable par pkg-config"
+fi
+
+if ! pkg-config --atleast-version=1.6.1 popt 2>/dev/null; then
+    warn "popt >= 1.6.1 non détectable par pkg-config, tentative d'installation alternative..."
+    apt install -y libpopt0 popt-devel 2>/dev/null || true
+fi
 
 # Créer répertoire de build temporaire
 BUILD_DIR="/tmp/gphoto2_build"
