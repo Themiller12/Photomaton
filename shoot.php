@@ -28,17 +28,64 @@
     <h2><i class="fas fa-star"></i> Choisissez votre photo préférée <i class="fas fa-star"></i></h2>
     <div id="thumbnails" class="thumbs"></div>
     <div class="controls" style="align-items: center;">
-      <label for="copies"><i class="fas fa-heart"></i> Nombre de copies :</label>
-      <select id="copies">
-        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
-      </select>
-      <button id="print-selected" class="btn"><i class="fas fa-print"></i> Imprimer</button>
-      <button id="print-double" class="btn" style="background: linear-gradient(135deg, #9CAF88 0%, #E8B4B8 100%);">
-        <i class="fas fa-clone"></i> 2 photos / page
-      </button>
-      <button class="btn secondary" onclick="window.location='index.php'"><i class="fas fa-home"></i> Terminer</button>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; width: 100%;">
+        <button id="retake-photo" class="btn secondary" style="display: none;">
+          <i class="fas fa-redo"></i> Reprendre une photo
+        </button>
+        <label for="copies"><i class="fas fa-heart"></i> Nombre de copies :</label>
+        <select id="copies">
+          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+        </select>
+      </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; width: 100%;">
+        <button id="print-selected" class="btn"><i class="fas fa-print"></i> Imprimer</button>
+        <button id="print-double" class="btn" style="background: linear-gradient(135deg, #9CAF88 0%, #E8B4B8 100%);">
+          <i class="fas fa-clone"></i> 2 photos / page
+        </button>
+        <button class="btn secondary" onclick="window.location='index.php'"><i class="fas fa-home"></i> Terminer</button>
+      </div>
     </div>
   </div>
+
+  
+  <!-- Modale d'impression -->
+  <div id="print-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <i class="fas fa-print modal-icon"></i>
+        <h3 id="modal-title">Impression en cours...</h3>
+      </div>
+      <div class="modal-body">
+        <div id="print-spinner" class="spinner">
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+        </div>
+        <p id="modal-message">Votre photo est en cours d'impression, veuillez patienter...</p>
+        <div id="print-success" class="success-animation" style="display: none;">
+          <i class="fas fa-check-circle"></i>
+          <span>Impression réussie !</span>
+        </div>
+        <div id="print-error" class="error-message" style="display: none;">
+          <i class="fas fa-exclamation-triangle"></i>
+          <span id="error-text">Une erreur s'est produite</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="modal-close" class="btn secondary" style="display: none;">
+          <i class="fas fa-times"></i> Fermer
+        </button>
+        <button id="modal-retry" class="btn" style="display: none;">
+          <i class="fas fa-redo"></i> Réessayer
+        </button>
+        <button id="modal-home" class="btn" style="display: none;">
+          <i class="fas fa-home"></i> Terminer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  
 <script src="src/js/config.js"></script>
 <script>
 // Pour compatibilité avec l'ancien système

@@ -59,6 +59,8 @@ apt install -y \
     php \
     php-gd \
     php-curl \
+    php-json \
+    php-mbstring \
     git \
     curl \
     wget \
@@ -68,12 +70,26 @@ apt install -y \
     automake \
     libtool \
     pkg-config \
+    gettext \
+    autopoint \
+    intltool \
     libusb-1.0-0-dev \
     usbutils
 
 # 3. Installation de CUPS
 log "Installation et configuration de CUPS..."
-apt install -y cups cups-client printer-driver-postscript
+
+# Installer les paquets CUPS de base (obligatoires)
+apt install -y cups cups-client
+
+# Installer les paquets additionnels (optionnels)
+for pkg in cups-filters ghostscript printer-driver-all hplip; do
+    if apt install -y "$pkg" 2>/dev/null; then
+        log "✓ $pkg installé"
+    else
+        warn "⚠ $pkg non disponible (ignoré)"
+    fi
+done
 
 # Démarrer et activer CUPS
 systemctl enable cups
@@ -86,6 +102,18 @@ usermod -a -G lp $REAL_USER
 # 4. Installation de gPhoto2 (dernière version)
 log "Installation de gPhoto2 dernière version..."
 
+# Fonction de fallback pour installer depuis les dépôts
+install_gphoto2_from_repos() {
+    warn "Installation depuis les dépôts comme alternative..."
+    apt install -y gphoto2 libgphoto2-dev
+    if command -v gphoto2 >/dev/null; then
+        log "gPhoto2 installé depuis les dépôts avec succès"
+        return 0
+    else
+        return 1
+    fi
+}
+
 # Supprimer l'ancienne version si présente
 apt remove -y gphoto2 libgphoto2-dev || true
 
@@ -97,26 +125,67 @@ cd $BUILD_DIR
 
 # Télécharger et compiler libgphoto2
 log "Compilation de libgphoto2..."
-git clone https://github.com/gphoto/libgphoto2.git
+if ! git clone https://github.com/gphoto/libgphoto2.git; then
+    error "Échec du téléchargement de libgphoto2"
+fi
+
 cd libgphoto2
-autoreconf -is
-./configure --prefix=/usr
-make -j$(nproc)
+if ! autoreconf -is; then
+    error "Échec d'autoreconf pour libgphoto2. Vérifiez que tous les outils de build sont installés."
+fi
+
+if ! ./configure --prefix=/usr; then
+    error "Échec de configuration de libgphoto2"
+fi
+
+if ! make -j$(nproc); then
+    warn "Compilation parallèle échouée, tentative séquentielle..."
+    make clean
+    if ! make; then
+        error "Échec de compilation de libgphoto2"
+    fi
+fi
+
 make install
 ldconfig
 
 # Télécharger et compiler gphoto2
 cd $BUILD_DIR
 log "Compilation de gphoto2..."
-git clone https://github.com/gphoto/gphoto2.git
+if ! git clone https://github.com/gphoto/gphoto2.git; then
+    error "Échec du téléchargement de gphoto2"
+fi
+
 cd gphoto2
-autoreconf -is
-./configure --prefix=/usr
-make -j$(nproc)
+if ! autoreconf -is; then
+    error "Échec d'autoreconf pour gphoto2"
+fi
+
+if ! ./configure --prefix=/usr; then
+    error "Échec de configuration de gphoto2"
+fi
+
+if ! make -j$(nproc); then
+    warn "Compilation parallèle échouée, tentative séquentielle..."
+    make clean
+    if ! make; then
+        error "Échec de compilation de gphoto2"
+    fi
+fi
+
 make install
 
 # Vérifier l'installation
-gphoto2 --version || error "Échec de l'installation de gphoto2"
+if ! gphoto2 --version; then
+    warn "Compilation de gPhoto2 échouée, tentative d'installation depuis les dépôts..."
+    cd /
+    rm -rf $BUILD_DIR
+    if ! install_gphoto2_from_repos; then
+        error "Impossible d'installer gPhoto2"
+    fi
+else
+    log "✅ gPhoto2 compilé avec succès"
+fi
 
 # 5. Configuration des règles udev pour gphoto2
 log "Configuration des règles udev..."
@@ -140,9 +209,22 @@ log "Configuration d'Apache..."
 systemctl enable apache2
 systemctl start apache2
 
-# Activer les modules PHP nécessaires
+# Activer les modules Apache nécessaires
 a2enmod rewrite
+a2enmod headers
+
+# Activer les extensions PHP nécessaires
+log "Activation des extensions PHP..."
 phpenmod gd
+phpenmod curl
+phpenmod json
+phpenmod mbstring
+
+# Vérifier que les extensions sont bien chargées
+php -m | grep -E "(gd|curl|json)" > /dev/null || warn "Certaines extensions PHP peuvent ne pas être chargées"
+
+# Redémarrer Apache pour prendre en compte les changements
+systemctl restart apache2
 
 # 7. Cloner le projet depuis GitHub
 log "Récupération du projet depuis GitHub..."
@@ -248,6 +330,17 @@ if [ -w "/var/www/html/Photomaton/captures" ]; then
 else
     echo "❌ Problème permissions captures"
 fi
+
+# Test extensions PHP
+echo ""
+echo "📋 Extensions PHP :"
+for ext in gd curl json mbstring; do
+    if php -m | grep -q "^$ext$"; then
+        echo "  ✅ $ext"
+    else
+        echo "  ❌ $ext manquante"
+    fi
+done
 
 echo ""
 echo "🌐 Accès web : http://$(hostname -I | awk '{print $1}')/Photomaton/"

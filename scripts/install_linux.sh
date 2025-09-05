@@ -26,27 +26,66 @@ echo "📦 Mise à jour des paquets..."
 apt update
 
 echo "📦 Installation des dépendances..."
+
+# Paquets essentiels
 apt install -y \
     apache2 \
     php \
     php-json \
     php-cli \
+    php-gd \
+    php-curl \
+    php-mbstring \
     cups \
     cups-client \
-    printer-driver-postscript \
     gphoto2 \
     libgphoto2-dev \
     imagemagick \
     git \
     curl \
-    wget
+    wget \
+    build-essential \
+    autoconf \
+    automake \
+    libtool \
+    pkg-config \
+    gettext \
+    autopoint \
+    intltool
+
+# Paquets CUPS optionnels
+echo "📦 Installation des drivers d'impression..."
+for pkg in cups-filters ghostscript printer-driver-all hplip; do
+    if apt install -y "$pkg" 2>/dev/null; then
+        echo "✓ $pkg installé"
+    else
+        echo "⚠ $pkg non disponible (ignoré)"
+    fi
+done
 
 echo "🔧 Configuration d'Apache..."
 systemctl enable apache2
 systemctl start apache2
 
+# Activer les modules Apache nécessaires
+a2enmod rewrite
+a2enmod headers
+
 # Activer les modules PHP nécessaires
 a2enmod php8.* 2>/dev/null || a2enmod php7.* 2>/dev/null || echo "Module PHP déjà activé"
+
+# Activer les extensions PHP nécessaires
+echo "🔧 Activation des extensions PHP..."
+phpenmod gd
+phpenmod curl
+phpenmod json
+phpenmod mbstring
+
+# Vérifier les extensions PHP
+php -m | grep -E "(gd|curl|json)" > /dev/null || echo "⚠️ Certaines extensions PHP peuvent ne pas être chargées"
+
+# Redémarrer Apache
+systemctl restart apache2
 
 echo "🖨️ Configuration de CUPS..."
 systemctl enable cups

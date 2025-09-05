@@ -4,6 +4,7 @@
 const video = document.getElementById('live-view');
 const startBtn = document.getElementById('start-sequence');
 const singlePhotoBtn = document.getElementById('single-photo');
+const retakeBtn = document.getElementById('retake-photo');
 const countdownEl = document.getElementById('countdown');
 const selectionScreen = document.getElementById('selection-screen');
 const selectionTitle = document.querySelector('#selection-screen h2');
@@ -21,6 +22,8 @@ const DELAY_BETWEEN_PHOTOS = window.PHOTOMATON_CONFIG.delayBetweenPhotos;
 
 let captured = [];
 let selectedIndex = 0;
+let isSinglePhotoMode = false;
+let lastPrintType = 'single'; // 'single' ou 'double'
 
 function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
@@ -35,6 +38,7 @@ async function initWebcamIfNeeded(){
 async function runSequence(){
   startBtn.disabled = true;
   captured = [];
+  isSinglePhotoMode = false;
   
   for(let i=0;i<PHOTO_COUNT;i++){
     if(MODE === 'webcam') {
@@ -65,6 +69,7 @@ async function runSinglePhoto(){
   singlePhotoBtn.disabled = true;
   startBtn.disabled = true;
   captured = [];
+  isSinglePhotoMode = true;
   
   if(MODE === 'webcam') {
     await runCountdown(3);
@@ -87,6 +92,20 @@ async function runSinglePhoto(){
     }
   }
   showSelection();
+}
+
+async function retakeSinglePhoto(){
+  // Retourner à l'écran de capture
+  selectionScreen.classList.add('hidden');
+  captureScreen.classList.remove('hidden');
+  
+  // Réactiver les boutons
+  singlePhotoBtn.disabled = false;
+  startBtn.disabled = false;
+  
+  // Vider les photos précédentes
+  captured = [];
+  resetCaptureScreenBackground();
 }
 
 async function runCountdown(from){
@@ -255,6 +274,15 @@ function showSelection(){
     }
   }
   
+  // Afficher/masquer le bouton "Reprendre" selon le mode
+  if (retakeBtn) {
+    if (isSinglePhotoMode) {
+      retakeBtn.style.display = 'inline-block';
+    } else {
+      retakeBtn.style.display = 'none';
+    }
+  }
+  
   // Masquer ou afficher les contrôles d'impression selon la configuration
   const printControls = document.querySelector('#selection-screen .controls');
   if (printControls && !isPrintingEnabled()) {
@@ -289,6 +317,11 @@ function showSelection(){
 
 printBtn?.addEventListener('click', async () => {
   const copies = parseInt(copiesSelect.value,10) || 1;
+  lastPrintType = 'single';
+  
+  // Afficher la modale d'impression
+  showPrintModal();
+  
   if(MODE === 'dslr_win' || MODE === 'dslr_linux' || MODE === 'sony_wifi' || MODE === 'sony_sdk' || MODE === 'folder_watch') {
     const filePath = captured[selectedIndex];
     if(filePath.startsWith('captures/')){
@@ -347,13 +380,11 @@ printBtn?.addEventListener('click', async () => {
         const data = await res.json().catch(() => ({}));
         if(!res.ok) throw new Error(data.error || 'Erreur impression');
         
-        // Message de succès personnalisé
-        const printerName = window.PHOTOMATON_CONFIG.printerName || 'imprimante';
-        const method = data.method ? ` (${data.method})` : '';
-        alert(`✅ Impression lancée sur ${printerName}${method}\n📄 ${copies} copie(s) en cours...`);
-        window.location='index.php';
+        // Afficher le succès dans la modale
+        showPrintSuccess();
+        
       } catch(e){ 
-        alert('❌ Erreur impression: ' + e.message); 
+        showPrintError('Erreur impression: ' + e.message); 
       }
       return;
     }
@@ -364,6 +395,11 @@ printBtn?.addEventListener('click', async () => {
 // Gestionnaire impression double (2 photos par page)
 printDoubleBtn?.addEventListener('click', async () => {
   const copies = parseInt(copiesSelect.value,10) || 1;
+  lastPrintType = 'double';
+  
+  // Afficher la modale d'impression
+  showPrintModal();
+  
   if(MODE === 'dslr_win' || MODE === 'dslr_linux' || MODE === 'sony_wifi' || MODE === 'sony_sdk' || MODE === 'folder_watch') {
     const filePath = captured[selectedIndex];
     if(filePath.startsWith('captures/')){
@@ -411,12 +447,11 @@ printDoubleBtn?.addEventListener('click', async () => {
         const data = await res.json().catch(() => ({}));
         if(!res.ok) throw new Error(data.error || 'Erreur impression double');
         
-        const printerName = window.PHOTOMATON_CONFIG.printerName || 'imprimante';
-        const method = data.method ? ` (${data.method})` : '';
-        alert(`✅ Impression double lancée sur ${printerName}${method}\n📄 ${copies} page(s) avec 2 photos chacune...`);
-        window.location='index.php';
+        // Afficher le succès dans la modale
+        showPrintSuccess();
+        
       } catch(e){ 
-        alert('❌ Erreur impression double: ' + e.message); 
+        showPrintError('Erreur impression double: ' + e.message); 
       }
       return;
     }
@@ -439,11 +474,107 @@ async function sendToSavePrint(imageData, copies){
     const res = await fetch('save_print.php',{ method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ image:imageData, copies }) });
     if(!res.ok) throw new Error('Erreur serveur');
     await res.json();
-    alert('Impression lancée');
-    window.location='index.php';
-  } catch(e){ alert('Erreur impression: '+e.message); }
+    showPrintSuccess();
+  } catch(e){ 
+    showPrintError('Erreur impression: '+e.message); 
+  }
+}
+
+// =======================
+// GESTION MODALE D'IMPRESSION
+// =======================
+
+function showPrintModal() {
+  const modal = document.getElementById('print-modal');
+  const title = document.getElementById('modal-title');
+  const message = document.getElementById('modal-message');
+  const spinner = document.getElementById('print-spinner');
+  const success = document.getElementById('print-success');
+  const error = document.getElementById('print-error');
+  const closeBtn = document.getElementById('modal-close');
+  const retryBtn = document.getElementById('modal-retry');
+  const homeBtn = document.getElementById('modal-home');
+
+  // Reset modal state
+  title.textContent = 'Impression en cours...';
+  message.textContent = 'Votre photo est en cours d\'impression, veuillez patienter...';
+  spinner.style.display = 'flex';
+  success.style.display = 'none';
+  error.style.display = 'none';
+  closeBtn.style.display = 'none';
+  retryBtn.style.display = 'none';
+  homeBtn.style.display = 'none';
+
+  modal.classList.add('show');
+}
+
+function showPrintSuccess() {
+  const title = document.getElementById('modal-title');
+  const message = document.getElementById('modal-message');
+  const spinner = document.getElementById('print-spinner');
+  const success = document.getElementById('print-success');
+  const homeBtn = document.getElementById('modal-home');
+
+  title.textContent = 'Impression réussie !';
+  message.textContent = 'Votre photo a été envoyée à l\'imprimante avec succès.';
+  spinner.style.display = 'none';
+  success.style.display = 'flex';
+  homeBtn.style.display = 'inline-block';
+
+  // Auto-fermeture après 3 secondes
+  setTimeout(() => {
+    hidePrintModal();
+    window.location = 'index.php';
+  }, 3000);
+}
+
+function showPrintError(errorMessage) {
+  const title = document.getElementById('modal-title');
+  const message = document.getElementById('modal-message');
+  const spinner = document.getElementById('print-spinner');
+  const error = document.getElementById('print-error');
+  const errorText = document.getElementById('error-text');
+  const closeBtn = document.getElementById('modal-close');
+  const retryBtn = document.getElementById('modal-retry');
+
+  title.textContent = 'Erreur d\'impression';
+  message.style.display = 'none';
+  spinner.style.display = 'none';
+  error.style.display = 'flex';
+  errorText.textContent = errorMessage;
+  closeBtn.style.display = 'inline-block';
+  retryBtn.style.display = 'inline-block';
+}
+
+function hidePrintModal() {
+  const modal = document.getElementById('print-modal');
+  modal.classList.remove('show');
+}
+
+function retryPrint() {
+  if (captured.length > 0) {
+    hidePrintModal();
+    setTimeout(() => {
+      // Simuler le clic sur le bon bouton selon le type d'impression
+      if (lastPrintType === 'double') {
+        printDoubleBtn?.click();
+      } else {
+        printBtn?.click();
+      }
+    }, 200);
+  }
 }
 
 startBtn?.addEventListener('click', runSequence);
 singlePhotoBtn?.addEventListener('click', runSinglePhoto);
+retakeBtn?.addEventListener('click', retakeSinglePhoto);
+
+// Event listeners pour la modale d'impression
+document.getElementById('modal-close')?.addEventListener('click', hidePrintModal);
+document.getElementById('modal-retry')?.addEventListener('click', retryPrint);
+document.getElementById('modal-home')?.addEventListener('click', () => {
+  hidePrintModal();
+  window.location = 'index.php';
+});
+
 initWebcamIfNeeded();
