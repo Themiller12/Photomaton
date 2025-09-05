@@ -16,7 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Configuration
-define('CAPTURE_SCRIPT', __DIR__ . '/../scripts/linux_capture.sh');
+$script_path = __DIR__ . '/../scripts/linux_capture.sh';
+// Fallback pour environnement de production Linux
+if (!file_exists($script_path) && file_exists('/var/www/html/Photomaton/scripts/linux_capture.sh')) {
+    $script_path = '/var/www/html/Photomaton/scripts/linux_capture.sh';
+}
+define('CAPTURE_SCRIPT', $script_path);
 define('LOG_FILE', __DIR__ . '/../logs/capture_log.txt');
 
 function logMessage($message) {
@@ -26,6 +31,13 @@ function logMessage($message) {
 
 function executeCapture() {
     logMessage("Début capture Linux avec gPhoto2");
+    
+    // Debug: afficher le chemin résolu
+    $resolved_path = realpath(CAPTURE_SCRIPT);
+    logMessage("Chemin script attendu: " . CAPTURE_SCRIPT);
+    logMessage("Chemin script résolu: " . ($resolved_path ? $resolved_path : "NON TROUVÉ"));
+    logMessage("Dossier courant: " . getcwd());
+    logMessage("__DIR__: " . __DIR__);
     
     // Vérifier que le script existe et est exécutable
     if (!file_exists(CAPTURE_SCRIPT)) {

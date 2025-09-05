@@ -287,6 +287,21 @@ find "$PROJECT_DIR" -type f -exec chmod 664 {} \;
 # Scripts exécutables
 find "$PROJECT_DIR" -name "*.sh" -exec chmod +x {} \;
 
+# Vérification spécifique des scripts critiques
+log "Vérification des permissions des scripts Linux..."
+for script in "$PROJECT_DIR/scripts/linux_capture.sh" "$PROJECT_DIR/scripts/linux_print.sh"; do
+    if [ -f "$script" ]; then
+        chmod +x "$script"
+        if [ -x "$script" ]; then
+            log "✅ $script est exécutable"
+        else
+            warn "⚠️ $script n'est pas exécutable"
+        fi
+    else
+        warn "⚠️ $script non trouvé"
+    fi
+done
+
 # Dossier captures avec permissions complètes
 mkdir -p "$PROJECT_DIR/captures"
 chmod 777 "$PROJECT_DIR/captures"
