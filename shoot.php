@@ -7,7 +7,8 @@
 <meta charset="UTF-8" />
 <title>Prise de vue - Photomaton</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="src/css/fonts.css" />
+<link rel="stylesheet" href="src/css/all.min.css" />
 <link rel="stylesheet" href="src/css/style.css" />
 <style>
 /* Style pour la modale d'aperçu impression double */
@@ -32,7 +33,7 @@
 </head>
 <body>
   <div class="screen" id="capture-screen">
-    <h2 id="prepare-title"><i class="fas fa-sparkles"></i> Préparez-vous ! <i class="fas fa-sparkles"></i></h2>
+    <h1><i class="fa-solid fa-spray-can-sparkles"></i> <span id="prepare-title">Préparez-vous !</span></h1>
     <p id="prepare-subtitle" style="font-size: 1.2rem; color: var(--charcoal); margin-bottom: 2rem;">
       Souriez, prenez votre plus belle pose et appuyez quand vous êtes prêts !
     </p>

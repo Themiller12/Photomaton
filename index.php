@@ -6,15 +6,16 @@
 <meta charset="UTF-8" />
 <title>Photomaton Mariage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="src/css/fonts.css" />
+<link rel="stylesheet" href="src/css/all.min.css" />
 <link rel="stylesheet" href="src/css/style.css" />
 </head>
 <body>
   <div class="screen" id="home">
-    <h1 id="welcome-title"><i class="fas fa-heart"></i> Photomaton <i class="fas fa-heart"></i></h1>
-    <h2 id="marriage-name" style="font-size: 1.8rem; color: var(--rose-gold); margin-bottom: 1rem; font-weight: 400;"></h2>
+    <h1><i class="fas fa-heart"></i> <span id="welcome-title">Photomaton</span> <i class="fas fa-heart"></i></h1>
+    <h2 id="marriage-name" style="font-size: 1.8rem; color: var(--rouge-fonce); margin-bottom: 1rem; font-weight: 400;"></h2>
     <p id="welcome-subtitle" style="font-size: 1.5rem; color: var(--charcoal); margin-bottom: 3rem; font-weight: 300;">
-      Capturez vos plus beaux souvenirs
+      Amusez-vous, faites des grimaces ou des poses originales ! <br>Les photos seront ensuite envoyées aux mariés pour des souvenirs inoubliables.
     </p>
     <div class="buttons">
       <button class="btn btn-lg" onclick="window.location='shoot.php'">
@@ -32,11 +33,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // Mettre à jour les textes avec la configuration
   const welcomeTitle = document.getElementById('welcome-title');
   const marriageName = document.getElementById('marriage-name');
+  const marriageName = document.getElementById('marriage-name');
   const welcomeSubtitle = document.getElementById('welcome-subtitle');
   
   if (welcomeTitle) welcomeTitle.textContent = getMessage('welcomeTitle');
   if (marriageName) marriageName.textContent = window.PHOTOMATON_CONFIG.marriageName;
-  if (welcomeSubtitle) welcomeSubtitle.textContent = getMessage('welcomeSubtitle');
+  if (welcomeSubtitle) welcomeSubtitle.innerHTML = getMessage('welcomeSubtitle');
 });
 </script>
 </body>

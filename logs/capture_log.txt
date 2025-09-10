@@ -1110,3 +1110,27 @@ OUTPUT=digiCamControl command line utility running
 No connected device was found ! Exiting
 -- BEFORE COUNT=0
 2025-09-10 11:32:18 DEVICE_NOT_FOUND
+2025-09-10 16:49:49 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+No connected device was found ! Exiting
+-- BEFORE COUNT=0
+2025-09-10 16:49:49 DEVICE_NOT_FOUND
+2025-09-10 16:50:09 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+No connected device was found ! Exiting
+-- BEFORE COUNT=0
+2025-09-10 16:50:09 DEVICE_NOT_FOUND
+2025-09-10 16:51:59 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+No connected device was found ! Exiting
+-- BEFORE COUNT=0
+2025-09-10 16:51:59 DEVICE_NOT_FOUND

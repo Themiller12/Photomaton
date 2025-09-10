@@ -1,6 +1,13 @@
 <?php
 /**
- * PHOTOMATON LINUX - Endpoint d'impression CUPS
+ * PHOTOMATOfunction create2upImage($originalPath) {
+    // Créer une image avec 2 copies l'une au-dessus de l'autre
+    logMessage("create2upImage: Traitement de $originalPath");
+    
+    $source = imagecreatefromjpeg($originalPath);
+    if (!$source) {
+        throw new Exception("Impossible de charger l'image source: $originalPath");
+    }X - Endpoint d'impression CUPS
  * Utilise le système CUPS pour impression  */
 
 
@@ -259,15 +266,34 @@ try {
             // Créer un aperçu de l'image double
             $imagePath = $input['imagePath'] ?? $input['file'] ?? $_POST['imagePath'] ?? $_POST['file'] ?? $_GET['imagePath'] ?? $_GET['file'] ?? '';
             
+            logMessage("DEMANDE aperçu 2up: $imagePath");
+            
             if (empty($imagePath)) {
                 throw new Exception("Fichier non spécifié pour l'aperçu");
             }
             
-            // Créer l'image 2up temporaire
-            $previewPath = create2upImage($imagePath);
-            $previewUrl = str_replace(__DIR__, '', $previewPath);
+            // Vérifier que le fichier existe
+            $fullPath = __DIR__ . '/' . $imagePath;
+            if (!file_exists($fullPath)) {
+                // Essayer sans le préfixe captures/
+                $imagePath = 'captures/' . basename($imagePath);
+                $fullPath = __DIR__ . '/' . $imagePath;
+                
+                if (!file_exists($fullPath)) {
+                    throw new Exception("Fichier non trouvé: $imagePath (testé: $fullPath)");
+                }
+            }
             
-            logMessage("SUCCÈS création aperçu: $previewPath");
+            logMessage("Fichier trouvé: $fullPath");
+            
+            // Créer l'image 2up temporaire
+            $previewPath = create2upImage($fullPath);
+            
+            // Créer une URL relative accessible depuis le navigateur
+            $fileName = basename($previewPath);
+            $previewUrl = $fileName; // Juste le nom du fichier car il sera dans le même répertoire
+            
+            logMessage("SUCCÈS création aperçu: $previewPath -> $previewUrl");
             echo json_encode([
                 'success' => true,
                 'previewPath' => $previewPath,

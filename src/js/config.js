@@ -56,7 +56,7 @@ window.PHOTOMATON_CONFIG = {
   
   // === CONFIGURATION MARIAGE ===
   // Nom du mariage affiché dans l'interface
-  marriageName: 'Mariage de Laure & Thomas',
+  marriageName: 'Mariage de Léa & Corentin',
   
   // === CONFIGURATION IMPRESSION ===
   // 1 = Proposer l'impression, 0 = Masquer l'impression
@@ -95,9 +95,9 @@ window.PHOTOMATON_CONFIG = {
   // === MESSAGES PERSONNALISABLES ===
   messages: {
     welcomeTitle: 'Photomaton',
-    welcomeSubtitle: 'Capturez vos plus beaux souvenirs',
+    welcomeSubtitle: "Amusez-vous, faites des grimaces ou des poses originales !<br>Les photos seront ensuite envoyées aux mariés pour des souvenirs inoubliables.",
     prepareTitle: 'Préparez-vous !',
-    prepareSubtitle: 'Souriez et prenez votre plus belle pose !',
+    prepareSubtitle: 'Souriez et prenez votre plus belle pose ! Le décompte dure 3 secondes.',
     galleryTitle: 'Galerie',
     gallerySubtitle: 'Tous vos souvenirs capturés',
     singlePhotoTitle: 'Votre magnifique photo !',

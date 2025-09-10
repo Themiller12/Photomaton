@@ -1,8 +1,9 @@
 /* Photomaton Mariage - Style moderne et élégant */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('./fonts.css');
 
 :root {
   --rose-gold: #E8B4B8;
+  --rouge-fonce: #72000a;
   --blush: #F5E6E8;
   --sage: #9CAF88;
   --cream: #FAF7F0;
@@ -74,7 +75,7 @@ h1, h2 {
 
 h1 { 
   font-size: 4rem; 
-  color: var(--rose-gold);
+  color: var(--rouge-fonce);
   margin-bottom: 1rem;
   animation: fadeInUp 1s ease-out;
 }
@@ -95,7 +96,7 @@ h2 {
 }
 
 .btn { 
-  background: linear-gradient(135deg, var(--rose-gold) 0%, var(--sage) 100%);
+  background: linear-gradient(135deg, var(--rose-gold) 0%, var(--rouge-fonce) 100%);
   border: none; 
   color: var(--white); 
   padding: 1.5rem 3rem; 
@@ -166,7 +167,7 @@ h2 {
   display: block;
   margin: 0 auto;
   pointer-events: none;
-  color: var(--rose-gold);
+  color: var(--rouge-fonce);
   text-shadow: 0 4px 8px var(--shadow-strong);
   animation: pulse 1s ease-in-out;
   z-index: 10;

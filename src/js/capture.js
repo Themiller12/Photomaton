@@ -482,6 +482,9 @@ printDoubleBtn?.addEventListener('click', async () => {
 // Fonction pour afficher l'aperçu de l'impression double
 async function showPrint2upPreview(filePath, copies) {
   try {
+    console.log('[Print Double Preview] filePath reçu:', filePath);
+    console.log('[Print Double Preview] copies:', copies);
+    
     // Créer l'aperçu via l'endpoint
     let printEndpoint = 'print_file.php';
     
@@ -489,13 +492,20 @@ async function showPrint2upPreview(filePath, copies) {
       printEndpoint = 'linux_print.php';
     }
     
+    // S'assurer que le chemin commence par 'captures/' pour l'endpoint PHP
+    let imagePath = filePath;
+    if (!imagePath.startsWith('captures/')) {
+      imagePath = 'captures/' + imagePath.replace(/^.*[\/]/, '');
+    }
+    
     const previewData = {
       action: 'preview2up',
-      imagePath: filePath,
-      file: filePath
+      imagePath: imagePath,
+      file: imagePath
     };
     
-    console.log('[Print Double Preview] Création aperçu...');
+    console.log('[Print Double Preview] Endpoint:', printEndpoint);
+    console.log('[Print Double Preview] Data envoyée:', previewData);
     const res = await fetch(printEndpoint, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

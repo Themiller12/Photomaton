@@ -18,7 +18,8 @@ usort($files, function($a, $b) {
 <meta charset="UTF-8" />
 <title>Galerie - Photomaton</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="src/css/fonts.css" />
+<link rel="stylesheet" href="src/css/all.min.css" />
 <link rel="stylesheet" href="src/css/style.css" />
 <style>
   /* Gallery styles pour écran tactile avec grosse barre de défilement */
