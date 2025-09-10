@@ -96,7 +96,7 @@ function executeCapture() {
             logMessage("Photo capturée: $capturedFile");
             
             // Vérifier que le fichier existe
-            $fullPath = __DIR__ . '/../' . $capturedFile;
+            $fullPath = __DIR__ . '/' . $capturedFile;
             if (file_exists($fullPath)) {
                 return [
                     'success' => true,

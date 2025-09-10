@@ -36,6 +36,7 @@ async function initWebcamIfNeeded(){
 }
 
 async function runSequence(){
+  singlePhotoBtn.disabled = true;
   startBtn.disabled = true;
   captured = [];
   isSinglePhotoMode = false;
@@ -94,18 +95,30 @@ async function runSinglePhoto(){
   showSelection();
 }
 
-async function retakeSinglePhoto(){
+async function retakePhotos(){
   // Retourner à l'écran de capture
   selectionScreen.classList.add('hidden');
   captureScreen.classList.remove('hidden');
   
-  // Réactiver les boutons
+  // Réactiver les boutons temporairement
   singlePhotoBtn.disabled = false;
   startBtn.disabled = false;
   
   // Vider les photos précédentes
   captured = [];
   resetCaptureScreenBackground();
+  
+  // Attendre un court délai pour que l'utilisateur voie l'écran de capture
+  await sleep(500);
+  
+  // Relancer automatiquement la capture selon le dernier mode utilisé
+  if (isSinglePhotoMode) {
+    console.log('[Retake] Relancement photo simple...');
+    await runSinglePhoto();
+  } else {
+    console.log('[Retake] Relancement séquence...');
+    await runSequence();
+  }
 }
 
 async function runCountdown(from){
@@ -274,12 +287,15 @@ function showSelection(){
     }
   }
   
-  // Afficher/masquer le bouton "Reprendre" selon le mode
+  // Afficher/masquer et adapter le texte du bouton "Reprendre" 
   if (retakeBtn) {
+    retakeBtn.style.display = 'inline-block';
+    
+    // Adapter le texte selon le mode
     if (isSinglePhotoMode) {
-      retakeBtn.style.display = 'inline-block';
+      retakeBtn.innerHTML = '<i class="fas fa-redo"></i> Reprendre la photo';
     } else {
-      retakeBtn.style.display = 'none';
+      retakeBtn.innerHTML = '<i class="fas fa-redo"></i> Reprendre les photos';
     }
   }
   
@@ -397,11 +413,23 @@ printDoubleBtn?.addEventListener('click', async () => {
   const copies = parseInt(copiesSelect.value,10) || 1;
   lastPrintType = 'double';
   
+  console.log('[Print Double] Début impression double');
+  console.log('[Print Double] Captured:', captured);
+  console.log('[Print Double] SelectedIndex:', selectedIndex);
+  console.log('[Print Double] MODE:', MODE);
+  
   // Afficher la modale d'impression
   showPrintModal();
   
   if(MODE === 'dslr_win' || MODE === 'dslr_linux' || MODE === 'sony_wifi' || MODE === 'sony_sdk' || MODE === 'folder_watch') {
     const filePath = captured[selectedIndex];
+    console.log('[Print Double] FilePath:', filePath);
+    
+    if(!filePath) {
+      showPrintError('Aucune photo sélectionnée pour l\'impression');
+      return;
+    }
+    
     if(filePath.startsWith('captures/')){
       try {
         // Utiliser même logique d'endpoint mais avec layout spécial
@@ -437,24 +465,47 @@ printDoubleBtn?.addEventListener('click', async () => {
         }
         
         console.log('[Print Double Debug] Endpoint:', printEndpoint, 'Data:', printData);
-          
+        
+        console.log('[Print Double] Envoi de la requête...');
         const res = await fetch(printEndpoint, {
           method: 'POST', 
           headers: {'Content-Type': 'application/json'}, 
           body: JSON.stringify(printData)
         });
         
-        const data = await res.json().catch(() => ({}));
-        if(!res.ok) throw new Error(data.error || 'Erreur impression double');
+        console.log('[Print Double] Réponse reçue, status:', res.status, res.statusText);
         
+        const data = await res.json().catch((parseError) => {
+          console.log('[Print Double] Erreur parsing JSON:', parseError);
+          console.log('[Print Double] Réponse brute:', res);
+          return {};
+        });
+        
+        console.log('[Print Double] Data parsée:', data);
+        
+        if(!res.ok) {
+          console.log('[Print Double] Erreur HTTP:', res.status, data);
+          throw new Error(data.error || `Erreur impression double (HTTP ${res.status})`);
+        }
+        
+        console.log('[Print Double] Impression réussie');
         // Afficher le succès dans la modale
         showPrintSuccess();
         
       } catch(e){ 
+        console.log('[Print Double] Exception capturée:', e);
+        console.log('[Print Double] Stack trace:', e.stack);
         showPrintError('Erreur impression double: ' + e.message); 
       }
       return;
+    } else {
+      console.log('[Print Double] Chemin de fichier invalide:', filePath);
+      showPrintError('Chemin de fichier invalide pour l\'impression double');
+      return;
     }
+  } else {
+    console.log('[Print Double] Mode non supporté:', MODE);
+    showPrintError('Mode de capture non supporté pour l\'impression double');
   }
 });
 
@@ -567,7 +618,7 @@ function retryPrint() {
 
 startBtn?.addEventListener('click', runSequence);
 singlePhotoBtn?.addEventListener('click', runSinglePhoto);
-retakeBtn?.addEventListener('click', retakeSinglePhoto);
+retakeBtn?.addEventListener('click', retakePhotos);
 
 // Event listeners pour la modale d'impression
 document.getElementById('modal-close')?.addEventListener('click', hidePrintModal);
