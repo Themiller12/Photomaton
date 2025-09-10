@@ -1,7 +1,16 @@
 <?php
 /**
  * PHOTOMATON LINUX - Endpoint d'impression CUPS
- * Utilise le système CUPS pour impression function setupPrinter() {
+ * Utilise le système CUPS pour impression  */
+
+
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+
+ 
+function setupPrinter() {
     logMessage("Configuration imprimante Linux");
     
     $command = escapeshellcmd(PRINT_SCRIPT) . ' setup 2>&1';
@@ -23,19 +32,58 @@ function create2upImage($originalPath) {
     $srcWidth = imagesx($source);
     $srcHeight = imagesy($source);
     
-    // Calculer dimensions pour 2 images côte à côte sur format 10x15
-    // Format final : 15x10 cm (landscape) avec 2 photos de ~7x10 chacune
-    $finalWidth = $srcWidth * 2;
-    $finalHeight = $srcHeight;
+    // Calculer dimensions pour 2 images l'une au-dessus de l'autre sur format 10x15
+    // Format final : 10x15 cm (portrait) avec 2 photos de ~10x6 chacune + espacement
+    $photoWidth = $srcWidth;  // Largeur de chaque photo (conservée)
+    $photoHeight = intval($srcWidth * 0.6); // Hauteur proportionnelle (ratio 10:6)
+    
+    // Espacement entre les photos (équivalent à ~2cm sur papier 10x15)
+    $spacing = intval($photoWidth * 0.15); // 15% de la largeur comme espacement
+    
+    // Dimensions de l'image finale
+    $finalWidth = $photoWidth;
+    $finalHeight = ($photoHeight * 2) + $spacing;
     
     // Créer l'image de destination
     $dest = imagecreatetruecolor($finalWidth, $finalHeight);
     $white = imagecolorallocate($dest, 255, 255, 255);
     imagefill($dest, 0, 0, $white);
     
-    // Copier l'image 2 fois
-    imagecopy($dest, $source, 0, 0, 0, 0, $srcWidth, $srcHeight); // Gauche
-    imagecopy($dest, $source, $srcWidth, 0, 0, 0, $srcWidth, $srcHeight); // Droite
+    // Redimensionner l'image source si nécessaire pour éviter la déformation
+    $resized = imagecreatetruecolor($photoWidth, $photoHeight);
+    $resizedWhite = imagecolorallocate($resized, 255, 255, 255);
+    imagefill($resized, 0, 0, $resizedWhite);
+    
+    // Redimensionner en conservant les proportions (crop center si nécessaire)
+    $srcRatio = $srcWidth / $srcHeight;
+    $destRatio = $photoWidth / $photoHeight;
+    
+    if ($srcRatio > $destRatio) {
+        // Image source plus large : recadrer les côtés
+        $newSrcWidth = intval($srcHeight * $destRatio);
+        $srcX = intval(($srcWidth - $newSrcWidth) / 2);
+        $srcY = 0;
+        imagecopyresampled($resized, $source, 0, 0, $srcX, $srcY, $photoWidth, $photoHeight, $newSrcWidth, $srcHeight);
+    } else {
+        // Image source plus haute : recadrer le haut/bas
+        $newSrcHeight = intval($srcWidth / $destRatio);
+        $srcX = 0;
+        $srcY = intval(($srcHeight - $newSrcHeight) / 2);
+        imagecopyresampled($resized, $source, 0, 0, $srcX, $srcY, $photoWidth, $photoHeight, $srcWidth, $newSrcHeight);
+    }
+    
+    // Copier les 2 photos sur l'image finale
+    imagecopy($dest, $resized, 0, 0, 0, 0, $photoWidth, $photoHeight); // Photo du haut
+    imagecopy($dest, $resized, 0, $photoHeight + $spacing, 0, 0, $photoWidth, $photoHeight); // Photo du bas
+    
+    // Ajouter des lignes de découpe (optionnel, en pointillés légers)
+    $lightGray = imagecolorallocate($dest, 200, 200, 200);
+    $lineY = intval($photoHeight + ($spacing / 2));
+    
+    // Ligne de découpe horizontale en pointillés
+    for ($x = 0; $x < $finalWidth; $x += 10) {
+        imageline($dest, $x, $lineY, min($x + 5, $finalWidth), $lineY, $lightGray);
+    }
     
     // Sauvegarder
     $outputPath = __DIR__ . '/temp_2up_' . basename($originalPath);
@@ -45,16 +93,11 @@ function create2upImage($originalPath) {
     
     // Nettoyer
     imagedestroy($source);
+    imagedestroy($resized);
     imagedestroy($dest);
     
     return $outputPath;
-}ELPHY CP1500
- */
-
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+}
 
 // Gestion CORS
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -161,17 +204,6 @@ function printImage($imagePath, $copies = 1, $media = '4x6', $options = []) {
     }
 }
 
-function setupPrinter() {
-    logMessage("Configuration automatique imprimante");
-    
-    $command = escapeshellcmd(PRINT_SCRIPT) . ' setup 2>&1';
-    exec($command, $output, $returnCode);
-    
-    return [
-        'success' => $returnCode === 0,
-        'output' => implode("\n", $output)
-    ];
-}
 
 function checkPrintStatus($jobId = null) {
     logMessage("Vérification statut impression: $jobId");
