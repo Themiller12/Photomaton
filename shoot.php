@@ -9,6 +9,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <link rel="stylesheet" href="src/css/style.css" />
+<style>
+/* Style pour la modale d'aperçu impression double */
+#print2up-preview-modal .modal-content {
+  max-width: 600px;
+  width: 90%;
+}
+
+#print2up-preview-modal .modal-body {
+  padding: 1.5rem;
+}
+
+#print2up-preview-modal #preview2up-image {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin: 1rem 0;
+}
+
+#print2up-preview-modal .modal-footer {
+  gap: 1rem;
+}
+</style>
 </head>
 <body>
   <div class="screen" id="capture-screen">

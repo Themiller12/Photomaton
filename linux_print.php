@@ -32,15 +32,17 @@ function create2upImage($originalPath) {
     $srcWidth = imagesx($source);
     $srcHeight = imagesy($source);
     
-    // Calculer dimensions pour 2 images l'une au-dessus de l'autre sur format 10x15
-    // Format final : 10x15 cm (portrait) avec 2 photos de ~10x6 chacune + espacement
-    $photoWidth = $srcWidth;  // Largeur de chaque photo (conservée)
-    $photoHeight = intval($srcWidth * 0.6); // Hauteur proportionnelle (ratio 10:6)
+    // Calculer dimensions pour 2 images paysage l'une au-dessus de l'autre
+    // Format final : 10x15 cm (portrait) avec 2 photos paysage de même taille + espacement
     
-    // Espacement entre les photos (équivalent à ~2cm sur papier 10x15)
-    $spacing = intval($photoWidth * 0.15); // 15% de la largeur comme espacement
+    // Garder les proportions originales des photos (format paysage)
+    $photoWidth = $srcWidth;
+    $photoHeight = $srcHeight;
     
-    // Dimensions de l'image finale
+    // Espacement entre les photos (équivalent à ~1.5cm sur papier)
+    $spacing = intval($photoHeight * 0.3); // 30% de la hauteur comme espacement
+    
+    // Dimensions de l'image finale (portrait)
     $finalWidth = $photoWidth;
     $finalHeight = ($photoHeight * 2) + $spacing;
     
@@ -49,40 +51,25 @@ function create2upImage($originalPath) {
     $white = imagecolorallocate($dest, 255, 255, 255);
     imagefill($dest, 0, 0, $white);
     
-    // Redimensionner l'image source si nécessaire pour éviter la déformation
-    $resized = imagecreatetruecolor($photoWidth, $photoHeight);
-    $resizedWhite = imagecolorallocate($resized, 255, 255, 255);
-    imagefill($resized, 0, 0, $resizedWhite);
-    
-    // Redimensionner en conservant les proportions (crop center si nécessaire)
-    $srcRatio = $srcWidth / $srcHeight;
-    $destRatio = $photoWidth / $photoHeight;
-    
-    if ($srcRatio > $destRatio) {
-        // Image source plus large : recadrer les côtés
-        $newSrcWidth = intval($srcHeight * $destRatio);
-        $srcX = intval(($srcWidth - $newSrcWidth) / 2);
-        $srcY = 0;
-        imagecopyresampled($resized, $source, 0, 0, $srcX, $srcY, $photoWidth, $photoHeight, $newSrcWidth, $srcHeight);
-    } else {
-        // Image source plus haute : recadrer le haut/bas
-        $newSrcHeight = intval($srcWidth / $destRatio);
-        $srcX = 0;
-        $srcY = intval(($srcHeight - $newSrcHeight) / 2);
-        imagecopyresampled($resized, $source, 0, 0, $srcX, $srcY, $photoWidth, $photoHeight, $srcWidth, $newSrcHeight);
-    }
-    
-    // Copier les 2 photos sur l'image finale
-    imagecopy($dest, $resized, 0, 0, 0, 0, $photoWidth, $photoHeight); // Photo du haut
-    imagecopy($dest, $resized, 0, $photoHeight + $spacing, 0, 0, $photoWidth, $photoHeight); // Photo du bas
+    // Copier les 2 photos identiques sans déformation (format paysage conservé)
+    imagecopy($dest, $source, 0, 0, 0, 0, $photoWidth, $photoHeight); // Photo du haut
+    imagecopy($dest, $source, 0, $photoHeight + $spacing, 0, 0, $photoWidth, $photoHeight); // Photo du bas
     
     // Ajouter des lignes de découpe (optionnel, en pointillés légers)
     $lightGray = imagecolorallocate($dest, 200, 200, 200);
     $lineY = intval($photoHeight + ($spacing / 2));
     
     // Ligne de découpe horizontale en pointillés
-    for ($x = 0; $x < $finalWidth; $x += 10) {
-        imageline($dest, $x, $lineY, min($x + 5, $finalWidth), $lineY, $lightGray);
+    for ($x = 0; $x < $finalWidth; $x += 15) {
+        imageline($dest, $x, $lineY, min($x + 8, $finalWidth), $lineY, $lightGray);
+    }
+    
+    // Lignes de découpe verticales sur les côtés (optionnel)
+    for ($y = 0; $y < $finalHeight; $y += 15) {
+        // Ligne gauche
+        imageline($dest, 5, $y, 5, min($y + 8, $finalHeight), $lightGray);
+        // Ligne droite  
+        imageline($dest, $finalWidth - 6, $y, $finalWidth - 6, min($y + 8, $finalHeight), $lightGray);
     }
     
     // Sauvegarder
@@ -93,7 +80,6 @@ function create2upImage($originalPath) {
     
     // Nettoyer
     imagedestroy($source);
-    imagedestroy($resized);
     imagedestroy($dest);
     
     return $outputPath;
@@ -267,6 +253,27 @@ try {
             $result = printImage($imagePath, $copies, $media, $options);
             logMessage("SUCCÈS impression: Job " . ($result['jobId'] ?? 'N/A'));
             echo json_encode($result);
+            break;
+            
+        case 'preview2up':
+            // Créer un aperçu de l'image double
+            $imagePath = $input['imagePath'] ?? $input['file'] ?? $_POST['imagePath'] ?? $_POST['file'] ?? $_GET['imagePath'] ?? $_GET['file'] ?? '';
+            
+            if (empty($imagePath)) {
+                throw new Exception("Fichier non spécifié pour l'aperçu");
+            }
+            
+            // Créer l'image 2up temporaire
+            $previewPath = create2upImage($imagePath);
+            $previewUrl = str_replace(__DIR__, '', $previewPath);
+            
+            logMessage("SUCCÈS création aperçu: $previewPath");
+            echo json_encode([
+                'success' => true,
+                'previewPath' => $previewPath,
+                'previewUrl' => $previewUrl,
+                'originalImage' => $imagePath
+            ]);
             break;
             
         case 'setup':

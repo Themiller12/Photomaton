@@ -418,9 +418,6 @@ printDoubleBtn?.addEventListener('click', async () => {
   console.log('[Print Double] SelectedIndex:', selectedIndex);
   console.log('[Print Double] MODE:', MODE);
   
-  // Afficher la modale d'impression
-  showPrintModal();
-  
   if(MODE === 'dslr_win' || MODE === 'dslr_linux' || MODE === 'sony_wifi' || MODE === 'sony_sdk' || MODE === 'folder_watch') {
     const filePath = captured[selectedIndex];
     console.log('[Print Double] FilePath:', filePath);
@@ -431,11 +428,17 @@ printDoubleBtn?.addEventListener('click', async () => {
     }
     
     if(filePath.startsWith('captures/')){
-      try {
-        // Utiliser même logique d'endpoint mais avec layout spécial
-        let printEndpoint = 'print_file.php';
-        
-        console.log('[Print Double Debug] OS:', window.PHOTOMATON_CONFIG.operatingSystem, 'PrinterType:', window.PHOTOMATON_CONFIG.printerType);
+      // D'abord créer l'aperçu
+      await showPrint2upPreview(filePath, copies);
+    } else {
+      console.log('[Print Double] Chemin de fichier invalide:', filePath);
+      showPrintError('Chemin de fichier invalide pour l\'impression double');
+      return;
+    }
+  } else {
+    console.log('[Print Double] Mode non supporté:', MODE);
+    showPrintError('Mode de capture non supporté pour l\'impression double');
+  }
         
         if (window.PHOTOMATON_CONFIG.operatingSystem === 'linux' && window.PHOTOMATON_CONFIG.printerType === 'linux_cups') {
           printEndpoint = 'linux_print.php';
@@ -474,40 +477,149 @@ printDoubleBtn?.addEventListener('click', async () => {
         });
         
         console.log('[Print Double] Réponse reçue, status:', res.status, res.statusText);
-        
-        const data = await res.json().catch((parseError) => {
-          console.log('[Print Double] Erreur parsing JSON:', parseError);
-          console.log('[Print Double] Réponse brute:', res);
-          return {};
-        });
-        
-        console.log('[Print Double] Data parsée:', data);
-        
-        if(!res.ok) {
-          console.log('[Print Double] Erreur HTTP:', res.status, data);
-          throw new Error(data.error || `Erreur impression double (HTTP ${res.status})`);
-        }
-        
-        console.log('[Print Double] Impression réussie');
-        // Afficher le succès dans la modale
-        showPrintSuccess();
-        
-      } catch(e){ 
-        console.log('[Print Double] Exception capturée:', e);
-        console.log('[Print Double] Stack trace:', e.stack);
-        showPrintError('Erreur impression double: ' + e.message); 
-      }
-      return;
-    } else {
-      console.log('[Print Double] Chemin de fichier invalide:', filePath);
-      showPrintError('Chemin de fichier invalide pour l\'impression double');
-      return;
-    }
-  } else {
-    console.log('[Print Double] Mode non supporté:', MODE);
-    showPrintError('Mode de capture non supporté pour l\'impression double');
-  }
 });
+
+// Fonction pour afficher l'aperçu de l'impression double
+async function showPrint2upPreview(filePath, copies) {
+  try {
+    // Créer l'aperçu via l'endpoint
+    let printEndpoint = 'print_file.php';
+    
+    if (window.PHOTOMATON_CONFIG.operatingSystem === 'linux' && window.PHOTOMATON_CONFIG.printerType === 'linux_cups') {
+      printEndpoint = 'linux_print.php';
+    }
+    
+    const previewData = {
+      action: 'preview2up',
+      imagePath: filePath,
+      file: filePath
+    };
+    
+    console.log('[Print Double Preview] Création aperçu...');
+    const res = await fetch(printEndpoint, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(previewData)
+    });
+    
+    const data = await res.json().catch(() => ({}));
+    
+    if (!res.ok) {
+      throw new Error(data.error || 'Erreur création aperçu');
+    }
+    
+    // Afficher la modale de prévisualisation
+    showPrint2upModal(data.previewUrl, filePath, copies);
+    
+  } catch(e) {
+    console.log('[Print Double Preview] Erreur:', e);
+    showPrintError('Erreur création aperçu: ' + e.message);
+  }
+}
+
+// Fonction pour afficher la modale d'aperçu
+function showPrint2upModal(previewUrl, originalPath, copies) {
+  // Créer la modale d'aperçu si elle n'existe pas
+  let modal = document.getElementById('print2up-preview-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'print2up-preview-modal';
+    modal.className = 'modal';
+    modal.innerHTML = `
+      <div class="modal-content">
+        <div class="modal-header">
+          <i class="fas fa-eye modal-icon"></i>
+          <h3>Aperçu impression double</h3>
+        </div>
+        <div class="modal-body" style="text-align: center;">
+          <p>Vos 2 photos seront imprimées comme ceci :</p>
+          <img id="preview2up-image" src="" alt="Aperçu 2 photos" style="max-width: 90%; max-height: 60vh; border: 2px solid #ddd; border-radius: 8px;">
+          <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+            <i class="fas fa-scissors"></i> Les lignes en pointillés indiquent où découper
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button id="print2up-cancel" class="btn secondary">
+            <i class="fas fa-times"></i> Annuler
+          </button>
+          <button id="print2up-confirm" class="btn">
+            <i class="fas fa-print"></i> Confirmer l'impression
+          </button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+  
+  // Mettre à jour l'image d'aperçu
+  const previewImage = modal.querySelector('#preview2up-image');
+  previewImage.src = previewUrl + '?t=' + Date.now();
+  
+  // Gérer les événements
+  modal.querySelector('#print2up-cancel').onclick = () => {
+    modal.style.display = 'none';
+  };
+  
+  modal.querySelector('#print2up-confirm').onclick = () => {
+    modal.style.display = 'none';
+    // Lancer l'impression réelle
+    confirmPrint2up(originalPath, copies);
+  };
+  
+  // Afficher la modale
+  modal.style.display = 'flex';
+}
+
+// Fonction pour confirmer et lancer l'impression double
+async function confirmPrint2up(filePath, copies) {
+  showPrintModal(); // Afficher la modale de progression
+  
+  try {
+    let printEndpoint = 'print_file.php';
+    
+    if (window.PHOTOMATON_CONFIG.operatingSystem === 'linux' && window.PHOTOMATON_CONFIG.printerType === 'linux_cups') {
+      printEndpoint = 'linux_print.php';
+    } else {
+      // Windows endpoints
+      switch(window.PHOTOMATON_CONFIG.printerType) {
+        case 'simple': printEndpoint = 'print_simple.php'; break;
+        case 'selphy_optimized': printEndpoint = 'print_selphy_optimized.php'; break;
+        case 'canon_cp1500': printEndpoint = 'print_canon_ps.php'; break;
+        case 'ppd_optimized': printEndpoint = 'print_ppd.php'; break;
+        case 'browser': printEndpoint = 'print_browser.php'; break;
+        default: printEndpoint = 'print_canon.php';
+      }
+    }
+    
+    const printData = {
+      file: filePath, 
+      imagePath: filePath,
+      copies: copies,
+      layout: '2up',
+      doublePhoto: true
+    };
+    
+    if (window.PHOTOMATON_CONFIG.defaultPaperSize) {
+      printData.paperSize = window.PHOTOMATON_CONFIG.defaultPaperSize;
+      printData.media = window.PHOTOMATON_CONFIG.defaultPaperSize;
+    }
+    
+    console.log('[Print Double] Impression confirmée, endpoint:', printEndpoint);
+    const res = await fetch(printEndpoint, {
+      method: 'POST', 
+      headers: {'Content-Type': 'application/json'}, 
+      body: JSON.stringify(printData)
+    });
+    
+    const data = await res.json().catch(() => ({}));
+    if(!res.ok) throw new Error(data.error || 'Erreur impression double');
+    
+    showPrintSuccess();
+    
+  } catch(e) {
+    showPrintError('Erreur impression double: ' + e.message);
+  }
+}
 
 async function toBase64FromUrl(url){
   const res = await fetch(url+'?raw='+Date.now());
