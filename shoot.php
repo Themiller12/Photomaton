@@ -13,21 +13,65 @@
 <style>
 /* Style pour la modale d'aperçu impression double */
 #print2up-preview-modal .modal-content {
-  max-width: 600px;
-  width: 90%;
+  max-width: 600px !important;
+  width: 90% !important;
+  max-height: 90vh !important;
+  overflow-y: auto;
 }
 
 #print2up-preview-modal .modal-body {
   padding: 1.5rem;
+  max-height: 65vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 #print2up-preview-modal #preview2up-image {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
   margin: 1rem 0;
+  max-width: 100% !important;
+  max-height: 50vh !important;
+  height: auto !important;
+  width: auto !important;
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  object-fit: contain !important;
+  border: 2px solid var(--rose-gold);
+  border-radius: 10px;
 }
 
 #print2up-preview-modal .modal-footer {
   gap: 1rem;
+  position: sticky;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--cream) 0%, var(--blush) 100%);
+  border-top: 1px solid var(--rose-gold);
+  margin-top: auto;
+  padding: 1rem 2rem;
+  border-radius: 0 0 20px 20px;
+  flex-shrink: 0;
+}
+
+/* S'assurer que la modale ne déborde pas */
+#print2up-preview-modal .modal-dialog {
+  max-height: 95vh;
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+}
+
+/* Titre de la modale */
+#print2up-preview-modal .modal-header {
+  padding: 1.5rem 2rem 0.5rem 2rem;
+  flex-shrink: 0;
+}
+
+#print2up-preview-modal .modal-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--rouge-fonce);
 }
 </style>
 </head>
@@ -61,7 +105,7 @@
       <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; width: 100%;">
         <button id="print-selected" class="btn"><i class="fas fa-print"></i> Imprimer</button>
         <button id="print-double" class="btn" style="background: linear-gradient(135deg, #9CAF88 0%, #E8B4B8 100%);">
-          <i class="fas fa-clone"></i> 2 photos / page
+          <i class="fas fa-clone"></i> Imprimer 2 photos / page
         </button>
         <button class="btn secondary" onclick="window.location='index.php'"><i class="fas fa-home"></i> Terminer</button>
       </div>

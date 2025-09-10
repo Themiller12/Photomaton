@@ -543,7 +543,7 @@ function showPrint2upModal(previewUrl, originalPath, copies) {
         </div>
         <div class="modal-body" style="text-align: center;">
           <p>Vos 2 photos seront imprimées comme ceci :</p>
-          <img id="preview2up-image" src="" alt="Aperçu 2 photos" style="max-width: 90%; max-height: 60vh; border: 2px solid #ddd; border-radius: 8px;">
+          <img id="preview2up-image" src="" alt="Aperçu 2 photos">
           <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
             <i class="fas fa-scissors"></i> Les lignes en pointillés indiquent où découper
           </p>
