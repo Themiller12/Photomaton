@@ -167,36 +167,43 @@ print_image() {
     
     # Construire la commande d'impression avec options précises du PPD
     local print_options=""
+    # Détecter l'orientation nécessaire
+    # Si c'est une impression double (2up), utiliser portrait
+    local orientation="landscape"  # par défaut
+    if [[ "$image_path" == *"temp_2up_"* ]]; then
+        orientation="portrait"
+        log_message "Image double détectée, utilisation du mode portrait"
+    fi
     
     # Options spécifiques Canon SELPHY basées sur le fichier PPD
     case "$media" in
         "Postcard.Fullbleed"|"postcard"|"10x15")
             # Format 10x15cm sans bordure (format par défaut du PPD)
-            print_options="-o media=Postcard.fullbleed -o landscape -o fit-to-page"
+            print_options="-o media=Postcard.fullbleed -o $orientation -o fit-to-page"
             ;;
         "Postcard")
             # Format 10x15cm avec bordure
-            print_options="-o media=Postcard -o landscape -o fit-to-page"
+            print_options="-o media=Postcard -o $orientation -o fit-to-page"
             ;;
         "54x86mm.Fullbleed")
             # Format carte de crédit sans bordure
-            print_options="-o media=54x86mm.fullbleed -o landscape -o fit-to-page"
+            print_options="-o media=54x86mm.fullbleed -o $orientation -o fit-to-page"
             ;;
         "54x86mm")
             # Format carte de crédit avec bordure
-            print_options="-o media=54x86mm -o landscape -o fit-to-page"
+            print_options="-o media=54x86mm -o $orientation -o fit-to-page"
             ;;
         "89x119mm.Fullbleed")
             # Format L sans bordure
-            print_options="-o media=89x119mm.fullbleed -o landscape -o fit-to-page"
+            print_options="-o media=89x119mm.fullbleed -o $orientation -o fit-to-page"
             ;;
         "89x119mm")
             # Format L avec bordure
-            print_options="-o media=89x119mm -o landscape -o fit-to-page"
+            print_options="-o media=89x119mm -o $orientation -o fit-to-page"
             ;;
         *)
             # Fallback avec le format par défaut du PPD
-            print_options="-o media=Postcard.fullbleed -o landscape -o fit-to-page"
+            print_options="-o media=Postcard.fullbleed -o $orientation -o fit-to-page"
             log_message "Format '$media' non reconnu, utilisation de Postcard.Fullbleed"
             ;;
     esac
@@ -205,6 +212,7 @@ print_image() {
     log_message "USER: $(whoami), UID: $(id -u), GROUPS: $(groups)"
     log_message "PATH: $PATH"
     log_message "Imprimante active: $PRINTER_NAME"
+    log_message "Options d'impression choisies: $print_options"
     
     # Vérifier l'état de l'imprimante avant impression
     local printer_status=$(lpstat -p "$PRINTER_NAME" 2>/dev/null)
