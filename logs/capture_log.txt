@@ -1102,3 +1102,11 @@ Transfer done :C:\xampp\htdocs\Photomaton\captures\DSC_0081.JPG
 Photo transfer done.
 -- BEFORE COUNT=79
 2025-08-26 17:05:21 NEWFILE=captures/DSC_0081.JPG
+2025-09-10 11:32:18 CMD="C:\Program Files (x86)\digiCamControl\CameraControlCmd.exe" /capture /folder "C:\xampp\htdocs\Photomaton\captures"
+WIN_DIR=C:\xampp\htdocs\Photomaton\captures
+EXIT=0
+OUTPUT=digiCamControl command line utility running
+
+No connected device was found ! Exiting
+-- BEFORE COUNT=0
+2025-09-10 11:32:18 DEVICE_NOT_FOUND

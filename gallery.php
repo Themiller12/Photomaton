@@ -21,31 +21,88 @@ usort($files, function($a, $b) {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <link rel="stylesheet" href="src/css/style.css" />
 <style>
-  /* Gallery performance optimizations for Raspberry Pi */
-  html, body { height:auto; min-height:100%; overflow-y:auto; touch-action:pan-y; }
-  #gallery-shell { padding:0.8rem 1.2rem 2rem; }
-  #gallery-head { margin-bottom:0.8rem; }
+  /* Gallery styles pour écran tactile avec grosse barre de défilement */
+  html, body { height: 100%; }
+  
+  /* Barre de défilement épaisse et visible */
+  ::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 8px;
+    border: 2px solid #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  ::-webkit-scrollbar-corner {
+    background: #f1f1f1;
+  }
+  
+  /* Pour Firefox */
+  * {
+    scrollbar-width: thick;
+    scrollbar-color: #888 #f1f1f1;
+  }
+  
+  #gallery-shell { 
+    padding: 0.8rem 1.2rem 2rem; 
+  }
+  
+  #gallery-head { 
+    margin-bottom: 0.8rem; 
+  }
+  
   #gallery-grid { 
-    display:grid; 
-    grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); 
-    gap:0.7rem; 
-    align-content:start; 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); 
+    gap: 0.7rem; 
+    align-content: start; 
   }
+  
   #gallery-grid .item img { 
-    width:100%; height:140px; object-fit:cover; border-radius:8px; 
-    border:2px solid rgba(255,255,255,0.6); 
-    background:#eee; 
-    cursor:pointer; 
-    transition:opacity .15s; 
+    width: 100%; 
+    height: 140px; 
+    object-fit: cover; 
+    border-radius: 8px; 
+    border: 2px solid rgba(255,255,255,0.6); 
+    background: #eee; 
+    cursor: pointer; 
+    transition: transform 0.2s; 
   }
-  #gallery-grid .item img:active { opacity:0.75; }
-  #loadMore { margin:1.1rem auto 0; }
-  #photoModal.modal { align-items:center; justify-content:center; }
-  #photoModal img { max-width:92vw; max-height:92vh; }
-  /* Hide scrollbars visually (optional) */
-  #gallery-grid::-webkit-scrollbar { width:0; height:0; }
-  /* Pin action buttons */
-  .gallery-actions { text-align:center; margin-top:1rem; }
+  
+  #gallery-grid .item img:hover { 
+    transform: scale(1.02); 
+  }
+  
+  #loadMore { 
+    margin: 1.1rem auto 0; 
+  }
+  
+  #photoModal.modal { 
+    align-items: center; 
+    justify-content: center; 
+  }
+  
+  #photoModal img { 
+    max-width: 92vw; 
+    max-height: 92vh; 
+  }
+  
+  .gallery-actions { 
+    text-align: center; 
+    margin-top: 1rem; 
+  }
 </style>
 </head>
 <body>

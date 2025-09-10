@@ -21,6 +21,25 @@ $script_path = __DIR__ . '/scripts/linux_capture.sh';
 if (!file_exists($script_path) && file_exists('/var/www/html/Photomaton/scripts/linux_capture.sh')) {
     $script_path = '/var/www/html/Photomaton/scripts/linux_capture.sh';
 }
+
+// Vérifications supplémentaires
+if (!file_exists($script_path)) {
+    // Essayer d'autres chemins possibles
+    $possible_paths = [
+        '/var/www/html/Photomaton/scripts/linux_capture.sh',
+        '/home/pi/Photomaton/scripts/linux_capture.sh',
+        dirname($_SERVER['DOCUMENT_ROOT']) . '/Photomaton/scripts/linux_capture.sh',
+        $_SERVER['DOCUMENT_ROOT'] . '/Photomaton/scripts/linux_capture.sh'
+    ];
+    
+    foreach ($possible_paths as $path) {
+        if (file_exists($path)) {
+            $script_path = $path;
+            break;
+        }
+    }
+}
+
 define('CAPTURE_SCRIPT', $script_path);
 define('LOG_FILE', __DIR__ . '/logs/capture_log.txt');
 

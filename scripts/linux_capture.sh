@@ -1,6 +1,4 @@
-#!/bin/# Configuration
-CAPTURES_DIR="/var/www/html/Photomaton/captures"
-LOG_FILE="/var/www/html/Photomaton/logs/capture_log.txt"h
+#!/bin/bash
 
 # ============================================================================
 # PHOTOMATON LINUX - Script de capture photo
@@ -29,15 +27,41 @@ error_exit() {
 check_dependencies() {
     log_message "Vérification des dépendances..."
     
-    if ! command -v gphoto2 &> /dev/null; then
-        error_exit "gPhoto2 n'est pas installé. Installez avec: sudo apt install gphoto2"
+    # Vérification gPhoto2 avec plusieurs méthodes
+    if command -v gphoto2 &> /dev/null; then
+        log_message "gPhoto2 trouvé via command"
+    elif which gphoto2 &> /dev/null; then
+        log_message "gPhoto2 trouvé via which"
+    elif [ -x "/usr/bin/gphoto2" ]; then
+        log_message "gPhoto2 trouvé dans /usr/bin/"
+    elif [ -x "/usr/local/bin/gphoto2" ]; then
+        log_message "gPhoto2 trouvé dans /usr/local/bin/"
+    else
+        # Test direct avec gphoto2 --version
+        if gphoto2 --version &> /dev/null; then
+            log_message "gPhoto2 accessible directement"
+        else
+            error_exit "gPhoto2 n'est pas accessible. Installez avec: sudo apt install gphoto2"
+        fi
     fi
     
-    if ! command -v identify &> /dev/null; then
-        error_exit "ImageMagick n'est pas installé. Installez avec: sudo apt install imagemagick"
+    # Vérification ImageMagick avec plusieurs méthodes
+    if command -v identify &> /dev/null; then
+        log_message "ImageMagick trouvé via command"
+    elif which identify &> /dev/null; then
+        log_message "ImageMagick trouvé via which"
+    elif [ -x "/usr/bin/identify" ]; then
+        log_message "ImageMagick trouvé dans /usr/bin/"
+    else
+        # Test direct
+        if identify -version &> /dev/null; then
+            log_message "ImageMagick accessible directement"
+        else
+            log_message "ATTENTION: ImageMagick non trouvé, mais on continue..."
+        fi
     fi
     
-    log_message "Dépendances OK"
+    log_message "Vérification des dépendances terminée"
 }
 
 # Créer les dossiers nécessaires
@@ -87,16 +111,39 @@ free_camera_if_busy() {
 # Détecter l'appareil photo
 detect_camera() {
     log_message "Détection de l'appareil photo..."
-    log_message "Processus gphoto2 actifs: $(pgrep -fl gphoto2 | tr '\n' ';' )"
-    log_message "Processus gvfs: $(pgrep -fl gvfsd-gphoto2 | tr '\n' ';')"
+    log_message "Utilisateur courant: $(whoami) (UID: $(id -u))"
+    log_message "Processus gphoto2 actifs: $(pgrep -fl gphoto2 2>/dev/null | tr '\n' ';' || echo 'aucun')"
+    log_message "Processus gvfs: $(pgrep -fl gvfsd-gphoto2 2>/dev/null | tr '\n' ';' || echo 'aucun')"
     
-    # Vérifier si un appareil est connecté
-    if ! gphoto2 --auto-detect | grep -q "usb:"; then
-        error_exit "Aucun appareil photo détecté. Vérifiez la connexion USB."
+    # Debug: afficher la version de gphoto2
+    local gphoto_version=$(gphoto2 --version 2>/dev/null | head -1 || echo "Version non disponible")
+    log_message "Version gPhoto2: $gphoto_version"
+    
+    # Vérifier si un appareil est connecté avec plus de détails
+    log_message "Tentative de détection automatique..."
+    local auto_detect_output=$(gphoto2 --auto-detect 2>&1)
+    log_message "Sortie auto-detect: $auto_detect_output"
+    
+    if ! echo "$auto_detect_output" | grep -q "usb:"; then
+        log_message "Aucun appareil USB trouvé par auto-detect"
+        
+        # Essayer une détection alternative
+        log_message "Tentative alternative avec --list-ports..."
+        local list_ports=$(gphoto2 --list-ports 2>&1 || echo "Erreur list-ports")
+        log_message "Ports disponibles: $list_ports"
+        
+        # Essayer encore avec summary direct
+        log_message "Test direct summary..."
+        if gphoto2 --summary >/dev/null 2>&1; then
+            log_message "Appareil accessible via summary direct"
+        else
+            error_exit "Aucun appareil photo détecté. Vérifiez la connexion USB et les permissions."
+        fi
     fi
     
-    # Obtenir le modèle
-    CAMERA_MODEL=$(gphoto2 --summary 2>/dev/null | grep "Model:" | cut -d: -f2 | xargs)
+    # Obtenir le modèle avec gestion d'erreur
+    log_message "Récupération des informations appareil..."
+    CAMERA_MODEL=$(gphoto2 --summary 2>/dev/null | grep "Model:" | cut -d: -f2 | xargs || echo "Modèle inconnu")
     log_message "Appareil détecté: $CAMERA_MODEL"
     
     # Vérifier si l'appareil est libre (pas utilisé par un autre processus)
