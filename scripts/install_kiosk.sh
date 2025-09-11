@@ -36,15 +36,31 @@ cat > "$DESKTOP_FILE" << 'EOF'
 [Desktop Entry]
 Type=Application
 Name=Photomaton Kiosk
-Comment=Démarre le photomaton en mode kiosque
+Comment=Demarre le photomaton en mode kiosque
 Exec=/var/www/html/Photomaton/scripts/start_kiosk.sh
 Icon=chromium-browser
 Terminal=false
 NoDisplay=false
 Hidden=false
 X-GNOME-Autostart-enabled=true
-X-GNOME-Autostart-Delay=10
+X-GNOME-Autostart-Delay=15
+X-KDE-autostart-after=panel
+Categories=Application;
+StartupNotify=false
 EOF
+
+# Rendre le fichier desktop exécutable
+chmod +x "$DESKTOP_FILE"
+
+# Créer aussi un script dans ~/.profile comme fallback
+echo "Creation du fallback dans .profile..."
+grep -v "# Photomaton Kiosk Autostart" ~/.profile > ~/.profile.tmp 2>/dev/null || touch ~/.profile.tmp
+echo "# Photomaton Kiosk Autostart" >> ~/.profile.tmp
+echo "if [ \"\$XDG_SESSION_TYPE\" = \"x11\" ] && [ -z \"\$PHOTOMATON_STARTED\" ]; then" >> ~/.profile.tmp
+echo "  export PHOTOMATON_STARTED=1" >> ~/.profile.tmp
+echo "  (sleep 20 && /var/www/html/Photomaton/scripts/start_kiosk.sh) &" >> ~/.profile.tmp
+echo "fi" >> ~/.profile.tmp
+mv ~/.profile.tmp ~/.profile
 
 # Installer les dépendances nécessaires
 echo "Installation des dependances..."
