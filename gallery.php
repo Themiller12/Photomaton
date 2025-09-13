@@ -104,6 +104,34 @@ usort($files, function($a, $b) {
     text-align: center; 
     margin-top: 1rem; 
   }
+
+  /* Styles pour les modales */
+  .modal-actions {
+    padding: 1rem 0 0;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    margin-top: 1rem;
+  }
+
+  .print-format-btn {
+    transition: all 0.3s ease;
+  }
+
+  .print-format-btn.active {
+    background-color: #007bff !important;
+    color: white !important;
+    border-color: #007bff !important;
+  }
+
+  .print-format-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,123,255,0.3);
+  }
+
+  #printModal .modal-content {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
 </style>
 </head>
 <body>
@@ -142,11 +170,76 @@ usort($files, function($a, $b) {
     </div>
   </div>
 
-  <!-- Modal -->
+  <!-- Modal Photo -->
   <div id="photoModal" class="modal" style="display:none;">
     <div class="modal-content">
       <button class="modal-close" onclick="closeModal()">&times;</button>
       <img id="modalImage" src="" alt="Photo en grand" />
+      <div class="modal-actions" style="text-align: center; margin-top: 1rem;">
+        <button class="btn primary" onclick="openPrintModal()" style="padding: 0.8rem 1.5rem; font-size: 1rem;">
+          <i class="fas fa-print"></i> Imprimer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Impression -->
+  <div id="printModal" class="modal" style="display:none;">
+    <div class="modal-content" style="max-width: 500px; padding: 2rem;">
+      <button class="modal-close" onclick="closePrintModal()">&times;</button>
+      <h2 style="text-align: center; margin-bottom: 1.5rem;">
+        <i class="fas fa-print"></i> Options d'impression
+      </h2>
+      
+      <!-- Nombre d'exemplaires -->
+      <div style="margin-bottom: 1.5rem;">
+        <label for="copyCount" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">
+          Nombre d'exemplaires :
+        </label>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <button type="button" onclick="decreaseCopies()" class="btn secondary" style="width: 40px; height: 40px; padding: 0;">
+            <i class="fas fa-minus"></i>
+          </button>
+          <input type="number" id="copyCount" value="1" min="1" max="10" 
+                 style="width: 80px; text-align: center; font-size: 1.2rem; padding: 0.5rem; border: 2px solid #ddd; border-radius: 8px;">
+          <button type="button" onclick="increaseCopies()" class="btn secondary" style="width: 40px; height: 40px; padding: 0;">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Format d'impression -->
+      <div style="margin-bottom: 2rem;">
+        <label style="display: block; margin-bottom: 1rem; font-weight: 600;">
+          Format d'impression :
+        </label>
+        <div style="display: flex; gap: 1rem;">
+          <button type="button" id="print1" onclick="selectPrintFormat(1)" 
+                  class="btn secondary print-format-btn active" 
+                  style="flex: 1; padding: 1rem; text-align: center; border: 2px solid #007bff;">
+            <i class="fas fa-image" style="font-size: 1.5rem; display: block; margin-bottom: 0.5rem;"></i>
+            <strong>1 photo / page</strong><br>
+            <small>Pleine page</small>
+          </button>
+          <button type="button" id="print2" onclick="selectPrintFormat(2)" 
+                  class="btn secondary print-format-btn" 
+                  style="flex: 1; padding: 1rem; text-align: center;">
+            <i class="fas fa-images" style="font-size: 1.5rem; display: block; margin-bottom: 0.5rem;"></i>
+            <strong>2 photos / page</strong><br>
+            <small>Format économique</small>
+          </button>
+        </div>
+      </div>
+
+      <!-- Boutons d'action -->
+      <div style="display: flex; gap: 1rem;">
+        <button class="btn secondary" onclick="closePrintModal()" style="flex: 1; padding: 0.8rem;">
+          <i class="fas fa-times"></i> Annuler
+        </button>
+        <button class="btn primary" onclick="startPrint()" style="flex: 1; padding: 0.8rem;">
+          <i class="fas fa-print"></i> Imprimer
+        </button>
+      </div>
     </div>
   </div>
 
@@ -157,6 +250,10 @@ let loadedCount = <?= count($displayFiles) ?>;
 const totalCount = <?= count($files) ?>;
 const allFiles = <?= json_encode(array_map('basename', $files)) ?>;
 const photosFolder = getPhotosFolder();
+
+// Variables pour l'impression
+let currentImageForPrint = '';
+let selectedPrintFormat = 1; // 1 ou 2 photos par page
 
 // Mettre à jour les textes avec la configuration
 document.addEventListener('DOMContentLoaded', function() {
@@ -177,6 +274,7 @@ function openModal(src) {
   const modal = document.getElementById('photoModal');
   const modalImg = document.getElementById('modalImage');
   modalImg.src = src;
+  currentImageForPrint = src; // Sauvegarder l'image pour l'impression
   modal.style.display = 'flex';
   requestAnimationFrame(()=> modal.classList.add('show'));
   document.body.style.overflow = 'hidden';
@@ -186,6 +284,119 @@ function closeModal() {
   const modal = document.getElementById('photoModal');
   modal.classList.remove('show');
   setTimeout(()=>{ modal.style.display='none'; document.body.style.overflow='auto'; }, 200);
+}
+
+// Fonctions pour la modale d'impression
+function openPrintModal() {
+  const printModal = document.getElementById('printModal');
+  printModal.style.display = 'flex';
+  requestAnimationFrame(()=> printModal.classList.add('show'));
+  
+  // Réinitialiser les valeurs par défaut
+  document.getElementById('copyCount').value = 1;
+  selectPrintFormat(1);
+}
+
+function closePrintModal() {
+  const printModal = document.getElementById('printModal');
+  printModal.classList.remove('show');
+  setTimeout(()=>{ printModal.style.display='none'; }, 200);
+}
+
+function increaseCopies() {
+  const input = document.getElementById('copyCount');
+  const currentValue = parseInt(input.value);
+  if (currentValue < 10) {
+    input.value = currentValue + 1;
+  }
+}
+
+function decreaseCopies() {
+  const input = document.getElementById('copyCount');
+  const currentValue = parseInt(input.value);
+  if (currentValue > 1) {
+    input.value = currentValue - 1;
+  }
+}
+
+function selectPrintFormat(format) {
+  selectedPrintFormat = format;
+  
+  // Mettre à jour l'interface
+  document.getElementById('print1').classList.toggle('active', format === 1);
+  document.getElementById('print2').classList.toggle('active', format === 2);
+  
+  // Mettre à jour les styles
+  const btn1 = document.getElementById('print1');
+  const btn2 = document.getElementById('print2');
+  
+  if (format === 1) {
+    btn1.style.borderColor = '#007bff';
+    btn1.style.backgroundColor = '#007bff';
+    btn1.style.color = 'white';
+    btn2.style.borderColor = '#ddd';
+    btn2.style.backgroundColor = '';
+    btn2.style.color = '';
+  } else {
+    btn2.style.borderColor = '#007bff';
+    btn2.style.backgroundColor = '#007bff';
+    btn2.style.color = 'white';
+    btn1.style.borderColor = '#ddd';
+    btn1.style.backgroundColor = '';
+    btn1.style.color = '';
+  }
+}
+
+function startPrint() {
+  const copies = document.getElementById('copyCount').value;
+  const format = selectedPrintFormat;
+  
+  if (!currentImageForPrint) {
+    alert('Aucune image sélectionnée pour l\'impression');
+    return;
+  }
+  
+  // Afficher un indicateur de chargement
+  const printBtn = document.querySelector('#printModal .btn.primary');
+  const originalText = printBtn.innerHTML;
+  printBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Impression...';
+  printBtn.disabled = true;
+  
+  // Préparer les données pour l'impression
+  const printData = {
+    image: currentImageForPrint,
+    copies: copies,
+    format: format,
+    source: 'gallery'
+  };
+  
+  // Envoyer la demande d'impression
+  fetch('print_photo.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(printData)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert(`Impression lancée avec succès !\n${copies} exemplaire(s) en format ${format} photo(s) par page`);
+      closePrintModal();
+      closeModal();
+    } else {
+      alert('Erreur lors de l\'impression: ' + (data.error || 'Erreur inconnue'));
+    }
+  })
+  .catch(error => {
+    console.error('Erreur:', error);
+    alert('Erreur lors de l\'impression: ' + error.message);
+  })
+  .finally(() => {
+    // Restaurer le bouton
+    printBtn.innerHTML = originalText;
+    printBtn.disabled = false;
+  });
 }
 
 function loadMorePhotos() {
@@ -208,7 +419,17 @@ function loadMorePhotos() {
 }
 
 // Fermer avec la touche Escape
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+document.addEventListener('keydown', e => { 
+  if(e.key==='Escape') {
+    // Fermer la modale d'impression en priorité si elle est ouverte
+    const printModal = document.getElementById('printModal');
+    if (printModal.style.display === 'flex') {
+      closePrintModal();
+    } else {
+      closeModal();
+    }
+  }
+});
 
 // Délégation clic sur images (meilleur perf)
 document.getElementById('gallery-grid')?.addEventListener('click', e => { if(e.target.tagName==='IMG') openModal(e.target.dataset.full); });
